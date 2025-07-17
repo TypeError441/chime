@@ -1,2 +1,2 @@
 # chimeweb
-Chime Web main repository
+Main repository for chimeweb
