@@ -13,7 +13,8 @@ let scheduleOverrides = {
 let schedules;
 let periods;
 let calendar;
-localStorage.setItem("school", "egan");
+
+if (localStorage.getItem("school") === null) localStorage.setItem("school", "egan");
 fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => response.json())
 .then(data => {
     schedules = data.schedules;
@@ -35,6 +36,14 @@ fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => respon
 });
 
 $(document).ready(function() {
+    // If migrating, load previous URL's preferences
+    if (getQueryParam("theme")) localStorage.setItem("theme", localgetQueryParam("theme"));
+    if (getQueryParam("font")) localStorage.setItem("font", localgetQueryParam("font"));
+
+    // Put version in .version div
+    fetch(`/manifest.json`).then(response => response.json())
+    .then(data => { $(".version").text(`version ` + data.ver); });
+
     // Load settings (periods not here because it's handled in UI)
     if (localStorage.getItem("theme") === null) localStorage.setItem("theme", "default-light");
     if (localStorage.getItem("font") === null) localStorage.setItem("font", "'Inter', sans-serif");
@@ -42,18 +51,19 @@ $(document).ready(function() {
     setTheme(localStorage.getItem("theme"));
     setFont(localStorage.getItem("font"));
     
-    $(".right-sidebar-toggle").click(function() {
+    $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
         $(".radial-timer").toggleClass("toggle-effect");
         $(".time-container").toggleClass("toggle-effect");
         $(".right-sidebar").toggleClass("toggle-effect");
         $(".right-sidebar-toggle").toggleClass("toggle-effect");
         $(".settings").toggleClass("toggle-effect");
+        $(".mobile.settings-mobile").toggleClass("toggle-effect");
         $(".time").toggleClass("toggle-effect");
         $(".period").toggleClass("toggle-effect");
         $(".schedule").toggleClass("toggle-effect");
     });
 
-    $(".settings").click(function() {
+    $(".settings,.mobile.settings-mobile").click(function() {
         $(".container").toggleClass("toggle-effect");
         $(".settings-container").toggleClass("toggle-effect");
 
@@ -261,7 +271,7 @@ function updateUI(time, period, schedule, today, percent) {
 
 function updatePage(time, period, schedule, favicon) {
     document.title = `${time} | ${period}, ${schedule}`;
-    $(".favicon").attr("href", `/lib/image/circle/${favicon}.png`);
+    $(".favicon").attr("href", `/lib/favicon/${favicon}.png`);
 }
 
 function drawRadialTimer(percent) {
@@ -297,3 +307,5 @@ function drawRadialTimer(percent) {
     let mainColor = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-background-color').trim();
     $(".radial-timer > path").attr("fill", mainColor);
 }
+
+function getQueryParam(key) { return new URLSearchParams(window.location.search).get(key); }
