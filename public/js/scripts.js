@@ -37,9 +37,12 @@ fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => respon
 
 $(document).ready(function() {
     // If migrating, load previous URL's preferences
-    if (getQueryParam("theme")) localStorage.setItem("theme", localgetQueryParam("theme"));
-    if (getQueryParam("font")) localStorage.setItem("font", localgetQueryParam("font"));
-
+    if (getQueryParam("theme")) localStorage.setItem("theme", getQueryParam("theme"));
+    if (getQueryParam("font")) localStorage.setItem("font", getQueryParam("font"));
+    if (window.location.search) {
+        history.pushState({}, "", window.location.pathname);
+    }
+    
     // Put version in .version div
     fetch(`/manifest.json`).then(response => response.json())
     .then(data => { $(".version").text(`version ` + data.ver); });
