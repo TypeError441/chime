@@ -39,8 +39,8 @@ let sidebarOpened = false;
 
 $(document).ready(function() {
     // If migrating, load previous URL's preferences
-    if (getQueryParam("theme")) localStorage.setItem("theme", getQueryParam("theme"));
-    if (getQueryParam("font")) localStorage.setItem("font", getQueryParam("font"));
+    if (getQueryParam("theme") != null) localStorage.setItem("theme", getQueryParam("theme"));
+    if (getQueryParam("font") != null) localStorage.setItem("font", getQueryParam("font"));
     if (window.location.search) {
         history.pushState({}, "", window.location.pathname);
     }
@@ -123,7 +123,7 @@ function tick() {
 
 function runLogic() {
     if (sidebarOpened && isMobile()) return;
-    
+
     let time = getTime(currentSchedule);
     let parsedTime = parseTime(time);
 
