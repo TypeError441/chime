@@ -294,6 +294,7 @@ select, input {
     
     .mobile.settings-mobile.toggle-effect { right: 4em; }
 
+    .mobile.settings-mobile > img { filter: brightness(var(--image-on-bg-brightness)); }
 
     .right-sidebar {
         position: absolute;
