@@ -35,6 +35,8 @@ fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => respon
     tick();
 });
 
+let sidebarOpened = false;
+
 $(document).ready(function() {
     // If migrating, load previous URL's preferences
     if (getQueryParam("theme")) localStorage.setItem("theme", getQueryParam("theme"));
@@ -42,7 +44,7 @@ $(document).ready(function() {
     if (window.location.search) {
         history.pushState({}, "", window.location.pathname);
     }
-    
+
     // Put version in .version div
     fetch(`/manifest.json`).then(response => response.json())
     .then(data => { $(".version").text(`version ` + data.ver); });
@@ -55,6 +57,7 @@ $(document).ready(function() {
     setFont(localStorage.getItem("font"));
     
     $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
+        sidebarOpened = !sidebarOpened;
         $(".radial-timer").toggleClass("toggle-effect");
         $(".time-container").toggleClass("toggle-effect");
         $(".right-sidebar").toggleClass("toggle-effect");
@@ -119,6 +122,8 @@ function tick() {
 }
 
 function runLogic() {
+    if (sidebarOpened && isMobile()) return;
+    
     let time = getTime(currentSchedule);
     let parsedTime = parseTime(time);
 
@@ -273,7 +278,7 @@ function updateUI(time, period, schedule, today, percent) {
 }
 
 function updatePage(time, period, schedule, favicon) {
-    document.title = `${time} | ${period}, ${schedule}`;
+    if (!isMobile()) document.title = `${time} | ${period}, ${schedule}`;
     $(".favicon").attr("href", `/lib/favicon/${favicon}.png`);
 }
 
@@ -312,3 +317,5 @@ function drawRadialTimer(percent) {
 }
 
 function getQueryParam(key) { return new URLSearchParams(window.location.search).get(key); }
+
+function isMobile() { return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
