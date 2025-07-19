@@ -45,9 +45,12 @@ $(document).ready(function() {
         history.pushState({}, "", window.location.pathname);
     }
 
-    // Put version in .version div
+    // Put version in .version div & register serviceWorker
     fetch(`/manifest.json`).then(response => response.json())
-    .then(data => { $(".version").text(`version ` + data.ver); });
+    .then(data => {
+        $(".version").text(`version ` + data.ver);
+        navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
+    });
 
     // Load settings (periods not here because it's handled in UI)
     if (localStorage.getItem("theme") === null) localStorage.setItem("theme", "default-light");
