@@ -1,21 +1,68 @@
+import { openDB } from "/lib/idb.js";
+
+// Load idb
+const dbPromise = openDB("chime-db", 1, {
+    upgrade(db) {
+        db.createObjectStore("settings");
+    }
+});
+
+// Idb helper functions
+async function set(lock, key, value) {
+    const db = await dbPromise;
+
+    console.log(`Set %c${key} %cto %c${value}.`,
+        "color: blue;",
+        "color: black;",
+        "color: green;"
+    );
+    
+    await db.put(lock, value, key);
+}
+
+async function get(lock, key) {
+    const db = await dbPromise;
+    return await db.get(lock, key);
+}
+
+loadSettings();
+migrate();
+
+// Use manifest for .version and sw
+fetch(`/manifest.json`).then(response => response.json())
+.then(data => {
+    $(".version").text(`version ` + data.ver);
+    navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
+    console.log("%cRegistered %csw.js.",
+        "color: blue;",
+        "color: black;"
+    );
+});
+
+// Date variables
 let now = new Date();
 let currentDay = now.getDay();
 let currentMonth = now.getMonth();
 let currentDate = now.getDate();
 
+// Schedule variables
 let currentScheduleName;
 let currentSchedule;
 
-let scheduleOverrides = {
-    "month-date": "schedule-name"
-}
+let scheduleOverrides = {"month-date": "schedule-name"}
 
 let schedules;
 let periods;
 let calendar;
 
-if (localStorage.getItem("school") === null) localStorage.setItem("school", "egan");
-fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => response.json())
+// Get school schedules and get current schedule, run tick()
+if (await get("settings", "school") === undefined) await set("settings", "school", "egan");
+console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
+    "color: blue;",
+    "color: black;",
+    "color: green;"
+);
+fetch(`/schools/${await get("settings", "school")}.json`).then(response => response.json())
 .then(data => {
     schedules = data.schedules;
     periods = data.periods;
@@ -37,101 +84,102 @@ fetch(`/schools/${localStorage.getItem("school")}.json`).then(response => respon
 
 let sidebarOpened = false;
 
-$(document).ready(function() {
-    // If migrating, load previous URL's preferences
-    if (getQueryParam("theme") != null) localStorage.setItem("theme", getQueryParam("theme"));
-    if (getQueryParam("font") != null) localStorage.setItem("font", getQueryParam("font"));
-    if (window.location.search) {
-        history.pushState({}, "", window.location.pathname);
-    }
+// JQuery events
+$(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
+    console.log("%cToggled %csidebar.",
+        "color: blue;",
+        "color: black;"
+    );
 
-    // Put version in .version div & register serviceWorker
-    fetch(`/manifest.json`).then(response => response.json())
-    .then(data => {
-        $(".version").text(`version ` + data.ver);
-        navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
-    });
-
-    // Load settings (periods not here because it's handled in UI)
-    if (localStorage.getItem("theme") === null) localStorage.setItem("theme", "default-light");
-    if (localStorage.getItem("font") === null) localStorage.setItem("font", "'Inter', sans-serif");
-    if (localStorage.getItem("periods") === null) localStorage.setItem("periods", ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6", "Period 7"]);
-    setTheme(localStorage.getItem("theme"));
-    setFont(localStorage.getItem("font"));
-    
-    $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
-        sidebarOpened = !sidebarOpened;
-        $(".radial-timer").toggleClass("toggle-effect");
-        $(".time-container").toggleClass("toggle-effect");
-        $(".right-sidebar").toggleClass("toggle-effect");
-        $(".right-sidebar-toggle").toggleClass("toggle-effect");
-        $(".settings").toggleClass("toggle-effect");
-        $(".mobile.settings-mobile").toggleClass("toggle-effect");
-        $(".time").toggleClass("toggle-effect");
-        $(".period").toggleClass("toggle-effect");
-        $(".schedule").toggleClass("toggle-effect");
-    });
-
-    $(".settings,.mobile.settings-mobile").click(function() {
-        $(".container").toggleClass("toggle-effect");
-        $(".settings-container").toggleClass("toggle-effect");
-
-        $(".select-theme").val(localStorage.getItem("theme"));
-        $("html").attr("data-theme", localStorage.getItem("theme"));
-        $(".select-font").val(localStorage.getItem("font"));
-
-        let periods = localStorage.getItem("periods").split(",");
-        $(".input-period#input-period-1").val(periods[0] || "Period 1");
-        $(".input-period#input-period-2").val(periods[1] || "Period 2");
-        $(".input-period#input-period-3").val(periods[2] || "Period 3");
-        $(".input-period#input-period-4").val(periods[3] || "Period 4");
-        $(".input-period#input-period-5").val(periods[4] || "Period 5");
-        $(".input-period#input-period-6").val(periods[5] || "Period 6");
-        $(".input-period#input-period-7").val(periods[6] || "Period 7");
-    });
-
-    $(".close-settings").click(function() {
-        $(".container").toggleClass("toggle-effect");
-        $(".settings-container").toggleClass("toggle-effect");
-
-        setTheme($(".select-theme").val());
-        setFont($(".select-font").val());
-        setPeriodNames($(".input-period#input-period-1").val(),
-        $(".input-period#input-period-2").val(),
-        $(".input-period#input-period-3").val(),
-        $(".input-period#input-period-4").val(),
-        $(".input-period#input-period-5").val(),
-        $(".input-period#input-period-6").val(),
-        $(".input-period#input-period-7").val());
-
-        runLogic();
-
-        displaySchedule(currentSchedule);
-    });
-
-    $(".select-schedule").change(function() {
-        currentScheduleName = $(".select-schedule").val();
-        currentSchedule = schedules[currentScheduleName];
-        runLogic();
-
-        displaySchedule(currentSchedule);
-    });
+    sidebarOpened = !sidebarOpened;
+    $(".radial-timer").toggleClass("toggle-effect");
+    $(".time-container").toggleClass("toggle-effect");
+    $(".right-sidebar").toggleClass("toggle-effect");
+    $(".right-sidebar-toggle").toggleClass("toggle-effect");
+    $(".settings").toggleClass("toggle-effect");
+    $(".mobile.settings-mobile").toggleClass("toggle-effect");
+    $(".time").toggleClass("toggle-effect");
+    $(".period").toggleClass("toggle-effect");
+    $(".schedule").toggleClass("toggle-effect");
 });
 
-function tick() {
+$(".settings,.mobile.settings-mobile").click(async function() {
+    console.log("%cOpened %csettings.",
+        "color: blue;",
+        "color: black;"
+    );
+
+    $(".container").toggleClass("toggle-effect");
+    $(".settings-container").toggleClass("toggle-effect");
+
+    let theme = await get("settings", "theme");
+    $(".select-theme").val(theme);
+    $("html").attr("data-theme", theme);
+    $(".select-font").val(await get("settings", "font"));
+
+    let periods = await get("settings", "periods");
+    $(".input-period#input-period-1").val(periods[0] || "Period 1");
+    $(".input-period#input-period-2").val(periods[1] || "Period 2");
+    $(".input-period#input-period-3").val(periods[2] || "Period 3");
+    $(".input-period#input-period-4").val(periods[3] || "Period 4");
+    $(".input-period#input-period-5").val(periods[4] || "Period 5");
+    $(".input-period#input-period-6").val(periods[5] || "Period 6");
+    $(".input-period#input-period-7").val(periods[6] || "Period 7");
+});
+
+$(".close-settings").click(function() {
+    console.log("%cClosed %csettings.",
+        "color: blue;",
+        "color: black;"
+    );
+    $(".container").toggleClass("toggle-effect");
+    $(".settings-container").toggleClass("toggle-effect");
+
+    setTheme($(".select-theme").val());
+    setFont($(".select-font").val());
+    setPeriodNames($(".input-period#input-period-1").val(),
+    $(".input-period#input-period-2").val(),
+    $(".input-period#input-period-3").val(),
+    $(".input-period#input-period-4").val(),
+    $(".input-period#input-period-5").val(),
+    $(".input-period#input-period-6").val(),
+    $(".input-period#input-period-7").val());
+
     runLogic();
 
-    setTimeout(tick, 1000);
-}
+    displaySchedule(currentSchedule);
+});
 
-function runLogic() {
-    if (sidebarOpened && isMobile()) return;
+$(".select-schedule").change(function() {
+    currentScheduleName = $(".select-schedule").val();
+    currentSchedule = schedules[currentScheduleName];
+
+    console.log(`Chose %c${currentScheduleName} %cas %cschedule.`,
+        "color: blue;",
+        "color: black;",
+        "color: green;"
+    );
+
+    runLogic();
+
+    displaySchedule(currentSchedule);
+});
+
+async function runLogic() {
+    if (sidebarOpened && isMobile()) {
+        console.log("Stopped %clogic %cdue to being on %cmobile.",
+            "color: blue;",
+            "color: black;",
+            "color: green;"
+        );
+        return;
+    }
 
     let time = getTime(currentSchedule);
     let parsedTime = parseTime(time);
 
     let period = getPeriod(currentSchedule);
-    let parsedPeriod = parsePeriod(period);
+    let parsedPeriod = await parsePeriod(period);
 
     let today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
@@ -143,28 +191,57 @@ function runLogic() {
     updatePage(parsedTime[0], parsedPeriod, currentScheduleName, favicon)
 }
 
-function setTheme(theme) {
-    $("html").attr("data-theme", theme);
-    localStorage.setItem("theme", theme);
+function tick() {
+    runLogic();
+
+    setTimeout(tick, 1000);
 }
 
-function setFont(font) {
+// Loading functions
+async function loadSettings() {
+    if (await get("settings", "theme") === undefined) await set("settings", "theme", "default-light");
+    if (await get("settings", "font") === undefined) await set("settings", "font", "'Inter', sans-serif");
+    if (await get("settings", "periods") === undefined) await set("settings", "periods", ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6", "Period 7"]);
+    setTheme(await get("settings", "theme"));
+    setFont(await get("settings", "font"));
+}
+
+async function migrate() {
+    if (getQueryParam("theme") != null) await set("settings", "theme", getQueryParam("theme"));
+    if (getQueryParam("font") != null) await set("settings", "font", getQueryParam("font"));
+    if (window.location.search) history.pushState({}, "", window.location.pathname);
+}
+
+// Logic functions
+async function setTheme(theme) {
+    $("html").attr("data-theme", theme);
+    await set("settings", "theme", theme);
+}
+
+async function setFont(font) {
     $(".time, .period, .schedule, .date").css("font-family", font);
     // schedule-item handled in displaySchedule()
-    localStorage.setItem("font", font);
+    await set("settings", "font", font);
 }
 
-function setPeriodNames(period1, period2, period3, period4, period5, period6, period7) {
+async function setPeriodNames(period1, period2, period3, period4, period5, period6, period7) {
     let periods = [period1, period2, period3, period4, period5, period6, period7];
     periods = periods.map(period => period.trim());
 
     for (let i = 0; i < periods.length; i++) { if (periods[i] === "") periods[i] = `Period ${i + 1}`; }
 
-    localStorage.setItem("periods", periods);
+    await set("settings", "periods", periods);
 
 }
 
-function loadAvailableSchedulesToDropdown() { for (let key of Object.keys(schedules)) { $(".select-schedule").append(`<option value="${key}">${key}</option>`) } }
+function loadAvailableSchedulesToDropdown() {
+    for (let key of Object.keys(schedules)) { $(".select-schedule").append(`<option value="${key}">${key}</option>`) }
+    
+    console.log("%cLoaded %cavailable schedules to dropdown.",
+        "color: blue;",
+        "color: black;"
+    );
+}
 
 function updatePeriodCountInSettings(periods) {
     for (let i = 0; i < periods; i++) {
@@ -173,24 +250,34 @@ function updatePeriodCountInSettings(periods) {
             <input maxlength="16" type="text" id="input-period-${i + 1}" class="input-period" value="Period ${i + 1}" placeholder="Period ${i + 1}">
         `);
     }
+
+    console.log("%cUpdated %cperiod count in settings.",
+        "color: blue;",
+        "color: black;"
+    );
 }
 
-function displaySchedule(schedule) {
+async function displaySchedule(schedule) {
     $(".schedule-list").empty();
 
-    schedule.forEach(period => {
+    for (const period of schedule) {
         let start = period.start;
         let end = period.end;
         let subject = period.subject;
-        if (subject.startsWith("Period")) subject = localStorage.getItem("periods").split(",")[subject.split(" ")[1] - 1];
+        if (subject.startsWith("Period")) subject = await get("settings", "periods")[subject.split(" ")[1] - 1];
 
-        let scheduleItem = `<tr style="font-family: ${localStorage.getItem("font")};" class="schedule-item ${getPeriod(schedule) === period ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
+        let scheduleItem = `<tr style="font-family: ${await get("settings","font")};" class="schedule-item ${getPeriod(schedule) === period ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
             <td class="schedule-item-time">${start} - ${end}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
 
         $(".schedule-list").append(scheduleItem);
-    });
+    };
+
+    console.log("%cDisplayed %cschedule in sidebar.",
+        "color: blue;",
+        "color: black;"
+    );
 }
 
 function getTime(schedule) {
@@ -245,12 +332,12 @@ function getPeriod(schedule) {
     return currentPeriod;
 }
 
-function parsePeriod(period) {
+async function parsePeriod(period) {
     if (period === null) return "School is over";
 
     let periodName = period ? period.subject : "Free";
 
-    let periodNames = localStorage.getItem("periods").split(",");
+    let periodNames = await get("settings", "periods");
 
     if (periodName === "Period 1") periodName = periodNames[0];
     else if (periodName === "Period 2") periodName = periodNames[1];
@@ -321,4 +408,4 @@ function drawRadialTimer(percent) {
 
 function getQueryParam(key) { return new URLSearchParams(window.location.search).get(key); }
 
-function isMobile() { return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent); }
+function isMobile() { return window.innerWidth <= 750; }

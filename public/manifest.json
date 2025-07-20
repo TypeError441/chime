@@ -1,4 +1,5 @@
 {
+    "ver": "4.3.0",
     "short_name": "Chime",
     "name": "Chime",
     "icons": [
@@ -64,6 +65,5 @@
         }
     ],
     "start_url": "/",
-    "display": "fullscreen",
-    "ver": "4.2.0"
+    "display": "fullscreen"
 }
