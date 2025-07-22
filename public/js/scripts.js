@@ -260,13 +260,15 @@ function updatePeriodCountInSettings(periods) {
 async function displaySchedule(schedule) {
     $(".schedule-list").empty();
 
+    let periods = await get("settings", "periods");
+
     for (const period of schedule) {
         let start = period.start;
         let end = period.end;
         let subject = period.subject;
-        if (subject.startsWith("Period")) subject = await get("settings", "periods")[subject.split(" ")[1] - 1];
+        if (subject.startsWith("Period")) subject = periods[subject.split(" ")[1] - 1];
 
-        let scheduleItem = `<tr style="font-family: ${await get("settings","font")};" class="schedule-item ${getPeriod(schedule) === period ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
+        let scheduleItem = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${getPeriod(schedule) === period ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
             <td class="schedule-item-time">${start} - ${end}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
