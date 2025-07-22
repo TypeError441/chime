@@ -4,18 +4,12 @@
         <meta charset="utf-8">
         <title>Page not found</title>
         <link rel="stylesheet" href="/css/styles.css">
-        <script src='/lib/jquery-3.7.1.slim.js'></script>
     </head>
     <body>
         <div class="container four">
             <p class="title four">This page does not exist.</p>
             <p class="four">Please check the URL or return to the <a href="/">homepage</a>.</p>
         </div>
-        <script>
-            $(document).ready(function() {
-                const savedTheme = localStorage.getItem("theme");
-                if (savedTheme) $("html").attr("data-theme", savedTheme);
-            });
-        </script>
+        <script type="module" src="/js/404.js"></script>
     </body>
 </html>
