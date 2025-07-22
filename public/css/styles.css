@@ -119,6 +119,11 @@ select, input {
     color: var(--background-color);
 }
 
+select > option {
+    background-color: var(--color);
+    color: var(--background-color);
+}
+
 /* Settings Buttons */
 .settings {
     background: none;
