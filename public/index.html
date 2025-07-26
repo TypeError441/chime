@@ -1,82 +1,32 @@
 <!doctype html>
-<html data-theme="default-light">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>...</title>
+        <title>Chime Tools</title>
         <link rel="stylesheet" href="/css/styles.css">
-        <link class="favicon" rel="shortcut icon" href="/lib/favicon/gray.png" type="image/x-icon">
-        <link rel="manifest" href="manifest.json">
+        <link class="favicon" rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <script src="/js/scripts.js"></script>
         <script src="/lib/jquery-3.7.1.slim.js"></script>
     </head>
     <body>
         <div class="container">
-            <button class="mobile settings-mobile"><img src="/lib/img/settings.png" alt="Settings" width="32"></button>
-            <div class="time-container">
-                <div>
-                    <div class="time">...</div>
-                    <div class="period">...</div>
-                    <div class="schedule">...</div>
-                    <svg class="radial-timer" viewBox="0 0 200 200" height="90%" preserveAspectRatio="xMidYMid meet">
-                        <path></path>
-                    </svg>
+            <div class="title">Chime Tools</div>
+            <div class="subtitle">A collection of tools for fun or help</div>
+            <div class="apps">
+                <div class="app">
+                    <div class="app-title">Chime</div>
+                    <div class="app-subtitle">A schedule app that displays the time until the next period.</div>
                 </div>
-                <div class="date">...</div>
-            </div>
-            <div class="right-sidebar-container">
-                <button class="right-sidebar-toggle"><img src="/lib/img/schedule.png" alt="Open Sidebar" width="32"></button>
-                <div class="right-sidebar">
-                    <div class="title">Schedule</div>
-                    <button class="mobile right-sidebar-exit"><img src="/lib/img/close.png" alt="Exit Sidebar" width="32"></button>
-                    <div class="sidebar-schedule">
-                        <table class="schedule-list"></table>
-                    </div>
-                    <div class="sidebar-footer">
-                        <select id="select-schedule" class="select-schedule"></select>
-                        <div class="version">version .....</div>
-                    </div>
+                <div class="app">
+                    <div class="app-title">Metadata Editor</div>
+                    <div class="app-subtitle">An app that lets you edit audio files' metadatas.</div>
+                </div>
+                <div class="app">
+                    <div class="app-title">Pomodoro Timer</div>
+                    <div class="app-subtitle">An app that lets you set a timer for working with included breaks.</div>
                 </div>
             </div>
-            <button class="settings"><img src="/lib/img/settings.png" alt="Settings" width="32"></button>
         </div>
-        <div class="settings-container">
-            <div class="title">Settings</div>
-            <div class="settings-content">
-                <div class="settings-column periods">
-                    <div class="settings-item"><label>Period Names</label></div>
-                </div>
-                <div class="settings-column">
-                    <div class="settings-item">
-                        <label for="select-theme">Theme</label>
-                        <select id="select-theme" class="select-theme">
-                            <option value="default-light">Default (light)</option>
-                            <option value="default-dark">Default (dark)</option>
-                            <option value="blue-light">Blue (light)</option>
-                            <option value="blue-dark">Blue (dark)</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="code">Code</option>
-                            <option value="space">Space</option>
-                        </select>
-                    </div>
-                    <div class="settings-item">
-                        <label for="select-font">Font</label>
-                        <select id="select-font" class="select-font">
-                            <option value="'Inter', sans-serif">Sans Serif</option>
-                            <option value="'Roboto', sans-serif">Bell.plus font</option>
-                            <option value="'Verdana, sans-serif'">Verdana</option>
-                            <option value="'Tahoma', sans-serif">Tahoma</option>
-                            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-                            <option value="'Times New Roman', serif">Times New Roman</option>
-                            <option value="'Georgia', serif">Georgia</option>
-                            <option value="'Garamond', serif">Garamond</option>
-                            <option value="'Courier New', monospace">Courier New</option>
-                            <option value="'Moo Lah Lah', fantasy">???</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <button class="close-settings"><img src="/lib/img/close.png" alt="Exit Settings" width="32"></button>
-        </div>
-        <script src="/js/scripts.js" type="module"></script>
     </body>
 </html>

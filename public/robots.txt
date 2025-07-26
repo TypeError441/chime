@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chimetools.netlify.app/sitemap.xml

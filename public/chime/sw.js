@@ -5,13 +5,16 @@ self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache =>
             cache.addAll([
-                "/",
-                "/index.html",
-                "/css/styles.css",
-                "/js/scripts.js",
-                "/manifest.json",
+                "/chime/",
+                "/chime/index.html",
+                "/chime/css/styles.css",
+                "/chime/js/404.js",
+                "/chime/js/idb-helper.js",
+                "/chime/js/scripts.js",
+                "/chime/manifest.json",
+                "/chime/lib/idb.js",
                 "/lib/jquery-3.7.1.slim.js",
-                "/schools/egan.json"
+                "/chime/schools/egan.json"
             ])
         ).catch(err => {
             console.error("Service worker install failed to cache resources:", err);
