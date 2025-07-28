@@ -11,6 +11,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    user-select: none;
 }
 
 .title {
@@ -44,7 +45,7 @@ img.icon {
     flex: 1 1 auto;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-rows: 1fr 3fr 3fr;
     grid-template-areas:
         "upload edit"
         "preview edit"
@@ -104,29 +105,28 @@ img.icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     height: 100%;
 }
 
-.edit-title, .preview-title {
+.edit-title {
     font-size: 26px;
     font-weight: bold;
     text-align: center;
 }
 
 .preview-view {
-    margin: auto; 
     background: 
-        linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05)),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)),
         rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 50%;
-    height: 70%;
+    height: 80%;
     position: relative;
 }
 
@@ -134,7 +134,7 @@ img.icon {
     width: 100%;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .preview-view-title {
@@ -152,3 +152,33 @@ img.icon {
 .button > img.icon { margin-right: 4px; margin-left: 0; }
 img.icon { margin: 0 8px 0 12px; }
 .song-file-name { display: inline-block; }
+
+.exit {
+    background: 
+        linear-gradient(145deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05)),
+        rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 1.5em;
+    top: 1.5em;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.1s ease-in-out;
+}
+
+.exit:hover { cursor: pointer; transform: scale(1.1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
+.exit:active { cursor: pointer; transform: scale(1); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+
+.exit > .icon { margin: 1px 0 0 0; }
+
+.version {
+    position: absolute;
+    left: 1em;
+    bottom: 1em;
+}

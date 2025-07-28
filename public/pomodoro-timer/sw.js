@@ -1,17 +1,16 @@
 const version = new URL(location).searchParams.get("version") || "dev";
-const CACHE_NAME = `metadata-editor-cache-version`;
+const CACHE_NAME = `pomodoro-timer-cache-${version}`;
 
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache =>
             cache.addAll([
                 "/",
-                "/metadata-editor/index.html",
-                "/metadata-editor/styles.css",
-                "/metadata-editor/scripts.js",
-                "/metadata-editor/manifest.json",
-                "/metadata-editor/sw.js",
-                "/metadata-editor/lib/mp3tag.min.js",
+                "/pomodoro-timer/index.html",
+                "/pomodoro-timer/styles.css",
+                "/pomodoro-timer/scripts.js",
+                "/pomodoro-timer/manifest.json",
+                "/pomodoro-timer/sw.js",
                 "/lib/jquery-3.7.1.slim.js",
             ])
         ).catch(err => {

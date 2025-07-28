@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    fetch("/metadata-editor/manifest.json").then(response => response.json())
+    fetch("/version.json").then(response => response.json())
     .then(data => {$(".version").text(`v${data.ver}`);
-        navigator.serviceWorker.register(`/metadata-editor/sw.js?version=${data.ver}`);
+        navigator.serviceWorker.register(`/mp3-metadata-tagger/sw.js?version=${data.ver}`);
     });
 
     let mp3tag;
@@ -17,8 +17,9 @@ $(document).ready(function() {
             $(".song-file-name").text(files[0].name);
             handleFiles(files);
         }
-
     });
+
+    $(".exit").click(function() { window.location.href = "/"; });
 
     function handleFiles(files) {
         const file = files[0];

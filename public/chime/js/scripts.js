@@ -3,8 +3,8 @@ import { set, get } from "/chime/js/idb-helper.js";
 loadSettings();
 migrate();
 
-// Use manifest for .version and sw
-fetch(`/chime/manifest.json`).then(response => response.json())
+// Use manifest for sw
+fetch(`/version.json`).then(response => response.json())
 .then(data => {
     $(".version").text(`version ` + data.ver);
     navigator.serviceWorker.register(`/chime/sw.js?version=${data.ver}`);
@@ -60,6 +60,8 @@ fetch(`/chime/schools/${await get("settings", "school")}.json`).then(response =>
 let sidebarOpened = false;
 
 // JQuery events
+$(".exit").click(function() { window.location.href = "/"; });
+
 $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
     console.log("%cToggled %csidebar.",
         "color: blue;",
