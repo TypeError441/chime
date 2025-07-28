@@ -1,2 +1,2 @@
-# chimetools
-Main repository for chimetools
+# chime
+Main repository for chime

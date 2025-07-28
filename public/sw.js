@@ -1,17 +1,20 @@
 const version = new URL(location).searchParams.get("version") || "dev";
-const CACHE_NAME = `pomodoro-timer-cache-${version}`;
+const CACHE_NAME = `chime-cache-${version}`;
 
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache =>
             cache.addAll([
                 "/",
-                "/pomodoro-timer/index.html",
-                "/pomodoro-timer/styles.css",
-                "/pomodoro-timer/scripts.js",
-                "/pomodoro-timer/manifest.json",
-                "/pomodoro-timer/sw.js",
+                "/index.html",
+                "/css/styles.css",
+                "/js/404.js",
+                "/js/idb-helper.js",
+                "/js/scripts.js",
+                "/manifest.json",
+                "/lib/idb.js",
                 "/lib/jquery-3.7.1.slim.js",
+                "/schools/egan.json"
             ])
         ).catch(err => {
             console.error("Service worker install failed to cache resources:", err);

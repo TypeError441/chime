@@ -1,13 +1,13 @@
-import { set, get } from "/chime/js/idb-helper.js";
+import { set, get } from "/js/idb-helper.js";
 
 loadSettings();
 migrate();
 
-// Use manifest for sw
+// Register sw
 fetch(`/version.json`).then(response => response.json())
 .then(data => {
     $(".version").text(`version ` + data.ver);
-    navigator.serviceWorker.register(`/chime/sw.js?version=${data.ver}`);
+    navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
     console.log("%cRegistered %csw.js.",
         "color: blue;",
         "color: black;"
@@ -37,7 +37,7 @@ console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
     "color: black;",
     "color: green;"
 );
-fetch(`/chime/schools/${await get("settings", "school")}.json`).then(response => response.json())
+fetch(`/schools/${await get("settings", "school")}.json`).then(response => response.json())
 .then(data => {
     schedules = data.schedules;
     periods = data.periods;
@@ -60,8 +60,6 @@ fetch(`/chime/schools/${await get("settings", "school")}.json`).then(response =>
 let sidebarOpened = false;
 
 // JQuery events
-$(".exit").click(function() { window.location.href = "/"; });
-
 $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
     console.log("%cToggled %csidebar.",
         "color: blue;",
@@ -348,7 +346,7 @@ function updateUI(time, period, schedule, today, percent) {
 
 function updatePage(time, period, schedule, favicon) {
     if (!isMobile()) document.title = `${time} | ${period}, ${schedule}`;
-    $(".favicon").attr("href", `/chime/lib/favicon/${favicon}.png`);
+    $(".favicon").attr("href", `/lib/favicon/${favicon}.png`);
 }
 
 function drawRadialTimer(percent) {
