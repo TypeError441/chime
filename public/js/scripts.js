@@ -1,10 +1,9 @@
 import { set, get } from "/js/idb-helper.js";
 
 loadSettings();
-migrate();
 
 // Register sw
-fetch(`/version.json`).then(response => response.json())
+fetch(`/manifest.json`).then(response => response.json())
 .then(data => {
     $(".version").text(`version ` + data.ver);
     navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
@@ -55,7 +54,6 @@ fetch(`/schools/${await get("settings", "school")}.json`).then(response => respo
     $(".select-schedule").val(currentScheduleName);
     updatePeriodCountInSettings(periods);
 
-    displaySchedule(currentSchedule);
     tick();
 });
 
@@ -69,6 +67,8 @@ $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
     );
 
     sidebarOpened = !sidebarOpened;
+    if (sidebarOpened) displaySchedule(currentSchedule);
+
     $(".radial-timer").toggleClass("toggle-effect");
     $(".time-container").toggleClass("toggle-effect");
     $(".right-sidebar").toggleClass("toggle-effect");
@@ -183,12 +183,6 @@ async function loadSettings() {
     setFont(await get("settings", "font"));
 }
 
-async function migrate() {
-    if (getQueryParam("theme") != null) await set("settings", "theme", getQueryParam("theme"));
-    if (getQueryParam("font") != null) await set("settings", "font", getQueryParam("font"));
-    if (window.location.search) history.pushState({}, "", window.location.pathname);
-}
-
 // Logic functions
 async function setTheme(theme) {
     $("html").attr("data-theme", theme);
@@ -245,7 +239,9 @@ async function displaySchedule(schedule) {
         let subject = period.subject;
         if (subject.startsWith("Period")) subject = periods[subject.split(" ")[1] - 1];
 
-        let scheduleItem = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${getPeriod(schedule) === period ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
+        let isCurrentPeriod = getPeriod(schedule) === period;
+
+        let scheduleItem = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${isCurrentPeriod ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
             <td class="schedule-item-time">${start} - ${end}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
