@@ -10,6 +10,9 @@
         "Advisory",
         "Holiday"
     ],
+    "overrides" : {
+        "month-date": "schedule-name"
+    },
     "schedules": {
         "Normal": [
             {
@@ -58,13 +61,8 @@
                 "subject": "Period 6"
             },
             {
-                "start": "13:28",
-                "end": "14:14",
-                "subject": "Period 6"
-            },
-            {
                 "start": "14:17",
-                "end": "15:33",
+                "end": "15:03",
                 "subject": "Period 7"
             }
         ],
@@ -423,7 +421,9 @@
                 "end": "23:59",
                 "subject": "Free"
             }
-        ],
+        ]
+    },
+    "special": {
         "8th CAST": [
             {
                 "start": "00:00",

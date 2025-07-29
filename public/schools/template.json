@@ -1,0 +1,34 @@
+{
+    "name": "Template School",
+    "periods": 5,
+    "calendar": [
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template"
+    ],
+    "overrides" : {
+        "month-date": "schedule-name"
+    },
+    "schedules": {
+        "Template": [
+            {
+                "start": "00:00",
+                "end": "23:59",
+                "subject": "Template"
+            }
+        ]
+    },
+    "special": {
+        "Template": [
+            {
+                "start": "00:00",
+                "end": "23:59",
+                "subject": "Template"
+            }
+        ]
+    }
+}

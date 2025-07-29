@@ -24,7 +24,7 @@ let currentDate = now.getDate();
 let currentScheduleName;
 let currentSchedule;
 
-let scheduleOverrides = {"month-date": "schedule-name"}
+let scheduleOverrides;
 
 let schedules;
 let periods;
@@ -44,6 +44,8 @@ fetch(`/schools/${await get("settings", "school")}.json`).then(response => respo
     calendar = data.calendar;
     
     currentScheduleName = calendar[currentDay]
+
+    scheduleOverrides = data.overrides;
 
     if (scheduleOverrides[`${currentMonth}-${currentDate}`]) currentScheduleName = scheduleOverrides[`${currentMonth}-${currentDate}`];
 
