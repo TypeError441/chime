@@ -1,7 +1,5 @@
 import { set, get } from "/js/idb-helper.js";
 
-loadSettings();
-
 // Register sw
 fetch(`/manifest.json`).then(response => response.json())
 .then(data => {
@@ -20,44 +18,63 @@ let currentMonth = now.getMonth();
 let currentDate = now.getDate();
 
 // Schedule variables
-let currentScheduleName;
-let currentSchedule;
+let scheduleName;
+let schedule;
 
-let scheduleOverrides;
+let period;
 
+let overrides;
 let schedules;
 let periods;
 let calendar;
 
-// Get school schedules and get current schedule, run tick()
+let sidebarOpened = false;
+
+// Load settings and school data
+console.log("%cLoading %csettings and school data.",
+    "color: blue;",
+    "color: black;"
+);
+
+// If there is no school, set it to egan by default
 if (await get("settings", "school") === undefined) await set("settings", "school", "egan");
 console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
     "color: blue;",
     "color: black;",
     "color: green;"
 );
+
+// Get school data
 fetch(`/schools/${await get("settings", "school")}.json`).then(response => response.json())
-.then(data => {
-    schedules = data.schedules;
+.then(async (data) => {
     periods = data.periods;
+
+    if (await get("settings", "theme") === undefined) await set("settings", "theme", "default-light");
+    if (await get("settings", "font") === undefined) await set("settings", "font", "'Inter', sans-serif");
+    let p = [];
+    for (let i = 0; i < periods; i++) {
+        p.push(`Period ${i + 1}`);
+    }
+    if (await get("settings", "periods") === undefined) await set("settings", "periods", p);
+    setTheme(await get("settings", "theme"));
+    setFont(await get("settings", "font"));
+
+    schedules = data.schedules;
     calendar = data.calendar;
     
-    currentScheduleName = calendar[currentDay]
+    scheduleName = calendar[currentDay]
 
-    scheduleOverrides = data.overrides;
+    overrides = data.overrides;
 
-    if (scheduleOverrides[`${currentMonth}-${currentDate}`]) currentScheduleName = scheduleOverrides[`${currentMonth}-${currentDate}`];
-
-    currentSchedule = schedules[currentScheduleName];
+    if (overrides[`${currentMonth + 1}-${currentDate}`]) scheduleName = overrides[`${currentMonth + 1}-${currentDate}`];
+    schedule = schedules[scheduleName];
 
     loadAvailableSchedulesToDropdown();
-    $(".select-schedule").val(currentScheduleName);
+    $(".select-schedule").val(scheduleName);
     updatePeriodCountInSettings(periods);
-
+    
     tick();
 });
-
-let sidebarOpened = false;
 
 // JQuery events
 $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
@@ -67,7 +84,7 @@ $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
     );
 
     sidebarOpened = !sidebarOpened;
-    if (sidebarOpened) displaySchedule(currentSchedule);
+    if (sidebarOpened) displaySchedule(schedule);
 
     $(".radial-timer").toggleClass("toggle-effect");
     $(".time-container").toggleClass("toggle-effect");
@@ -95,16 +112,12 @@ $(".settings,.mobile.settings-mobile").click(async function() {
     $(".select-font").val(await get("settings", "font"));
 
     let periods = await get("settings", "periods");
-    $(".input-period#input-period-1").val(periods[0] || "Period 1");
-    $(".input-period#input-period-2").val(periods[1] || "Period 2");
-    $(".input-period#input-period-3").val(periods[2] || "Period 3");
-    $(".input-period#input-period-4").val(periods[3] || "Period 4");
-    $(".input-period#input-period-5").val(periods[4] || "Period 5");
-    $(".input-period#input-period-6").val(periods[5] || "Period 6");
-    $(".input-period#input-period-7").val(periods[6] || "Period 7");
+    for (let i = 0; i < periods.length; i++) {
+        $(".input-period#input-period-1").val(periods[i] || "Period " + (i + 1));
+    }
 });
 
-$(".close-settings").click(function() {
+$(".close-settings").click(async function() {
     console.log("%cClosed %csettings.",
         "color: blue;",
         "color: black;"
@@ -114,32 +127,21 @@ $(".close-settings").click(function() {
 
     setTheme($(".select-theme").val());
     setFont($(".select-font").val());
-    setPeriodNames($(".input-period#input-period-1").val(),
-    $(".input-period#input-period-2").val(),
-    $(".input-period#input-period-3").val(),
-    $(".input-period#input-period-4").val(),
-    $(".input-period#input-period-5").val(),
-    $(".input-period#input-period-6").val(),
-    $(".input-period#input-period-7").val());
+
+    let periods = await get("settings", "periods");
+    let periodNames = [];
+    for (let i = 0; i < periods.length; i++) {
+        periodNames.push($(".input-period#input-period-" + (i + 1)).val())
+    }
+    setPeriodNames(periodNames);
 
     runLogic();
 
-    displaySchedule(currentSchedule);
+    displaySchedule(schedule);
 });
 
 $(".select-schedule").change(function() {
-    currentScheduleName = $(".select-schedule").val();
-    currentSchedule = schedules[currentScheduleName];
-
-    console.log(`Chose %c${currentScheduleName} %cas %cschedule.`,
-        "color: blue;",
-        "color: black;",
-        "color: green;"
-    );
-
-    runLogic();
-
-    displaySchedule(currentSchedule);
+    changeSchedule($(this).val());
 });
 
 async function runLogic() {
@@ -152,10 +154,10 @@ async function runLogic() {
         return;
     }
 
-    let time = getTime(currentSchedule);
+    let time = getTime(schedule);
     let parsedTime = parseTime(time);
 
-    let period = getPeriod(currentSchedule);
+    let period = getPeriod(schedule);
     let parsedPeriod = await parsePeriod(period);
 
     let today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -164,8 +166,8 @@ async function runLogic() {
 
     let percent = parsedTime[2];
 
-    if (!$(".container").hasClass("toggle-effect")) updateUI(parsedTime[0], parsedPeriod, currentScheduleName, today, percent); // Run if not in settings
-    updatePage(parsedTime[0], parsedPeriod, currentScheduleName, favicon)
+    if (!$(".container").hasClass("toggle-effect")) updateUI(parsedTime[0], parsedPeriod, scheduleName, today, percent); // Run if not in settings
+    updatePage(parsedTime[0], parsedPeriod, scheduleName, favicon)
 }
 
 function tick() {
@@ -174,13 +176,17 @@ function tick() {
     setTimeout(tick, 1000);
 }
 
-// Loading functions
-async function loadSettings() {
-    if (await get("settings", "theme") === undefined) await set("settings", "theme", "default-light");
-    if (await get("settings", "font") === undefined) await set("settings", "font", "'Inter', sans-serif");
-    if (await get("settings", "periods") === undefined) await set("settings", "periods", ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6", "Period 7"]);
-    setTheme(await get("settings", "theme"));
-    setFont(await get("settings", "font"));
+function changeSchedule(n) {
+    scheduleName = n;
+    schedule = schedules[scheduleName];
+
+    console.log(`Chose %c${scheduleName} %cas %cschedule.`,
+        "color: blue;",
+        "color: black;",
+        "color: green;"
+    );
+
+    runLogic();
 }
 
 // Logic functions
@@ -195,8 +201,8 @@ async function setFont(font) {
     await set("settings", "font", font);
 }
 
-async function setPeriodNames(period1, period2, period3, period4, period5, period6, period7) {
-    let periods = [period1, period2, period3, period4, period5, period6, period7];
+async function setPeriodNames(p) {
+    let periods = p;
     periods = periods.map(period => period.trim());
 
     for (let i = 0; i < periods.length; i++) { if (periods[i] === "") periods[i] = `Period ${i + 1}`; }
@@ -206,7 +212,11 @@ async function setPeriodNames(period1, period2, period3, period4, period5, perio
 }
 
 function loadAvailableSchedulesToDropdown() {
-    for (let key of Object.keys(schedules)) { $(".select-schedule").append(`<option value="${key}">${key}</option>`) }
+    let keys = Object.keys(schedules);
+    for (let i = 0; i < keys.length; i++) {
+        if (schedules[keys[i]].special) { $(".select-schedule").append(`<option value="${keys[i]}" hidden>${keys[i]}</option>`) }
+        else { $(".select-schedule").append(`<option value="${keys[i]}">${keys[i]}</option>`) }
+    }
     
     console.log("%cLoaded %cavailable schedules to dropdown.",
         "color: blue;",
@@ -232,8 +242,7 @@ async function displaySchedule(schedule) {
     $(".schedule-list").empty();
 
     let periods = await get("settings", "periods");
-
-    for (const period of schedule) {
+    for (const period of schedule.periods) {
         let start = period.start;
         let end = period.end;
         let subject = period.subject;
@@ -241,12 +250,12 @@ async function displaySchedule(schedule) {
 
         let isCurrentPeriod = getPeriod(schedule) === period;
 
-        let scheduleItem = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${isCurrentPeriod ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
+        let item = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${isCurrentPeriod ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
             <td class="schedule-item-time">${start} - ${end}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
 
-        $(".schedule-list").append(scheduleItem);
+        $(".schedule-list").append(item);
     };
 
     console.log("%cDisplayed %cschedule in sidebar.",
@@ -287,23 +296,30 @@ function parseTime(time) {
 function getPeriod(schedule) {
     let now = new Date();
     let currentTime = now.toTimeString().slice(0, 5);
-    let currentPeriod = schedule.find(period => {
+    let currentPeriod = schedule.periods.find(period => {
         return currentTime >= period.start && currentTime < period.end;
     });
     
     if (!currentPeriod) {
-        let nextPeriod = schedule.find(period => period.start > currentTime);
+        let nextPeriod = schedule.periods.find(period => period.start > currentTime);
         if (!nextPeriod) return null; // Schedule has ended for the day
-        let previousPeriod = schedule[schedule.indexOf(nextPeriod) - 1];
+        let previousPeriod = schedule.periods[schedule.periods.indexOf(nextPeriod) - 1];
 
         let passingPeriod = {
             start: previousPeriod.end,
             end: nextPeriod.start,
             subject: "Passing to " + nextPeriod.subject
         };
-
+        if (JSON.stringify(period) != JSON.stringify(passingPeriod) && sidebarOpened) {
+            displaySchedule(schedule);
+        }
+        period = passingPeriod;
         return passingPeriod;
     }
+    if (JSON.stringify(period) != JSON.stringify(currentPeriod) && sidebarOpened) {
+        displaySchedule(schedule);
+    }
+    period = currentPeriod;
     return currentPeriod;
 }
 
@@ -313,14 +329,10 @@ async function parsePeriod(period) {
     let periodName = period ? period.subject : "Free";
 
     let periodNames = await get("settings", "periods");
-
-    if (periodName === "Period 1") periodName = periodNames[0];
-    else if (periodName === "Period 2") periodName = periodNames[1];
-    else if (periodName === "Period 3") periodName = periodNames[2];
-    else if (periodName === "Period 4") periodName = periodNames[3];
-    else if (periodName === "Period 5") periodName = periodNames[4];
-    else if (periodName === "Period 6") periodName = periodNames[5];
-    else if (periodName === "Period 7") periodName = periodNames[6];
+    
+    if (periodName.split(" ")[0] === "Period" && !isNaN(periodName.split(" ")[1])) {
+        periodName = periodNames[parseInt(periodName.split(" ")[1]) - 1];
+    }
 
     return periodName;
 }
@@ -380,7 +392,5 @@ function drawRadialTimer(percent) {
     let mainColor = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-background-color').trim();
     $(".radial-timer > path").attr("fill", mainColor);
 }
-
-function getQueryParam(key) { return new URLSearchParams(window.location.search).get(key); }
 
 function isMobile() { return window.innerWidth <= 750; }

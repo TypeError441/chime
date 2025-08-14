@@ -14,21 +14,25 @@
         "month-date": "schedule-name"
     },
     "schedules": {
-        "Template": [
-            {
-                "start": "00:00",
-                "end": "23:59",
-                "subject": "Template"
-            }
-        ]
-    },
-    "special": {
-        "Template": [
-            {
-                "start": "00:00",
-                "end": "23:59",
-                "subject": "Template"
-            }
-        ]
+        "Template": {
+            "special": false,
+            "periods": [
+                {
+                    "start": "00:00",
+                    "end": "24:00",
+                    "subject": "Template"
+                }
+            ]
+        },
+        "Special": {
+            "special": true,
+            "periods": [
+                {
+                    "start": "00:00",
+                    "end": "24:00",
+                    "subject": "Template"
+                }
+            ]
+        }
     }
 }
