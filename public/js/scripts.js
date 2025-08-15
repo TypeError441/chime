@@ -113,7 +113,7 @@ $(".settings,.mobile.settings-mobile").click(async function() {
 
     let periods = await get("settings", "periods");
     for (let i = 0; i < periods.length; i++) {
-        $(".input-period#input-period-1").val(periods[i] || "Period " + (i + 1));
+        $(".input-period#input-period-" + (i + 1)).val(periods[i] || "Period " + (i + 1));
     }
 });
 
@@ -187,6 +187,8 @@ function changeSchedule(n) {
     );
 
     runLogic();
+
+    displaySchedule(schedule);
 }
 
 // Logic functions
@@ -293,17 +295,17 @@ function parseTime(time) {
     return [s, time[3], time[4]];
 }
 
-function getPeriod(schedule) {
+function getPeriod(s) {
     let now = new Date();
     let currentTime = now.toTimeString().slice(0, 5);
-    let currentPeriod = schedule.periods.find(period => {
+    let currentPeriod = s.periods.find(period => {
         return currentTime >= period.start && currentTime < period.end;
     });
     
     if (!currentPeriod) {
-        let nextPeriod = schedule.periods.find(period => period.start > currentTime);
+        let nextPeriod = s.periods.find(period => period.start > currentTime);
         if (!nextPeriod) return null; // Schedule has ended for the day
-        let previousPeriod = schedule.periods[schedule.periods.indexOf(nextPeriod) - 1];
+        let previousPeriod = s.periods[s.periods.indexOf(nextPeriod) - 1];
 
         let passingPeriod = {
             start: previousPeriod.end,
@@ -311,13 +313,13 @@ function getPeriod(schedule) {
             subject: "Passing to " + nextPeriod.subject
         };
         if (JSON.stringify(period) != JSON.stringify(passingPeriod) && sidebarOpened) {
-            displaySchedule(schedule);
+            displaySchedule(s);
         }
         period = passingPeriod;
         return passingPeriod;
     }
     if (JSON.stringify(period) != JSON.stringify(currentPeriod) && sidebarOpened) {
-        displaySchedule(schedule);
+        displaySchedule(s);
     }
     period = currentPeriod;
     return currentPeriod;
