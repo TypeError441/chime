@@ -1,4 +1,4 @@
-import { set, get } from "/js/idb-helper.js";
+import { set, get } from "/lib/js/idb-helper.js";
 
 // Register sw
 fetch(`/manifest.json`).then(response => response.json())
@@ -13,19 +13,20 @@ fetch(`/manifest.json`).then(response => response.json())
 
 // Date variables
 let now = new Date();
-let currentDay = now.getDay();
-let currentMonth = now.getMonth();
-let currentDate = now.getDate();
 
 // Schedule variables
 let scheduleName;
 let schedule;
 
-let period;
+let theme;
+let font;
+let periods;
+
+let period = {subject: ""};
 
 let overrides;
 let schedules;
-let periods;
+let periodCount;
 let calendar;
 
 let sidebarOpened = false;
@@ -37,7 +38,9 @@ console.log("%cLoading %csettings and school data.",
 );
 
 // If there is no school, set it to egan by default
-if (await get("settings", "school") === undefined) await set("settings", "school", "egan");
+if (await get("settings", "school") === undefined) {
+    await set("settings", "school", "egan");
+}
 console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
     "color: blue;",
     "color: black;",
@@ -47,7 +50,7 @@ console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
 // Get school data
 fetch(`/schools/${await get("settings", "school")}.json`).then(response => response.json())
 .then(async (data) => {
-    periods = data.periods;
+    periodCount = data.periods;
 
     if (await get("settings", "theme") === undefined) await set("settings", "theme", "default-light");
     if (await get("settings", "font") === undefined) await set("settings", "font", "'Inter', sans-serif");
@@ -56,23 +59,29 @@ fetch(`/schools/${await get("settings", "school")}.json`).then(response => respo
         p.push(`Period ${i + 1}`);
     }
     if (await get("settings", "periods") === undefined) await set("settings", "periods", p);
+    periods = await get("settings", "periods");
+    if (periods.length < periodCount) {
+        for (let i = periods.length; i < periodCount; i++) {
+            periods.push(`Period ${i + 1}`);
+        }
+    }
     setTheme(await get("settings", "theme"));
     setFont(await get("settings", "font"));
 
     schedules = data.schedules;
     calendar = data.calendar;
     
-    scheduleName = calendar[currentDay]
+    scheduleName = calendar[now.getDay()]
 
     overrides = data.overrides;
 
-    if (overrides[`${currentMonth + 1}-${currentDate}`]) scheduleName = overrides[`${currentMonth + 1}-${currentDate}`];
+    if (overrides[`${now.getMonth() + 1}-${now.getDate()}`]) scheduleName = overrides[`${now.getMonth() + 1}-${now.getDate()}`];
     schedule = schedules[scheduleName];
 
     loadAvailableSchedulesToDropdown();
     $(".select-schedule").val(scheduleName);
-    updatePeriodCountInSettings(periods);
-    
+    updatePeriodCountInSettings(periodCount);
+
     tick();
 });
 
@@ -97,7 +106,7 @@ $(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
     $(".schedule").toggleClass("toggle-effect");
 });
 
-$(".settings,.mobile.settings-mobile").click(async function() {
+$(".settings,.mobile.settings-mobile").click(function() {
     console.log("%cOpened %csettings.",
         "color: blue;",
         "color: black;"
@@ -106,18 +115,16 @@ $(".settings,.mobile.settings-mobile").click(async function() {
     $(".container").toggleClass("toggle-effect");
     $(".settings-container").toggleClass("toggle-effect");
 
-    let theme = await get("settings", "theme");
     $(".select-theme").val(theme);
     $("html").attr("data-theme", theme);
-    $(".select-font").val(await get("settings", "font"));
+    $(".select-font").val(font);
 
-    let periods = await get("settings", "periods");
-    for (let i = 0; i < periods.length; i++) {
+    for (let i = 0; i < periodCount; i++) {
         $(".input-period#input-period-" + (i + 1)).val(periods[i] || "Period " + (i + 1));
     }
 });
 
-$(".close-settings").click(async function() {
+$(".close-settings").click(function() {
     console.log("%cClosed %csettings.",
         "color: blue;",
         "color: black;"
@@ -128,12 +135,10 @@ $(".close-settings").click(async function() {
     setTheme($(".select-theme").val());
     setFont($(".select-font").val());
 
-    let periods = await get("settings", "periods");
-    let periodNames = [];
-    for (let i = 0; i < periods.length; i++) {
-        periodNames.push($(".input-period#input-period-" + (i + 1)).val())
+    for (let i = 0; i < periodCount; i++) {
+        periods[i] = $(".input-period#input-period-" + (i + 1)).val();
     }
-    setPeriodNames(periodNames);
+    setPeriodNames(periods);
 
     runLogic();
 
@@ -154,20 +159,21 @@ async function runLogic() {
         return;
     }
 
+    now = new Date();
+
     let time = getTime(schedule);
     let parsedTime = parseTime(time);
+    let p = getPeriod(schedule);
+    let parsedPeriod = await parsePeriod(p);
 
-    let period = getPeriod(schedule);
-    let parsedPeriod = await parsePeriod(period);
-
-    let today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    let today = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
     let favicon = getFaviconColor(parsedTime[1]);
 
     let percent = parsedTime[2];
 
     if (!$(".container").hasClass("toggle-effect")) updateUI(parsedTime[0], parsedPeriod, scheduleName, today, percent); // Run if not in settings
-    updatePage(parsedTime[0], parsedPeriod, scheduleName, favicon)
+    updatePage(parsedTime[0], parsedPeriod, scheduleName, favicon);
 }
 
 function tick() {
@@ -186,28 +192,30 @@ function changeSchedule(n) {
         "color: green;"
     );
 
-    runLogic();
-
     displaySchedule(schedule);
+
+    runLogic();
 }
 
 // Logic functions
-async function setTheme(theme) {
-    $("html").attr("data-theme", theme);
-    await set("settings", "theme", theme);
+async function setTheme(t) {
+    theme = t
+    $("html").attr("data-theme", t);
+    await set("settings", "theme", t);
 }
 
-async function setFont(font) {
-    $(".time, .period, .schedule, .date").css("font-family", font);
+async function setFont(f) {
+    font = f;
+    $(".time, .period, .schedule, .date").css("font-family", f);
     // schedule-item handled in displaySchedule()
-    await set("settings", "font", font);
+    await set("settings", "font", f);
 }
 
 async function setPeriodNames(p) {
     let periods = p;
     periods = periods.map(period => period.trim());
 
-    for (let i = 0; i < periods.length; i++) { if (periods[i] === "") periods[i] = `Period ${i + 1}`; }
+    for (let i = 0; i < periodCount; i++) { if (periods[i] === "") periods[i] = `Period ${i + 1}`; }
 
     await set("settings", "periods", periods);
 
@@ -242,18 +250,19 @@ function updatePeriodCountInSettings(periods) {
 
 async function displaySchedule(schedule) {
     $(".schedule-list").empty();
-
-    let periods = await get("settings", "periods");
-    for (const period of schedule.periods) {
-        let start = period.start;
-        let end = period.end;
-        let subject = period.subject;
+    for (const p of schedule.periods) {
+        let start = p.start;
+        let end = p.end;
+        let subject = p.subject;
         if (subject.startsWith("Period")) subject = periods[subject.split(" ")[1] - 1];
 
-        let isCurrentPeriod = getPeriod(schedule) === period;
+        let sh = String(start[0]).padStart(2, "0");
+        let sm = String(start[1]).padStart(2, "0");
+        let eh = String(end[0]).padStart(2, "0");
+        let em = String(end[1]).padStart(2, "0");
 
-        let item = `<tr style="font-family: ${await get("settings", "font")};" class="schedule-item ${isCurrentPeriod ? 'current' : ''}${new Date().toTimeString().slice(0, 5) > end ? 'finished' : ''}">
-            <td class="schedule-item-time">${start} - ${end}</td>
+        let item = `<tr style="font-family: ${font};" class="schedule-item ${now.getHours() * 60 + now.getMinutes() > end ? 'finished' : ''}">
+            <td class="schedule-item-time">` + `${sh}:${sm} - ${eh}:${em}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
 
@@ -270,15 +279,14 @@ function getTime(schedule) {
     let period = getPeriod(schedule);
     if (period === null) return null;
 
-    let now = new Date();
-    let end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.end.split(":")[0], period.end.split(":")[1], 0);
+    let end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.end[0], period.end[1], 0);
     let timeRemaining = end - now;
     let h = Math.floor(timeRemaining / (1000 * 60 * 60));
     let m = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
     let s = Math.floor((timeRemaining % (1000 * 60)) / 1000);
     
-    let pStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.start.split(":")[0], period.start.split(":")[1], 0);
-    let pEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.end.split(":")[0], period.end.split(":")[1], 0);
+    let pStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.start[0], period.start[1], 0);
+    let pEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.end[0], period.end[1], 0);
     let d = pEnd - pStart; // Total time of period in milliseconds
     let t = pEnd - now; // Total time left in the period in milliseconds
     let p = t / d;
@@ -296,32 +304,28 @@ function parseTime(time) {
 }
 
 function getPeriod(s) {
-    let now = new Date();
-    let currentTime = now.toTimeString().slice(0, 5);
+    let current = now.getHours() * 60 + now.getMinutes();
     let currentPeriod = s.periods.find(period => {
-        return currentTime >= period.start && currentTime < period.end;
+        return current >= period.start[0] * 60 + period.start[1] && current < period.end[0] * 60 + period.end[1];
     });
     
     if (!currentPeriod) {
-        let nextPeriod = s.periods.find(period => period.start > currentTime);
+        let nextPeriod = s.periods.find(period => period.start > current);
         if (!nextPeriod) return null; // Schedule has ended for the day
         let previousPeriod = s.periods[s.periods.indexOf(nextPeriod) - 1];
 
-        let passingPeriod = {
+        currentPeriod = {
             start: previousPeriod.end,
             end: nextPeriod.start,
             subject: "Passing to " + nextPeriod.subject
         };
-        if (JSON.stringify(period) != JSON.stringify(passingPeriod) && sidebarOpened) {
-            displaySchedule(s);
-        }
-        period = passingPeriod;
-        return passingPeriod;
     }
-    if (JSON.stringify(period) != JSON.stringify(currentPeriod) && sidebarOpened) {
+
+    if (sidebarOpened && currentPeriod.subject !== period.subject) {
         displaySchedule(s);
+        period = currentPeriod;
     }
-    period = currentPeriod;
+
     return currentPeriod;
 }
 
@@ -329,11 +333,9 @@ async function parsePeriod(period) {
     if (period === null) return "School is over";
 
     let periodName = period ? period.subject : "Free";
-
-    let periodNames = await get("settings", "periods");
     
     if (periodName.split(" ")[0] === "Period" && !isNaN(periodName.split(" ")[1])) {
-        periodName = periodNames[parseInt(periodName.split(" ")[1]) - 1];
+        periodName = periods[parseInt(periodName.split(" ")[1]) - 1];
     }
 
     return periodName;

@@ -1,4 +1,4 @@
-import { openDB } from "/lib/idb.js";
+import { openDB } from "/lib/js/idb.js";
 
 // Load idb
 const dbPromise = openDB("chime-db", 1, {
