@@ -13,8 +13,8 @@
     "overrides" : {
         "8-14": "First Three Days",
         "8-15": "First Three Days",
-        "8-19": "Advisory",
-        "8-26": "Advisory",
+        "8-19": "Monday",
+        "8-26": "Monday",
         "8-29": "Minimum"
     },
     "schedules": {
