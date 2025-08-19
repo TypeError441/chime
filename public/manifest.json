@@ -1,13 +1,8 @@
 {
-    "ver": "4.9.1",
+    "ver": "4.9.2",
     "short_name": "Chime",
     "name": "Chime",
     "icons": [
-        {
-            "src": "/lib/icon/152.png",
-            "sizes": "152x152",
-            "type": "image/png"
-        },
         {
             "src": "/lib/icon/192.png",
             "sizes": "192x192",

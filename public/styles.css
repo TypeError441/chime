@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
 
 /* Base */
@@ -104,7 +102,8 @@ body {
     flex-direction: column;
 }
 
-.settings-item > label {
+.settings-item > label:not(.label-input-periods) {
+    margin-bottom: 0.5em;
     font-weight: bold;
     font-size: 1.2em;
 }
@@ -112,10 +111,6 @@ body {
 .settings-item > label.label-input-periods {
     font-weight: normal;
     font-size: 0.8em;
-}
-
-.settings-item > label:not(.label-input-periods) {
-    margin-bottom: 0.5em;
 }
 
 select, input {
@@ -133,7 +128,7 @@ select > option {
 }
 
 /* Settings Buttons */
-.settings {
+.settings, .close-settings {
     background: none;
     border: none;
     position: absolute;
@@ -143,37 +138,17 @@ select > option {
     transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1), transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.settings:hover {
+.settings.toggle-effect {
+    right: calc(1em + min(30vw, 350px));
+}
+
+.settings:hover, .close-settings:hover {
     transform: rotate(180deg) translate(0, 3px);
     cursor: pointer;
     opacity: 1;
 }
 
-.settings.toggle-effect {
-    right: calc(1em + min(30vw, 350px));
-}
-
-.settings > img {
-    filter: brightness(var(--image-on-bg-brightness));
-}
-
-.close-settings {
-    background: none;
-    border: none;
-    position: absolute;
-    right: 1em;
-    bottom: 1em;
-    opacity: 0.7;
-    transition: opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1), transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
-}
-
-.close-settings:hover {
-    transform: rotate(90deg) translate(0, 3px);
-    cursor: pointer;
-    opacity: 1;
-}
-
-.close-settings > img {
+.settings > img, .close-settings > img {
     filter: brightness(var(--image-on-bg-brightness));
 }
 
@@ -230,6 +205,8 @@ select > option {
 
 .right-sidebar {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     right: calc(-1 * min(30vw, 350px));
     width: min(30vw, 350px);
     background-color: var(--sidebar-background-color);
@@ -240,12 +217,18 @@ select > option {
     filter: drop-shadow(0 0 10px var(--drop-shadow-color));
 }
 
+.right-sidebar-exit {
+    display: none;
+}
+
 .toggle-effect  > .right-sidebar {
     right: 0;
 }
 
 .right-sidebar > .title {
-    font-weight: bold; font-size: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
+    flex-shrink: 0;
 }
 
 .right-sidebar-toggle {
@@ -281,8 +264,8 @@ select > option {
 
 /* Schedule */
 .sidebar-schedule {
+    flex: 1;
     overflow: auto;
-    height: calc(100%);
 }
 
 .schedule-list {
@@ -311,34 +294,23 @@ select > option {
 }
 
 .sidebar-footer {
-    position: absolute;
-    bottom: 1em;
+    flex-shrink: 0;
     width: 100%;
     background-color: var(--sidebar-background-color);
 }
 
 .select-schedule {
     margin: 0 0 0.5em 0;
-    width: calc(100% - 2.3em);
+    width: 100%;
 }
 
 /* Mobile */
-/* Leaving the sidebar */
-@media (min-width: 750px) {
-    .right-sidebar-exit {
-        display: none;
-    }
-}
 
 @media (max-width: 750px) {
-    .right-sidebar {
-        filter: drop-shadow(0 0 0 #000);
-    }
-    .right-sidebar-toggle {
-        filter: drop-shadow(0 0 0 #000);
-    }
+    .right-sidebar,
+    .right-sidebar-toggle,
     .radial-timer {
-        filter: drop-shadow(0 0 0 #000);
+        filter: drop-shadow(0 0 0 #0000);
     }
 
     .time-container.toggle-effect {
@@ -359,22 +331,21 @@ select > option {
         right: 100vw;
     }
 
-    .sidebar-schedule {
-        height: calc(100% - 7.6em);
-    }
-
     .settings.toggle-effect {
         right: 4em;
     }
 
     .right-sidebar-exit {
+        display: block;
         position: absolute;
         right: 1em;
         bottom: 1em;
         background: none;
         border: none;
         opacity: 0.7;
-        transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1), transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+        transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1),
+                    opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1),
+                    transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
     }
 
     .right-sidebar-exit:hover {
@@ -387,6 +358,7 @@ select > option {
         filter: brightness(var(--image-on-bg-brightness));
     }
 
+    /* Schedule item font sizes */
     .schedule-item-time {
         font-size: 1.4em;
     }
@@ -395,21 +367,16 @@ select > option {
         font-size: 2em;
     }
 
-    .schedule-item.finished > .schedule-item-time {
-        font-size: 1.3em;
-    }
-
-    .schedule-item.finished > .schedule-item-name {
-        font-size: 1.7em;
-    }
+    /* Settings layout adjustments */
     .settings-column {
         margin: 0 1em;
     }
 
     .select-schedule {
-        margin: 2em 0;
+        margin-bottom: 2em;
     }
 
+    /* Input/select width for mobile */
     select, input {
         width: 32vw;
     }
