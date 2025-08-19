@@ -14,7 +14,9 @@
         "8-14": "First Three Days",
         "8-15": "First Three Days",
         "8-19": "Monday",
+        "8-20": "Even Without Tutorial",
         "8-26": "Monday",
+        "8-27": "Even Without Tutorial",
         "8-29": "Minimum"
     },
     "schedules": {
@@ -1045,6 +1047,88 @@
                         22
                     ],
                     "subject": "Period 7"
+                },
+                {
+                    "start": [
+                        14,
+                        22
+                    ],
+                    "end": [
+                        15,
+                        3
+                    ],
+                    "subject": "Assembly"
+                }
+            ]
+        },
+        "Even Without Tutorial": {
+            "special": true,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        9,
+                        12
+                    ],
+                    "subject": "Free"
+                },
+                {
+                    "start": [
+                        9,
+                        17
+                    ],
+                    "end": [
+                        10,
+                        39
+                    ],
+                    "subject": "Period 2"
+                },
+                {
+                    "start": [
+                        10,
+                        39
+                    ],
+                    "end": [
+                        10,
+                        53
+                    ],
+                    "subject": "Brunch"
+                },
+                {
+                    "start": [
+                        10,
+                        56
+                    ],
+                    "end": [
+                        12,
+                        18
+                    ],
+                    "subject": "Period 4"
+                },
+                {
+                    "start": [
+                        12,
+                        18
+                    ],
+                    "end": [
+                        12,
+                        54
+                    ],
+                    "subject": "Lunch"
+                },
+                {
+                    "start": [
+                        12,
+                        57
+                    ],
+                    "end": [
+                        14,
+                        19
+                    ],
+                    "subject": "Period 6"
                 },
                 {
                     "start": [

@@ -7,7 +7,7 @@ fetch(`/manifest.json`).then(response => response.json())
     navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
     console.log("%cRegistered %csw.js.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 });
 
@@ -30,11 +30,12 @@ let periodCount;
 let calendar;
 
 let sidebarOpened = false;
+let settingsOpened = false;
 
 // Load settings and school data
 console.log("%cLoading %csettings and school data.",
     "color: blue;",
-    "color: black;"
+    "color: white;"
 );
 
 // If there is no school, set it to egan by default
@@ -43,7 +44,7 @@ if (await get("settings", "school") === undefined) {
 }
 console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
     "color: blue;",
-    "color: black;",
+    "color: white;",
     "color: green;"
 );
 
@@ -86,34 +87,44 @@ fetch(`/schools/${await get("settings", "school")}.json`).then(response => respo
 });
 
 // JQuery events
-$(".right-sidebar-toggle,.mobile.right-sidebar-exit").click(function() {
+$(".right-sidebar-toggle,.right-sidebar-exit").click(function() {
     console.log("%cToggled %csidebar.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 
     sidebarOpened = !sidebarOpened;
     if (sidebarOpened) displaySchedule(schedule);
 
-    $(".radial-timer").toggleClass("toggle-effect");
+    if (sidebarOpened) {
+        $(".right-sidebar").show();
+        console.log("%cOpened %csidebar.")
+    } else {
+        setTimeout(() => {
+            $(".right-sidebar").hide();
+        }, 300);
+        console.log("%cOpened %csiassdebar.")
+    }
+
     $(".time-container").toggleClass("toggle-effect");
-    $(".right-sidebar").toggleClass("toggle-effect");
-    $(".right-sidebar-toggle").toggleClass("toggle-effect");
+    $(".right-sidebar-container").toggleClass("toggle-effect");
     $(".settings").toggleClass("toggle-effect");
-    $(".mobile.settings-mobile").toggleClass("toggle-effect");
-    $(".time").toggleClass("toggle-effect");
-    $(".period").toggleClass("toggle-effect");
-    $(".schedule").toggleClass("toggle-effect");
 });
 
-$(".settings,.mobile.settings-mobile").click(function() {
+$(".settings").click(function() {
     console.log("%cOpened %csettings.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 
-    $(".container").toggleClass("toggle-effect");
-    $(".settings-container").toggleClass("toggle-effect");
+    $(".settings-container").show();
+    setTimeout(() => {
+        $(".container").hide();
+    }, 600);
+    
+    settingsOpened = true;
+    $(".container").addClass("toggle-effect");
+    $(".settings-container").addClass("toggle-effect");
 
     $(".select-theme").val(theme);
     $("html").attr("data-theme", theme);
@@ -127,10 +138,17 @@ $(".settings,.mobile.settings-mobile").click(function() {
 $(".close-settings").click(function() {
     console.log("%cClosed %csettings.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
-    $(".container").toggleClass("toggle-effect");
-    $(".settings-container").toggleClass("toggle-effect");
+
+    $(".container").show();
+    setTimeout(() => {
+        $(".settings-container").hide();
+    }, 600);
+
+    settingsOpened = false;
+    $(".container").removeClass("toggle-effect");
+    $(".settings-container").removeClass("toggle-effect");
 
     setTheme($(".select-theme").val());
     setFont($(".select-font").val());
@@ -153,7 +171,7 @@ async function runLogic() {
     if (sidebarOpened && isMobile()) {
         console.log("Stopped %clogic %cdue to being on %cmobile.",
             "color: blue;",
-            "color: black;",
+            "color: white;",
             "color: green;"
         );
         return;
@@ -188,7 +206,7 @@ function changeSchedule(n) {
 
     console.log(`Chose %c${scheduleName} %cas %cschedule.`,
         "color: blue;",
-        "color: black;",
+        "color: white;",
         "color: green;"
     );
 
@@ -230,7 +248,7 @@ function loadAvailableSchedulesToDropdown() {
     
     console.log("%cLoaded %cavailable schedules to dropdown.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 }
 
@@ -244,7 +262,7 @@ function updatePeriodCountInSettings(periods) {
 
     console.log("%cUpdated %cperiod count in settings.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 }
 
@@ -261,7 +279,7 @@ async function displaySchedule(schedule) {
         let eh = String(end[0]).padStart(2, "0");
         let em = String(end[1]).padStart(2, "0");
 
-        let item = `<tr style="font-family: ${font};" class="schedule-item ${now.getHours() * 60 + now.getMinutes() > end ? 'finished' : ''}">
+        let item = `<tr style="font-family: ${font};" class="schedule-item">
             <td class="schedule-item-time">` + `${sh}:${sm} - ${eh}:${em}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
@@ -271,7 +289,7 @@ async function displaySchedule(schedule) {
 
     console.log("%cDisplayed %cschedule in sidebar.",
         "color: blue;",
-        "color: black;"
+        "color: white;"
     );
 }
 
@@ -393,7 +411,7 @@ function drawRadialTimer(percent) {
     }
 
     $(".radial-timer > path").attr("d", d);
-    let mainColor = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-background-color').trim();
+    let mainColor = getComputedStyle(document.documentElement).getPropertyValue('--radial-background-color').trim();
     $(".radial-timer > path").attr("fill", mainColor);
 }
 

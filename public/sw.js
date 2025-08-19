@@ -11,7 +11,6 @@ self.addEventListener("install", event => {
                 "/styles.css",
                 "/scripts.js",
                 "/manifest.json",
-                "/sw.js",
 
                 "/schools/egan.json",
 
@@ -21,17 +20,8 @@ self.addEventListener("install", event => {
                 "/lib/favicon/red.png",
                 "/lib/favicon/yellow.png",
 
-                "/lib/icon/50.png",
-                "/lib/icon/64.png",
-                "/lib/icon/72.png",
-                "/lib/icon/87.png",
-                "/lib/icon/128.png",
-                "/lib/icon/144.png",
                 "/lib/icon/152.png",
-                "/lib/icon/167.png",
-                "/lib/icon/180.png",
                 "/lib/icon/192.png",
-                "/lib/icon/256.png",
                 "/lib/icon/512.png",
 
                 "/lib/img/close.png",

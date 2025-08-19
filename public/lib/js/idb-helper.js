@@ -13,7 +13,7 @@ export async function set(lock, key, value) {
 
     console.log(`Set %c${key} %cto %c${value}.`,
         "color: blue;",
-        "color: black;",
+        "color: white;",
         "color: green;"
     );
     
