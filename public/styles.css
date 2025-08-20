@@ -1,12 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Moo+Lah+Lah&display=swap');
+/* Fonts */
+/* roboto-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/lib/fonts/roboto-v48-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/lib/fonts/roboto-v48-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/lib/fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/lib/fonts/inter-v19-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
 /* Base */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     color: var(--color);
 }
 
@@ -161,6 +195,7 @@ select > option {
 
 .period, .schedule {
     font-size: 13vmin;
+    font-weight: normal;
     text-align: left;
     transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
@@ -176,15 +211,15 @@ select > option {
     transition: height 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.toggle-effect > div > .time {
+.toggle-effect > header > .time {
     font-size: calc(35vmin - 6em);
 }
 
-.toggle-effect > div > .period, .toggle-effect > div > .schedule {
+.toggle-effect > header > .period, .toggle-effect > header > .schedule {
     font-size: calc(13vmin - 1em);
 }
 
-.toggle-effect > div > .radial-timer {
+.toggle-effect > header > .radial-timer {
     height: 70vmin;
 }
 

@@ -3,45 +3,59 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>...</title>
+        <meta name="description" content="A safe, distraction-free academic school bell schedule timer. Designed for students and teachers to track school periods easily.">
+        <meta name="keywords" content="school, bell, schedule, timer, academic, classroom, safe">
+        <meta name="author" content="TypeError">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+        <meta name="rating" content="safe for kids">
+        <title>Chime - Academic School Bell Schedule Timer</title>
         <link rel="stylesheet" href="/styles.css">
         <link class="favicon" rel="shortcut icon" href="/lib/favicon/gray.png" type="image/x-icon">
         <link rel="manifest" href="manifest.json">
         <script src="/lib/js/jquery-3.7.1.slim.js"></script>
     </head>
     <body>
-        <div class="container">
-            <div class="time-container">
-                <div>
-                    <div class="time">...</div>
-                    <div class="period">...</div>
-                    <div class="schedule">...</div>
+        <main class="container">
+            <section class="time-container">
+                <header>
+                    <time class="time">Time</time>
+                    <h2 class="period">School Period</h2>
+                    <h2 class="schedule">Schedule</h2>
                     <svg class="radial-timer" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
                         <path></path>
                     </svg>
-                </div>
-                <div class="date">...</div>
-            </div>
-            <div class="right-sidebar-container">
-                <button class="right-sidebar-toggle"><img src="/lib/img/schedule.png" alt="Open Sidebar" width="32"></button>
+                </header>
+                <time class="date">Date</time>
+            </section>
+            <aside class="right-sidebar-container">
+                <button class="right-sidebar-toggle">
+                    <img src="/lib/img/schedule.png" alt="Open Sidebar" width="32">
+                </button>
                 <div class="right-sidebar" style="display: none;">
-                    <div class="title">Schedule</div>
-                    <div class="sidebar-schedule">
+                    <h2 class="title">Schedule</h2>
+                    <section class="sidebar-schedule">
                         <table class="schedule-list"></table>
-                    </div>
-                    <div class="sidebar-footer">
+                    </section>
+                    <footer class="sidebar-footer">
                         <select id="select-schedule" class="select-schedule"></select>
                         <div class="version">version .....</div>
-                    </div>
-                    <button class="right-sidebar-exit"><img src="/lib/img/close.png" alt="Exit Sidebar" width="32"></button>
+                    </footer>
+                    <button class="right-sidebar-exit">
+                        <img src="/lib/img/close.png" alt="Exit Sidebar" width="32">
+                    </button>
                 </div>
-            </div>
-            <button class="settings"><img src="/lib/img/settings.png" alt="Settings" width="32"></button>
-        </div>
-        <div class="settings-container" style="display: none;">
-            <div class="title">Settings</div>
-            <div class="settings-content">
-                <div class="settings-column">
+            </aside>
+            <button class="settings">
+                <img src="/lib/img/settings.png" alt="Settings" width="32">
+            </button>
+        </main>
+        <section class="settings-container" style="display: none;">
+            <header class="title">
+                <h2>Settings</h2>
+            </header>
+            <section class="settings-content">
+                <fieldset class="settings-column">
                     <div class="settings-item">
                         <label for="select-theme">Theme</label>
                         <select id="select-theme" class="select-theme">
@@ -67,16 +81,19 @@
                             <option value="'Georgia', serif">Georgia</option>
                             <option value="'Garamond', serif">Garamond</option>
                             <option value="'Courier New', monospace">Courier New</option>
-                            <option value="'Moo Lah Lah', fantasy">???</option>
                         </select>
                     </div>
-                </div>
-                <div class="settings-column periods">
-                    <div class="settings-item"><label>Period Names</label></div>
-                </div>
-            </div>
-            <button class="close-settings"><img src="/lib/img/close.png" alt="Exit Settings" width="32"></button>
-        </div>
+                </fieldset>
+                <fieldset class="settings-column periods">
+                    <div class="settings-item">
+                        <label>Period Names</label>
+                    </div>
+                </fieldset>
+            </section>
+            <button class="close-settings">
+                <img src="/lib/img/close.png" alt="Exit Settings" width="32">
+            </button>
+        </section>
         <script src="/scripts.js" type="module"></script>
     </body>
 </html>
