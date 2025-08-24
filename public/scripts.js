@@ -1,160 +1,179 @@
-import { set, get } from "/lib/js/idb-helper.js";
+import { set, get } from '/lib/js/idb-helper.js';
 
-// Register sw
-fetch(`/manifest.json`).then(response => response.json())
-.then(data => {
-    $(".version").text(`version ` + data.ver);
-    navigator.serviceWorker.register(`/sw.js?version=${data.ver}`);
-    console.log("%cRegistered %csw.js.",
-        "color: blue;",
-        "color: white;"
-    );
-});
-
-// Date variables
+/* -------------------------------
+------------VARIABLES-------------
+------------------------------- */
 let now = new Date();
+
+// Setting variables
+let theme;
+let font;
+let periods;
+let version;
 
 // Schedule variables
 let scheduleName;
 let schedule;
-
-let theme;
-let font;
-let periods;
-
-let period = {subject: ""};
+let currentPeriod = { subject: '' };
 
 let overrides;
 let schedules;
 let periodCount;
 let calendar;
 
+let schools;
+let school;
+
 let sidebarOpened = false;
 let settingsOpened = false;
 
-// Load settings and school data
-console.log("%cLoading %csettings and school data.",
-    "color: blue;",
-    "color: white;"
-);
+/* -------------------------------
+-------------LOADING--------------
+------------------------------- */
+console.log('Loading settings, school, and sw data.');
+
+// Register sw
+fetch('/manifest.json').then(response => response.json())
+.then(data => {
+    version = data.ver;
+    $('.version').text('version ' + version);
+    navigator.serviceWorker.register(`/sw.js?version=${version}`);
+    console.log('Registered sw.js.');
+
+    setTimeout(pollForVersion, document.hidden ? 20 * 60000 : 30 * 1000);
+});
 
 // If there is no school, set it to egan by default
-if (await get("settings", "school") === undefined) {
-    await set("settings", "school", "egan");
+if (await get('settings', 'school') === undefined) {
+    await set('settings', 'school', 'egan');
 }
-console.log(`Got %cschool %cas %c${await get("settings", "school")}.`,
-    "color: blue;",
-    "color: white;",
-    "color: green;"
-);
+school = await get('settings', 'school');
+
+console.log(`Got school as ${school}.`);
+
+// Get schools.json list
+fetch('/schools/schools.json').then(response => response.json())
+.then(async (data) => {
+    schools = data.schools;
+    loadAvailableSchoolsToDropdown();
+    $('.select-school').val(school);
+});
 
 // Get school data
-fetch(`/schools/${await get("settings", "school")}.json`).then(response => response.json())
+fetch(`/schools/${school}.json`).then(response => response.json())
 .then(async (data) => {
     periodCount = data.periods;
 
-    if (await get("settings", "theme") === undefined) await set("settings", "theme", "default-light");
-    if (await get("settings", "font") === undefined) await set("settings", "font", "'Inter', sans-serif");
     let p = [];
-    for (let i = 0; i < periods; i++) {
+    for (let i = 0; i < periodCount; i++) {
         p.push(`Period ${i + 1}`);
     }
-    if (await get("settings", "periods") === undefined) await set("settings", "periods", p);
-    periods = await get("settings", "periods");
+    if (await get('settings', 'periods').length < periodCount || await get('settings', 'periods') === undefined) {
+        await set('settings', 'periods', p);
+    }
+
+    periods = await get('settings', 'periods');
     if (periods.length < periodCount) {
         for (let i = periods.length; i < periodCount; i++) {
             periods.push(`Period ${i + 1}`);
         }
     }
-    setTheme(await get("settings", "theme"));
-    setFont(await get("settings", "font"));
+
+    if (await get('settings', 'theme') === undefined) {
+        await set('settings', 'theme', 'default-light')
+    };
+    if (await get('settings', 'font') === undefined) {
+        await set('settings', 'font', '"Inter", sans-serif')
+    };
+    setTheme(await get('settings', 'theme'));
+    setFont(await get('settings', 'font'));
 
     schedules = data.schedules;
     calendar = data.calendar;
     
-    scheduleName = calendar[now.getDay()]
+    scheduleName = calendar[now.getDay()];
 
     overrides = data.overrides;
 
-    if (overrides[`${now.getMonth() + 1}-${now.getDate()}`]) scheduleName = overrides[`${now.getMonth() + 1}-${now.getDate()}`];
+    let overrideKey = `${now.getMonth() + 1}-${now.getDate()}`;
+    if (overrides[overrideKey]) {
+        scheduleName = overrides[overrideKey];
+    }
     schedule = schedules[scheduleName];
 
     loadAvailableSchedulesToDropdown();
-    $(".select-schedule").val(scheduleName);
-    updatePeriodCountInSettings(periodCount);
+    $('.select-schedule').val(scheduleName);
+
+    loadPeriodsInSettings(periodCount);
 
     tick();
 });
 
-// JQuery events
-$(".right-sidebar-toggle,.right-sidebar-exit").click(function() {
-    console.log("%cToggled %csidebar.",
-        "color: blue;",
-        "color: white;"
-    );
+/* -------------------------------
+----------JQuery Events-----------
+------------------------------- */
+$('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
+    console.log('Toggled sidebar.');
 
     sidebarOpened = !sidebarOpened;
-    if (sidebarOpened) displaySchedule(schedule);
-
     if (sidebarOpened) {
-        $(".right-sidebar").show();
-        console.log("%cOpened %csidebar.")
-    } else {
-        setTimeout(() => {
-            $(".right-sidebar").hide();
-        }, 300);
-        console.log("%cOpened %csiassdebar.")
+        displaySchedule(schedule);
     }
 
-    $(".time-container").toggleClass("toggle-effect");
-    $(".right-sidebar-container").toggleClass("toggle-effect");
-    $(".settings").toggleClass("toggle-effect");
+    if (sidebarOpened) {
+        $('.right-sidebar').show();
+        console.log('Opened sidebar.');
+    }
+    else {
+        setTimeout(function () {
+            $('.right-sidebar').hide();
+        }, 300);
+        console.log('Closed sidebar.');
+    }
+
+    $('.time-container').toggleClass('toggle-effect');
+    $('.right-sidebar-container').toggleClass('toggle-effect');
+    $('.settings').toggleClass('toggle-effect');
 });
 
-$(".settings").click(function() {
-    console.log("%cOpened %csettings.",
-        "color: blue;",
-        "color: white;"
-    );
+$('.settings').click(function () {
+    console.log('Opened settings.');
 
-    $(".settings-container").show();
-    setTimeout(() => {
-        $(".container").hide();
+    $('.settings-container').show();
+    setTimeout(function () {
+        $('.container').hide();
     }, 600);
     
     settingsOpened = true;
-    $(".container").addClass("toggle-effect");
-    $(".settings-container").addClass("toggle-effect");
+    $('.container').addClass('toggle-effect');
+    $('.settings-container').addClass('toggle-effect');
 
-    $(".select-theme").val(theme);
-    $("html").attr("data-theme", theme);
-    $(".select-font").val(font);
+    $('.select-theme').val(theme);
+    $('html').attr('data-theme', theme);
+    $('.select-font').val(font);
 
     for (let i = 0; i < periodCount; i++) {
-        $(".input-period#input-period-" + (i + 1)).val(periods[i] || "Period " + (i + 1));
+        $('.input-period#input-period-' + (i + 1)).val(periods[i] || 'Period ' + (i + 1));
     }
 });
 
-$(".close-settings").click(function() {
-    console.log("%cClosed %csettings.",
-        "color: blue;",
-        "color: white;"
-    );
+$('.close-settings').click(function () {
+    console.log('Closed settings.');
 
-    $(".container").show();
-    setTimeout(() => {
-        $(".settings-container").hide();
+    $('.container').show();
+    setTimeout(function () {
+        $('.settings-container').hide();
     }, 600);
 
     settingsOpened = false;
-    $(".container").removeClass("toggle-effect");
-    $(".settings-container").removeClass("toggle-effect");
+    $('.container').removeClass('toggle-effect');
+    $('.settings-container').removeClass('toggle-effect');
 
-    setTheme($(".select-theme").val());
-    setFont($(".select-font").val());
+    setTheme($('.select-theme').val());
+    setFont($('.select-font').val());
 
     for (let i = 0; i < periodCount; i++) {
-        periods[i] = $(".input-period#input-period-" + (i + 1)).val();
+        periods[i] = $('.input-period#input-period-' + (i + 1)).val();
     }
     setPeriodNames(periods);
 
@@ -163,17 +182,114 @@ $(".close-settings").click(function() {
     displaySchedule(schedule);
 });
 
-$(".select-schedule").change(function() {
+$('.select-schedule').change(function () {
     changeSchedule($(this).val());
 });
 
+$('.select-school').change(function () {
+    changeSchool($(this).val());
+});
+
+function loadPeriodsInSettings(periods) {
+    $('.settings-column.periods > .settings-item').empty();
+
+    for (let i = 0; i < periods; i++) {
+        $('.settings-column.periods > .settings-item').append(`
+            <label class="label-input-periods" for="input-period-${i + 1}">Period ${i + 1}</label>
+            <input maxlength="16" type="text" id="input-period-${i + 1}" class="input-period" value="Period ${i + 1}" placeholder="Period ${i + 1}">
+        `);
+    }
+
+    console.log('Updated period count in settings.');
+}
+
+function loadAvailableSchedulesToDropdown() {
+    $('.select-schedule').empty();
+
+    let keys = Object.keys(schedules);
+    for (let i = 0; i < keys.length; i++) {
+        if (schedules[keys[i]].special) {
+            $('.select-schedule').append(`<option value="${keys[i]}" hidden>${keys[i]}</option>`);
+        }
+        else {
+            $('.select-schedule').append(`<option value="${keys[i]}">${keys[i]}</option>`);
+        }
+    }
+    
+    console.log('Loaded available schedules to dropdown.');
+}
+
+function loadAvailableSchoolsToDropdown() {
+    $('.select-school').empty();
+
+    let keys = Object.keys(schools);
+    for (let i = 0; i < keys.length; i++) {
+        $('.select-school').append(`<option value="${keys[i]}">${schools[keys[i]]}</option>`);
+    }
+    
+    console.log('Loaded available schedules to dropdown.');
+}
+
+function changeSchedule(n) {
+    scheduleName = n;
+    schedule = schedules[scheduleName];
+
+    console.log(`Chose ${scheduleName} as schedule.`);
+
+    displaySchedule(schedule);
+
+    runLogic();
+}
+
+async function changeSchool(n) {
+    school = n;
+
+    console.log(`Chose ${school} as school.`);
+
+    await set('settings', 'school', school);
+    fetch(`/schools/${school}.json`).then(response => response.json())
+    .then(async (data) => {
+        periodCount = data.periods;
+
+        let p = [];
+        for (let i = 0; i < periodCount; i++) {
+            p.push(`Period ${i + 1}`);
+        }
+        if (await get('settings', 'periods').length < periodCount || await get('settings', 'periods') === undefined) {
+            await set('settings', 'periods', p);
+        }
+
+        periods = await get('settings', 'periods');
+        if (periods.length < periodCount) {
+            for (let i = periods.length; i < periodCount; i++) {
+                periods.push(`Period ${i + 1}`);
+            }
+        }
+
+        schedules = data.schedules;
+        calendar = data.calendar;
+        
+        scheduleName = calendar[now.getDay()];
+
+        overrides = data.overrides;
+
+        let overrideKey = `${now.getMonth() + 1}-${now.getDate()}`;
+        if (overrides[overrideKey]) {
+            scheduleName = overrides[overrideKey];
+        }
+        schedule = schedules[scheduleName];
+
+        loadAvailableSchedulesToDropdown();
+        $('.select-schedule').val(scheduleName);
+
+        loadPeriodsInSettings(periodCount);
+
+    });
+}
+
 async function runLogic() {
     if (sidebarOpened && isMobile()) {
-        console.log("Stopped %clogic %cdue to being on %cmobile.",
-            "color: blue;",
-            "color: white;",
-            "color: green;"
-        );
+        console.log('Stopped logic because sidebar on mobile.');
         return;
     }
 
@@ -190,8 +306,21 @@ async function runLogic() {
 
     let percent = parsedTime[2];
 
-    if (!$(".container").hasClass("toggle-effect")) updateUI(parsedTime[0], parsedPeriod, scheduleName, today, percent); // Run if not in settings
+    if (!settingsOpened) {
+        updateUI(parsedTime[0], parsedPeriod, scheduleName, today, percent);
+    }
     updatePage(parsedTime[0], parsedPeriod, scheduleName, favicon);
+}
+
+function pollForVersion() {
+    fetch('/manifest.json').then(response => response.json())
+    .then(data => {
+        if (data.ver !== version) {
+            window.location.reload(true);
+        }
+    });
+    
+    setTimeout(pollForVersion, document.hidden ? 20 * 60000 : 30 * 1000);
 }
 
 function tick() {
@@ -200,102 +329,67 @@ function tick() {
     setTimeout(tick, 1000);
 }
 
-function changeSchedule(n) {
-    scheduleName = n;
-    schedule = schedules[scheduleName];
-
-    console.log(`Chose %c${scheduleName} %cas %cschedule.`,
-        "color: blue;",
-        "color: white;",
-        "color: green;"
-    );
-
-    displaySchedule(schedule);
-
-    runLogic();
-}
-
-// Logic functions
+/* -------------------------------
+---------Logic Functions----------
+------------------------------- */
 async function setTheme(t) {
-    theme = t
-    $("html").attr("data-theme", t);
-    await set("settings", "theme", t);
+    theme = t;
+    $('html').attr('data-theme', t);
+    await set('settings', 'theme', t);
 }
 
 async function setFont(f) {
     font = f;
-    $(".time, .period, .schedule, .date").css("font-family", f);
+    $('.time, .period, .schedule, .date').css('font-family', f);
     // schedule-item handled in displaySchedule()
-    await set("settings", "font", f);
+    await set('settings', 'font', f);
 }
 
 async function setPeriodNames(p) {
     let periods = p;
     periods = periods.map(period => period.trim());
 
-    for (let i = 0; i < periodCount; i++) { if (periods[i] === "") periods[i] = `Period ${i + 1}`; }
-
-    await set("settings", "periods", periods);
-
-}
-
-function loadAvailableSchedulesToDropdown() {
-    let keys = Object.keys(schedules);
-    for (let i = 0; i < keys.length; i++) {
-        if (schedules[keys[i]].special) { $(".select-schedule").append(`<option value="${keys[i]}" hidden>${keys[i]}</option>`) }
-        else { $(".select-schedule").append(`<option value="${keys[i]}">${keys[i]}</option>`) }
-    }
-    
-    console.log("%cLoaded %cavailable schedules to dropdown.",
-        "color: blue;",
-        "color: white;"
-    );
-}
-
-function updatePeriodCountInSettings(periods) {
-    for (let i = 0; i < periods; i++) {
-        $(".settings-column.periods > .settings-item").append(`
-            <label class="label-input-periods" for="input-period-${i + 1}">Period ${i + 1}</label>
-            <input maxlength="16" type="text" id="input-period-${i + 1}" class="input-period" value="Period ${i + 1}" placeholder="Period ${i + 1}">
-        `);
+    for (let i = 0; i < periodCount; i++) {
+        if (periods[i] === '') {
+            periods[i] = `Period ${i + 1}`;
+        }
     }
 
-    console.log("%cUpdated %cperiod count in settings.",
-        "color: blue;",
-        "color: white;"
-    );
+    await set('settings', 'periods', periods);
+
 }
 
 async function displaySchedule(schedule) {
-    $(".schedule-list").empty();
-    for (const p of schedule.periods) {
+    $('.schedule-list').empty();
+    for (let p of schedule.periods) {
         let start = p.start;
         let end = p.end;
         let subject = p.subject;
-        if (subject.startsWith("Period")) subject = periods[subject.split(" ")[1] - 1];
+        if (subject.startsWith('Period')) {
+            subject = periods[subject.split(' ')[1] - 1];
+        }
 
-        let sh = String(start[0]).padStart(2, "0");
-        let sm = String(start[1]).padStart(2, "0");
-        let eh = String(end[0]).padStart(2, "0");
-        let em = String(end[1]).padStart(2, "0");
+        let sh = String(start[0]).padStart(2, '0');
+        let sm = String(start[1]).padStart(2, '0');
+        let eh = String(end[0]).padStart(2, '0');
+        let em = String(end[1]).padStart(2, '0');
 
         let item = `<tr style="font-family: ${font};" class="schedule-item">
-            <td class="schedule-item-time">` + `${sh}:${sm} - ${eh}:${em}</td>
+            <td class="schedule-item-time">${sh}:${sm} - ${eh}:${em}</td>
             <td class="schedule-item-name">${subject}</td>
         </tr>`;
 
-        $(".schedule-list").append(item);
+        $('.schedule-list').append(item);
     };
 
-    console.log("%cDisplayed %cschedule in sidebar.",
-        "color: blue;",
-        "color: white;"
-    );
+    console.log('Displayed schedule in sidebar.');
 }
 
 function getTime(schedule) {
     let period = getPeriod(schedule);
-    if (period === null) return null;
+    if (period === null) {
+        return null;
+    }
 
     let end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), period.end[0], period.end[1], 0);
     let timeRemaining = end - now;
@@ -313,9 +407,13 @@ function getTime(schedule) {
 }
 
 function parseTime(time) {
-    if (time === null) return ["Free", null]; // Schedule is finished, return null for favicon
-    let s = "";
-    if (time[0] > 0) s += `${time[0].toString()}:`;
+    if (time === null) { // Schedule is finished, return null for favicon
+        return ['Free', null];
+    }
+    let s = '';
+    if (time[0] > 0) {
+        s += `${time[0]}:`;
+    }
     s += `${time[1].toString().padStart(2, '0')}:${time[2].toString().padStart(2, '0')}`;
 
     return [s, time[3], time[4]];
@@ -323,19 +421,21 @@ function parseTime(time) {
 
 function getPeriod(s) {
     let current = now.getHours() * 60 + now.getMinutes();
-    let currentPeriod = s.periods.find(period => {
-        return current >= period.start[0] * 60 + period.start[1] && current < period.end[0] * 60 + period.end[1];
-    });
+    let currentPeriod = s.periods.find(period => current >= period.start[0] * 60 + period.start[1] && current < period.end[0] * 60 + period.end[1]);
     
     if (!currentPeriod) {
-        let nextPeriod = s.periods.find(period => period.start > current);
-        if (!nextPeriod) return null; // Schedule has ended for the day
-        let previousPeriod = s.periods[s.periods.indexOf(nextPeriod) - 1];
+        let nextPeriod = s.periods.find(period => period.start[0] * 60 + period.start[1] > current);
+        if (!nextPeriod) { // Schedule has ended for the day
+            return null;
+        }
+
+        let prevIndex = s.periods.indexOf(nextPeriod) - 1;
+        let previousPeriod = s.periods[prevIndex];
 
         currentPeriod = {
             start: previousPeriod.end,
             end: nextPeriod.start,
-            subject: "Passing to " + nextPeriod.subject
+            subject: 'Passing to ' + nextPeriod.subject
         };
     }
 
@@ -348,37 +448,52 @@ function getPeriod(s) {
 }
 
 async function parsePeriod(period) {
-    if (period === null) return "School is over";
+    if (period === null) {
+        return 'School is over';
+    }
 
-    let periodName = period ? period.subject : "Free";
+    let periodName = period.subject || 'Free';
     
-    if (periodName.split(" ")[0] === "Period" && !isNaN(periodName.split(" ")[1])) {
-        periodName = periods[parseInt(periodName.split(" ")[1]) - 1];
+    const parts = periodName.split(' ');
+    if (parts[0] === 'Period' && !isNaN(parts[1])) {
+        periodName = periods[parseInt(parts[1]) - 1];
     }
 
     return periodName;
 }
 
 function getFaviconColor(ms) {
-    if (ms === null) return "gray";
-    else if (ms >= 15 * 60 * 1000) return "green";
-    else if (ms >= 5 * 60 * 1000) return "yellow";
-    else if (ms >= 2 * 60 * 1000) return "orange";
-    else return "red";
+    if (ms === null) {
+        return 'gray';
+    }
+    if (ms >= 15 * 60 * 1000) {
+        return 'green';
+    }
+    if (ms >= 5 * 60 * 1000) {
+        return 'yellow';
+    }
+    if (ms >= 2 * 60 * 1000) {
+        return 'orange';
+    }
+    if (ms < 2 * 60 * 1000) {
+        return 'red';
+    }
 }
 
 function updateUI(time, period, schedule, today, percent) {
-    $(".time").text(time);
-    $(".period").text(period);
-    $(".schedule").text(schedule);
-    $(".date").text(today);
+    $('.time').text(time);
+    $('.period').text(period);
+    $('.schedule').text(schedule);
+    $('.date').text(today);
 
     drawRadialTimer(percent * 100);
 }
 
 function updatePage(time, period, schedule, favicon) {
-    if (!isMobile()) document.title = `${time} | ${period}, ${schedule}`;
-    $(".favicon").attr("href", `/lib/favicon/${favicon}.png`);
+    if (!isMobile()) {
+        document.title = `${time} | ${period}, ${schedule}`;
+    }
+    $('.favicon').attr('href', `/lib/favicon/${favicon}.png`);
 }
 
 function drawRadialTimer(percent) {
@@ -393,7 +508,8 @@ function drawRadialTimer(percent) {
             A${r},${r} 0 1,1 ${cx},${cy - r}
             Z
         `;
-    } else { // 1 arc
+    }
+    else { // 1 arc
         let angle = percent / 100 * 360;
         let radians = (270 - angle) * (Math.PI / 180);
 
@@ -410,9 +526,11 @@ function drawRadialTimer(percent) {
         `;
     }
 
-    $(".radial-timer > path").attr("d", d);
+    $('.radial-timer > path').attr('d', d);
     let mainColor = getComputedStyle(document.documentElement).getPropertyValue('--radial-background-color').trim();
-    $(".radial-timer > path").attr("fill", mainColor);
+    $('.radial-timer > path').attr('fill', mainColor);
 }
 
-function isMobile() { return window.innerWidth <= 750; }
+function isMobile() {
+    return window.innerWidth <= 750;
+}

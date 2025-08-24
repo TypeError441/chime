@@ -1,0 +1,312 @@
+{
+    "periods": 7,
+    "calendar": [
+        "Holiday",
+        "A",
+        "B",
+        "C",
+        "B",
+        "C",
+        "Holiday"
+    ],
+    "overrides" : {
+        "month-date": "schedule"
+    },
+    "schedules": {
+        "A (Monday)": {
+            "special": false,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        8,
+                        20
+                    ],
+                    "subject": "Free"
+                },
+                {
+                    "start": [
+                        8,
+                        30
+                    ],
+                    "end": [
+                        9,
+                        20
+                    ],
+                    "subject": "Period 1"
+                },
+                {
+                    "start": [
+                        9,
+                        27
+                    ],
+                    "end": [
+                        10,
+                        17
+                    ],
+                    "subject": "Period 2"
+                },
+                {
+                    "start": [
+                        10,
+                        17
+                    ],
+                    "end": [
+                        10,
+                        25
+                    ],
+                    "subject": "Brunch"
+                },
+                {
+                    "start": [
+                        10,
+                        32
+                    ],
+                    "end": [
+                        11,
+                        22
+                    ],
+                    "subject": "Period 3"
+                },
+                {
+                    "start": [
+                        11,
+                        29
+                    ],
+                    "end": [
+                        12,
+                        19
+                    ],
+                    "subject": "Period 4"
+                },
+                {
+                    "start": [
+                        12,
+                        19
+                    ],
+                    "end": [
+                        12,
+                        54
+                    ],
+                    "subject": "Lunch"
+                },
+                {
+                    "start": [
+                        13,
+                        1
+                    ],
+                    "end": [
+                        13,
+                        51
+                    ],
+                    "subject": "Period 5"
+                },
+                {
+                    "start": [
+                        13,
+                        58
+                    ],
+                    "end": [
+                        14,
+                        48
+                    ],
+                    "subject": "Period 6"
+                },
+                {
+                    "start": [
+                        14,
+                        55
+                    ],
+                    "end": [
+                        15,
+                        45
+                    ],
+                    "subject": "Period 7"
+                }
+            ]
+        },
+        "B (Odd)": {
+            "special": false,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        8,
+                        20
+                    ],
+                    "subject": "Free"
+                },
+                {
+                    "start": [
+                        8,
+                        30
+                    ],
+                    "end": [
+                        10,
+                        0
+                    ],
+                    "subject": "Period 1"
+                },
+                {
+                    "start": [
+                        10,
+                        0
+                    ],
+                    "end": [
+                        10,
+                        8
+                    ],
+                    "subject": "Brunch"
+                },
+                {
+                    "start": [
+                        10,
+                        15
+                    ],
+                    "end": [
+                        11,
+                        45
+                    ],
+                    "subject": "Period 3"
+                },
+                {
+                    "start": [
+                        11,
+                        45
+                    ],
+                    "end": [
+                        12,
+                        25
+                    ],
+                    "subject": "Lunch"
+                },
+                {
+                    "start": [
+                        12,
+                        32
+                    ],
+                    "end": [
+                        14,
+                        2
+                    ],
+                    "subject": "Period 5"
+                },
+                {
+                    "start": [
+                        14,
+                        9
+                    ],
+                    "end": [
+                        15,
+                        39
+                    ],
+                    "subject": "Period 7"
+                }
+            ]
+        },
+        "C (Even)": {
+            "special": false,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        8,
+                        20
+                    ],
+                    "subject": "Free"
+                },
+                {
+                    "start": [
+                        8,
+                        30
+                    ],
+                    "end": [
+                        10,
+                        0
+                    ],
+                    "subject": "Period 2"
+                },
+                {
+                    "start": [
+                        10,
+                        7
+                    ],
+                    "end": [
+                        11,
+                        0
+                    ],
+                    "subject": "ACT"
+                },
+                {
+                    "start": [
+                        11,
+                        0
+                    ],
+                    "end": [
+                        11,
+                        8
+                    ],
+                    "subject": "Brunch"
+                },
+                {
+                    "start": [
+                        11,
+                        15
+                    ],
+                    "end": [
+                        12,
+                        45
+                    ],
+                    "subject": "Period 3"
+                },
+                {
+                    "start": [
+                        12,
+                        45
+                    ],
+                    "end": [
+                        13,
+                        25
+                    ],
+                    "subject": "Lunch"
+                },
+                {
+                    "start": [
+                        13,
+                        32
+                    ],
+                    "end": [
+                        15,
+                        2
+                    ],
+                    "subject": "Period 5"
+                }
+            ]
+        },
+        "Holiday": {
+            "special": false,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        24,
+                        0
+                    ],
+                    "subject": "Free"
+                }
+            ]
+        }
+    }
+}

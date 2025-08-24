@@ -11,11 +11,7 @@ const dbPromise = openDB("chime-db", 1, {
 export async function set(lock, key, value) {
     const db = await dbPromise;
 
-    console.log(`Set %c${key} %cto %c${value}.`,
-        "color: blue;",
-        "color: white;",
-        "color: green;"
-    );
+    console.log(`Set ${key} to ${value}.`);
     
     await db.put(lock, value, key);
 }

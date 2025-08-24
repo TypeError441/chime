@@ -1,5 +1,4 @@
 {
-    "name": "Ardis G. Egan Junior High School",
     "periods": 7,
     "calendar": [
         "Holiday",
@@ -942,22 +941,6 @@
                         0
                     ],
                     "subject": "Free"
-                }
-            ]
-        },
-        "Dev": {
-            "special": false,
-            "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        24,
-                        0
-                    ],
-                    "subject": "Tutorial / 8th Grade Meeting"
                 }
             ]
         },
