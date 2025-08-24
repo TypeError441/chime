@@ -13,11 +13,33 @@
     "overrides" : {
         "8-14": "First Three Days",
         "8-15": "First Three Days",
+
         "8-19": "Normal",
         "8-20": "Even Without Tutorial",
+
         "8-26": "Normal",
         "8-27": "Even Without Tutorial",
-        "8-29": "Minimum"
+        "8-29": "Minimum",
+
+        "9-1": "Holiday",
+        "9-2": "Normal",
+        "9-3": "Even Without Tutorial",
+
+        "9-9": "Assembly",
+
+
+
+        "9-26": "Assembly",
+
+        "10-3": "Assembly",
+
+        "10-7": "Odd",
+        "10-9": "Minimum",
+        "10-10": "Holiday",
+
+        "10-14": "Odd",
+        "10-15": "Even with Yosemite",
+        "10-16": "Assembly"
     },
     "schedules": {
         "Normal": {
@@ -923,6 +945,22 @@
                 }
             ]
         },
+        "Dev": {
+            "special": false,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        24,
+                        0
+                    ],
+                    "subject": "Tutorial / 8th Grade Meeting"
+                }
+            ]
+        },
 
         "First Three Days": {
             "special": true,
@@ -1140,6 +1178,88 @@
                         3
                     ],
                     "subject": "Assembly"
+                }
+            ]
+        },
+        "Even With Yosemite": {
+            "special": true,
+            "periods": [
+                {
+                    "start": [
+                        0,
+                        0
+                    ],
+                    "end": [
+                        9,
+                        12
+                    ],
+                    "subject": "Free"
+                },
+                {
+                    "start": [
+                        9,
+                        17
+                    ],
+                    "end": [
+                        10,
+                        39
+                    ],
+                    "subject": "Period 2"
+                },
+                {
+                    "start": [
+                        10,
+                        39
+                    ],
+                    "end": [
+                        10,
+                        53
+                    ],
+                    "subject": "Brunch"
+                },
+                {
+                    "start": [
+                        10,
+                        56
+                    ],
+                    "end": [
+                        12,
+                        18
+                    ],
+                    "subject": "Period 4"
+                },
+                {
+                    "start": [
+                        12,
+                        18
+                    ],
+                    "end": [
+                        12,
+                        54
+                    ],
+                    "subject": "Lunch"
+                },
+                {
+                    "start": [
+                        12,
+                        57
+                    ],
+                    "end": [
+                        14,
+                        19
+                    ],
+                    "subject": "Period 6"
+                },
+                {
+                    "start": [
+                        14,
+                        22
+                    ],
+                    "end": [
+                        15,
+                        3
+                    ],
+                    "subject": "Yosemite Meeting/Tutorial"
                 }
             ]
         },
