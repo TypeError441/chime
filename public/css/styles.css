@@ -35,13 +35,19 @@
     src: url("/lib/fonts/inter-v19-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/* Base */
+/* wingdings */
+@font-face {
+    font-family: "Wingdings";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Wingdings"), url("/lib/fonts/wingding.woff") format("woff");
+}
+
+/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Inter", sans-serif;
-    color: var(--color);
 }
 
 body {
@@ -56,6 +62,8 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: "Inter", sans-serif;
+    color: var(--color);
 }
 
 /* Containers */
@@ -69,8 +77,15 @@ body {
     transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.container.toggle-effect {
-    top: -100vh;
+.settings-container {
+    position: fixed;
+    top: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
 .time-container {
@@ -86,31 +101,25 @@ body {
     transition: width 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.time-container.toggle-effect {
-    width: calc(100% - min(30vw, 350px));
+.time {
+    font-size: calc(35vmin - 3em);
+    text-align: left;
+    transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.settings-container {
-    position: fixed;
-    top: 100vh;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1);
+.period, .schedule {
+    font-size: 13vmin;
+    font-weight: normal;
+    text-align: left;
+    transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.settings-container > .title {
+.settings-container .title {
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
     padding: 1em;
     background-color: var(--sidebar-background-color);
-}
-
-.settings-container.toggle-effect {
-    top: 0;
 }
 
 /* Settings */
@@ -137,13 +146,13 @@ body {
     flex-direction: column;
 }
 
-.settings-item > label:not(.label-input-periods) {
+.settings-item label:not(.label-input-periods) {
     margin-bottom: 0.5em;
     font-weight: bold;
     font-size: 1.2em;
 }
 
-.settings-item > label.label-input-periods {
+.settings-item label.label-input-periods {
     font-weight: normal;
     font-size: 0.8em;
 }
@@ -157,12 +166,13 @@ select, input {
     color: var(--background-color);
 }
 
-select > option {
+option {
     background-color: var(--color);
     color: var(--background-color);
 }
 
 /* Settings Buttons */
+
 .settings, .close-settings {
     background: none;
     border: none;
@@ -173,32 +183,14 @@ select > option {
     transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1), transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
-.settings.toggle-effect {
-    right: calc(1em + min(30vw, 350px));
-}
-
 .settings:hover, .close-settings:hover {
     transform: rotate(180deg) translate(0, 3px);
     cursor: pointer;
     opacity: 1;
 }
 
-.settings > img, .close-settings > img {
+.settings img, .close-settings img {
     filter: brightness(var(--image-on-bg-brightness));
-}
-
-/* Central behavior */
-.time {
-    font-size: calc(35vmin - 3em);
-    text-align: left;
-    transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
-}
-
-.period, .schedule {
-    font-size: 13vmin;
-    font-weight: normal;
-    text-align: left;
-    transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 }
 
 .radial-timer {
@@ -210,18 +202,6 @@ select > option {
     height: 90vmin;
     filter: drop-shadow(0 0 10px var(--drop-shadow-color));
     transition: height 0.3s cubic-bezier(0.7, 0, 0.6, 1);
-}
-
-.toggle-effect > header > .time {
-    font-size: calc(35vmin - 6em);
-}
-
-.toggle-effect > header > .period, .toggle-effect > header > .schedule {
-    font-size: calc(13vmin - 1em);
-}
-
-.toggle-effect > header > .radial-timer {
-    height: 70vmin;
 }
 
 .date {
@@ -257,11 +237,7 @@ select > option {
     display: none;
 }
 
-.toggle-effect  > .right-sidebar {
-    right: 0;
-}
-
-.right-sidebar > .title {
+.right-sidebar .title {
     font-weight: bold;
     font-size: 2rem;
     flex-shrink: 0;
@@ -286,15 +262,7 @@ select > option {
     background-color: var(--sidebar-toggle-hover-background-color);
 }
 
-.toggle-effect > .right-sidebar-toggle {
-    right: min(30vw, 350px);
-}
-
-.toggle-effect > .right-sidebar-container > .right-sidebar-toggle {
-    top: -50vh;
-}
-
-.right-sidebar-toggle > img {
+.right-sidebar-toggle img {
     filter: brightness(var(--image-on-toggle-brightness));
 }
 
@@ -340,17 +308,63 @@ select > option {
     width: 100%;
 }
 
-/* Mobile */
+.container.sidebar-opened .right-sidebar-toggle {
+    right: min(30vw, 350px);
+}
 
+.container.settings-opened .right-sidebar-toggle {
+    top: -50vh;
+}
+
+.container.sidebar-opened .right-sidebar {
+    right: 0;
+}
+
+.container.sidebar-opened .time {
+    font-size: calc(35vmin - 6em);
+}
+
+.container.sidebar-opened .period, .container.sidebar-opened .schedule {
+    font-size: calc(13vmin - 1em);
+}
+
+.container.sidebar-opened .radial-timer {
+    height: 70vmin;
+}
+
+.container.sidebar-opened .settings {
+    right: calc(1em + min(30vw, 350px));
+}
+.settings-container.settings-opened {
+    top: 0;
+}
+
+.container.sidebar-opened .time-container {
+    width: calc(100% - min(30vw, 350px));
+}
+
+.container.settings-opened {
+    top: -100vh;
+}
+
+/* Mobile */
 @media (max-width: 750px) {
+    .container.sidebar-opened .time-container {
+        width: 100%;
+    }
+
+    .container.sidebar-opened .right-sidebar-toggle {
+        right: 100vw;
+    }
+
+    .container.sidebar-opened .settings {
+        right: 4em;
+    }
+
     .right-sidebar,
     .right-sidebar-toggle,
     .radial-timer {
         filter: drop-shadow(0 0 0 #0000);
-    }
-
-    .time-container.toggle-effect {
-        width: 100%;
     }
 
     .right-sidebar {
@@ -361,14 +375,6 @@ select > option {
     
     .right-sidebar-toggle {
         bottom: 7em;
-    }
-
-    .right-sidebar-toggle.toggle-effect {
-        right: 100vw;
-    }
-
-    .settings.toggle-effect {
-        right: 4em;
     }
 
     .right-sidebar-exit {
@@ -390,7 +396,7 @@ select > option {
         opacity: 1;
     }
 
-    .right-sidebar-exit > img {
+    .right-sidebar-exit img {
         filter: brightness(var(--image-on-bg-brightness));
     }
 

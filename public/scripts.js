@@ -14,7 +14,7 @@ let version;
 // Schedule variables
 let scheduleName;
 let schedule;
-let currentPeriod = { subject: '' };
+let period = { subject: '' };
 
 let overrides;
 let schedules;
@@ -113,8 +113,6 @@ fetch(`/schools/${school}.json`).then(response => response.json())
 ----------JQuery Events-----------
 ------------------------------- */
 $('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
-    console.log('Toggled sidebar.');
-
     sidebarOpened = !sidebarOpened;
     if (sidebarOpened) {
         displaySchedule(schedule);
@@ -131,6 +129,8 @@ $('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
         console.log('Closed sidebar.');
     }
 
+    $('.container').toggleClass('sidebar-opened');
+
     $('.time-container').toggleClass('toggle-effect');
     $('.right-sidebar-container').toggleClass('toggle-effect');
     $('.settings').toggleClass('toggle-effect');
@@ -145,6 +145,9 @@ $('.settings').click(function () {
     }, 600);
     
     settingsOpened = true;
+    $('.container').addClass('settings-opened');
+    $('.settings-container').addClass('settings-opened');
+
     $('.container').addClass('toggle-effect');
     $('.settings-container').addClass('toggle-effect');
 
@@ -166,6 +169,9 @@ $('.close-settings').click(function () {
     }, 600);
 
     settingsOpened = false;
+    $('.container').removeClass('settings-opened');
+    $('.settings-container').removeClass('settings-opened');
+
     $('.container').removeClass('toggle-effect');
     $('.settings-container').removeClass('toggle-effect');
 
@@ -192,6 +198,7 @@ $('.select-school').change(function () {
 
 function loadPeriodsInSettings(periods) {
     $('.settings-column.periods > .settings-item').empty();
+    $('.settings-column.periods > .settings-item').append('<label>Period Names</label>');
 
     for (let i = 0; i < periods; i++) {
         $('.settings-column.periods > .settings-item').append(`
@@ -317,6 +324,9 @@ function pollForVersion() {
     .then(data => {
         if (data.ver !== version) {
             window.location.reload(true);
+            if (navigator.userAgent.indexOf('Googlebot') === -1) {
+                window.location.href = window.location.href;
+            }
         }
     });
     
@@ -439,10 +449,7 @@ function getPeriod(s) {
         };
     }
 
-    if (sidebarOpened && currentPeriod.subject !== period.subject) {
-        displaySchedule(s);
-        period = currentPeriod;
-    }
+    period = currentPeriod;
 
     return currentPeriod;
 }
@@ -493,7 +500,7 @@ function updatePage(time, period, schedule, favicon) {
     if (!isMobile()) {
         document.title = `${time} | ${period}, ${schedule}`;
     }
-    $('.favicon').attr('href', `/lib/favicon/${favicon}.png`);
+    $('#favicon').attr('href', `/lib/favicon/${favicon}.png`);
 }
 
 function drawRadialTimer(percent) {
