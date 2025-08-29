@@ -47,18 +47,15 @@
 }
 
 [data-theme="green-light"] {
-    --background-color: #00ff00;
+    --background-color: #a3ffa3;
     --background-image: none;
     --color: #000000;
-
-    --sidebar-toggle-background-color: #00a500;
-    --sidebar-toggle-hover-background-color: #005f00;
-    --sidebar-background-color: #00d100;
-    --radial-background-color: #00dd00;
-
-    --image-on-toggle-brightness: 1;
+    --sidebar-toggle-background-color: #f1fff2;
+    --sidebar-toggle-hover-background-color: #cfffcf;
+    --sidebar-background-color: #88ff88;
+    --radial-background-color: #81ee81;
+    --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 0;
-
     --drop-shadow-color: #0000;
 }
 
@@ -86,7 +83,7 @@
     --sidebar-toggle-background-color: #ffffff;
     --sidebar-toggle-hover-background-color: #e8edff;
     --sidebar-background-color: #a3d6ff;
-    --radial-background-color: #a3d6ff;
+    --radial-background-color: #85bdea;
 
     --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 0;

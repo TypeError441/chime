@@ -67,6 +67,11 @@
             .select-schedule {
                 margin: 0 0 0.5em 0;
                 width: 100%;
+
+
+                @media (max-width: templates.$mobile-breakpoint) {
+                    margin-bottom: 1em;
+                }
             }
         }
 
@@ -108,6 +113,7 @@
 }
 
 @media (max-width: templates.$mobile-breakpoint) {
+  #right-sidebar-container {
     .right-sidebar,
     .right-sidebar-toggle,
     #timer-progress {
@@ -118,48 +124,24 @@
         width: 100vw;
         border-radius: 0;
     }
-    
+
     .right-sidebar-toggle {
+        position: absolute;
+        right: 100vw;
         bottom: 7em;
     }
 
-    .right-sidebar-exit {
+    .right-sidebar .right-sidebar-exit {
         display: block;
-        position: absolute;
-        right: 1em;
-        bottom: 1em;
-        background: none;
-        border: none;
-        opacity: 0.7;
-        transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1),
-                    opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1),
-                    transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 
-        img {
-            width: 32px;
-        }
-    }
+        @include templates.flex(both, column);
+        align-items: end;
 
-    .right-sidebar-exit:hover {
-        transform: rotate(90deg) translate(0, 3px);
-        cursor: pointer;
-        opacity: 1;
-    }
-
-    .right-sidebar-exit img {
-        filter: brightness(var(--image-on-bg-brightness));
+        transition: transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
     }
 
     /* Schedule item font sizes */
-    .schedule-item-time {
-        font-size: 1.4em;
-    }
-
-    .schedule-item-name {
-        font-size: 2em;
-    }
-
-    .select-schedule {
-        margin-bottom: 2em;
-    }
+    .sidebar-schedule .schedule-item-time { font-size: 1.4em; }
+    .sidebar-schedule .schedule-item-name { font-size: 2em; }
+  }
 }

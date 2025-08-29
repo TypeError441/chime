@@ -1,19 +1,30 @@
 @use "templates";
 
 .button {
+    @include templates.flex(both, column);
+    align-items: end;
+
     position: absolute;
     z-index: 3;
     right: 1em;
     bottom: 1em;
     background: none;
+    width: 65px;
     border: none;
-    opacity: 0.7;
-    transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1), bottom 0.6s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1), transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+    transition: right 0.3s cubic-bezier(0.7, 0, 0.6, 1), bottom 0.6s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1);
 
     &:hover {
-        transform: rotate(180deg) translate(0, 3px);
         cursor: pointer;
-        opacity: 1;
+
+        .button-tooltip {
+            opacity: 1;
+            margin-bottom: 0.2em;
+        }
+
+        img {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
     }
 
     &#settings {
@@ -29,8 +40,19 @@
         }
     }
 
+    .button-tooltip {
+        background-color: var(--color);
+        color: var(--background-color);
+        padding: 0.5em;
+        border-radius: 0.5em;
+        opacity: 0;
+        transition: margin 0.3s cubic-bezier(0.7, 0, 0.6, 1), opacity 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+    }
+
     img {
-        filter: brightness(var(--image-on-bg-brightness));
         width: 32px;
+        transition: transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+        filter: brightness(var(--image-on-bg-brightness));
+        opacity: 0.7;
     }
 }
