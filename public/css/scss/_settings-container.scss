@@ -1,0 +1,63 @@
+@use "templates";
+
+#settings-container {
+    @include templates.flex(none, column);
+
+    position: fixed;
+    top: 100vh;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1);
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2rem;
+        padding: 1em;
+        background-color: var(--sidebar-background-color);
+    }
+}
+/* Settings */
+.settings-content {
+    @include templates.flex(horiz, row);
+
+    height: 100%;
+    padding-top: 2em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.settings-column {
+    @include templates.flex(none, column);
+
+    margin: 0 2em;
+    border: none;
+}
+
+/* Settings Item */
+.settings-item {
+    @include templates.flex(none, column);
+}
+
+.settings-item label:not(.label-input-periods) {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.settings-item label.label-input-periods {
+    font-weight: normal;
+    font-size: 0.8em;
+}
+
+
+#settings-container.settings-opened {
+    top: 0;
+}
+
+@media (max-width: templates.$mobile-breakpoint) {
+    .settings-column {
+        margin: 0 1em;
+    }
+}

@@ -1,0 +1,90 @@
+@use "templates";
+
+
+#app-container {
+    @include templates.flex(both, column);
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1), width 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+
+    &.sidebar-opened {
+        width: calc(100% - min(30vw, 350px));
+
+        @media (max-width: templates.$mobile-breakpoint) {
+            width: 100%;
+        }
+
+        #timer {
+            #timer-time {
+                font-size: calc(35vmin - 6em);
+            }
+
+            #timer-period, #timer-schedule {
+                font-size: calc(13vmin - 1em);
+            }
+
+            #timer-progress {
+                height: 70vmin;
+            }
+        }
+    }
+
+    &.settings-opened {
+        top: -100vh;
+    }
+
+    #timer {
+        position: relative;
+        background: none;
+
+        #timer-time {
+            display: block;
+            font-size: calc(35vmin - 3em);
+            width: 100%;
+            text-align: center;
+            transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+
+            @media (max-width: templates.$mobile-breakpoint) {
+                font-size: calc(35vmin - 1.5em);
+            }
+        }
+
+        #timer-period, #timer-schedule {
+            font-size: 13vmin;
+            font-weight: normal;
+            text-align: left;
+            transition: font-size 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+        }
+
+        #timer-progress {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            height: 90vmin;
+            filter: drop-shadow(0 0 10px var(--drop-shadow-color));
+            transition: height 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+        }
+    }
+
+    #app-date {
+        font-size: 2rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
+    }
+}
+
+@media (max-width: templates.$mobile-breakpoint) {
+    #timer-time {
+        font-size: calc(35vmin - 1.5em);
+    }
+
+    #app-container.sidebar-opened {
+        width: 100%;
+    }
+}

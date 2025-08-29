@@ -7,8 +7,6 @@
         <meta name="keywords" content="school, bell, schedule, timer, academic, classroom, safe">
         <meta name="author" content="TypeError">
         <meta name="robots" content="index, follow">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
-        <meta name="rating" content="safe for kids">
         <title>Chime - Academic School Bell Schedule Timer</title>
         <link rel="stylesheet" href="/css/main.css">
         <link class="favicon" rel="shortcut icon" href="/lib/favicon/gray.png" type="image/x-icon">
@@ -16,41 +14,56 @@
         <script src="/lib/js/jquery-3.7.1.slim.js"></script>
     </head>
     <body>
-        <main class="container">
-            <section class="time-container">
-                <header>
-                    <time class="time">Time</time>
-                    <h2 class="period">School Period</h2>
-                    <h2 class="schedule">Schedule</h2>
-                    <svg class="radial-timer" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
-                        <path></path>
-                    </svg>
-                </header>
-                <time class="date">Date</time>
-            </section>
-            <aside class="right-sidebar-container">
-                <button class="right-sidebar-toggle">
-                    <img src="/lib/img/schedule.png" alt="Open Sidebar" width="32">
-                </button>
-                <div class="right-sidebar" style="display: none;">
-                    <h2 class="title">Schedule</h2>
-                    <section class="sidebar-schedule">
-                        <table class="schedule-list"></table>
-                    </section>
-                    <footer class="sidebar-footer">
-                        <select id="select-schedule" class="select-schedule"></select>
-                        <div class="version">version .....</div>
-                    </footer>
-                    <button class="right-sidebar-exit">
-                        <img src="/lib/img/close.png" alt="Exit Sidebar" width="32">
-                    </button>
-                </div>
-            </aside>
-            <button class="settings">
-                <img src="/lib/img/settings.png" alt="Settings" width="32">
-            </button>
+        <main id="app-container">
+            <header id="timer">
+                <time id="timer-time">Time</time>
+                <h2 id="timer-period">School Period</h2>
+                <h2 id="timer-schedule">Schedule</h2>
+                <svg id="timer-progress" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+                    <path></path>
+                </svg>
+            </header>
+            <time id="app-date">Date</time>
         </main>
-        <section class="settings-container" style="display: none;">
+        <button id="settings" class="button">
+            <img src="/lib/img/settings.png" alt="Settings">
+        </button>
+        <section id="notification-container">
+            <div id="notification-tune-01" class="notification">
+                <div class="notification-content">
+                    <p class="notification-message">Bells are around 30 seconds early. Go to settings to tune Chime so that the timer is accurate.</p>
+                </div>
+                <button class="notification-close">OK</button>
+            </div>
+            </div>
+            <div class="quick-links">
+                <a class="quick-link" href="https://powerschool.losaltos.k12.ca.us/public/">
+                    <img src="/lib/icon/quick-link/powerschool.png" alt="PowerSchool">
+                </a>
+                <a class="quick-link" href="https://classroom.google.com/">
+                    <img src="/lib/icon/quick-link/classroom.png" alt="Google Classroom">
+                </a>
+            </div>
+        </section>
+        <aside id="right-sidebar-container">
+            <button class="right-sidebar-toggle">
+                <img src="/lib/img/schedule.png" alt="Open Sidebar">
+            </button>
+            <div class="right-sidebar">
+                <h2 class="title">Schedule</h2>
+                <section class="sidebar-schedule">
+                    <table class="schedule-list"></table>
+                </section>
+                <footer class="sidebar-footer">
+                    <select id="select-schedule" class="select-schedule"></select>
+                    <div class="version">version .....</div>
+                </footer>
+                <button class="right-sidebar-exit">
+                    <img src="/lib/img/close.png" alt="Exit Sidebar">
+                </button>
+            </div>
+        </aside>
+        <section id="settings-container" style="display: none;">
             <header class="title">
                 <h2>Settings</h2>
             </header>
@@ -74,7 +87,7 @@
                         <select id="select-font" class="select-font">
                             <option value="'Inter', sans-serif">Sans Serif</option>
                             <option value="'Roboto', sans-serif">Bell.plus font</option>
-                            <option value="'Verdana', sans-serif'">Verdana</option>
+                            <option value="'Verdana', sans-serif">Verdana</option>
                             <option value="'Tahoma', sans-serif">Tahoma</option>
                             <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
                             <option value="'Times New Roman', serif">Times New Roman</option>
@@ -85,16 +98,16 @@
                         </select>
                     </div>
                     <div class="settings-item">
-                        <label for="select-school">School</label>
-                        <select id="select-school" class="select-school"></select>
+                        <label for="select-tune">Tune (offset)</label>
+                        <input id="select-tune" class="select-tune" type="number" min="-60" max="60">
                     </div>
                 </fieldset>
                 <fieldset class="settings-column periods">
                     <div class="settings-item"></div>
                 </fieldset>
             </section>
-            <button class="close-settings">
-                <img src="/lib/img/close.png" alt="Exit Settings" width="32">
+            <button id="close-settings" class="button">
+                <img src="/lib/img/close.png" alt="Exit Settings">
             </button>
         </section>
         <script src="/scripts.js" type="module"></script>

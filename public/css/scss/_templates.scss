@@ -1,0 +1,17 @@
+@mixin flex($axis: both, $dir: column) {
+    display: flex;
+    flex-direction: $dir;
+
+    @if $axis == both {
+        justify-content: center;
+        align-items: center;
+    }
+    @else if $axis == horiz {
+        justify-content: center;
+    }
+    @else if $axis == vert {
+        align-items: center;
+    }
+}
+
+$mobile-breakpoint: 750px;
