@@ -309,7 +309,7 @@ function tick() {
     
         const parts = parsedPeriod.split(' ');
         if (parts[0] === 'Period' && !isNaN(parts[1])) {
-            parsedPeriod = periodCount[parseInt(parts[1]) - 1];
+            parsedPeriod = settings.periodNames[parseInt(parts[1]) - 1];
         }
     }
 
