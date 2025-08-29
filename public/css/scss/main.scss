@@ -36,17 +36,13 @@ select, input {
     margin: 0.2em 0 2em 0;
     background-color: var(--color);
     color: var(--background-color);
+
+    @media (max-width: templates.$mobile-breakpoint) {
+        width: 32vw;
+    }
 }
 
 option {
     background-color: var(--color);
     color: var(--background-color);
-}
-
-/* Mobile */
-@media (max-width: templates.$mobile-breakpoint) {
-    /* Input/select width for mobile */
-    select, input {
-        width: 32vw;
-    }
 }
