@@ -1,10 +1,9 @@
 @use "templates";
 
-#notification-container {
+#popup-container {
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     width: 25em;
-    height: 100vh;
 
     &.empty { display: none; }
 
@@ -43,7 +42,7 @@
         }
     }
 
-    .quick-links {
+    #quick-links {
         display: grid;
         grid-template-columns: repeat(auto-fit, 5em);
         gap: 1em;
@@ -66,6 +65,60 @@
 
             img {
                 width: 32px;
+            }
+        }
+    }
+
+    #modals {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0008;
+
+        .modal {
+            position: absolute;
+            top: 50vh;
+            left: 50vw;
+            transform: translate(-50%, -50%);
+            background-color: var(--background-color);
+            padding: 1em;
+            border-radius: 0.5em;
+            text-align: center;
+
+            .title {
+                font-size: 3vw;
+            }
+
+            textarea {
+                width: 100%;
+                height: 12cap;
+                background-color: var(--radial-background-color);
+                color: var(--color);
+                border: none;
+                resize: none;
+                margin: 1em 0;
+            }
+
+            .submit, .exit {
+                border: none;
+                padding: 1em;
+                border-radius: 0.5em;
+                cursor: pointer;
+
+                &.exit {
+                    background-color: #ff4646;
+                    color: #ffffff;
+
+                    &:hover {
+                        background-color: #da3a3a;
+                    }
+
+                    &:active {
+                        background-color: #bd3232;
+                    }
+                }
             }
         }
     }

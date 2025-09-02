@@ -29,7 +29,7 @@
 
     &#settings {
         &.sidebar-opened {
-            right: calc(1em + min(30vw, 350px));
+            right: calc(1em + templates.$sidebar-width);
             @media (max-width: templates.$mobile-breakpoint) {
                 right: 4em;
             }
@@ -37,6 +37,37 @@
 
         &.settings-opened {
             bottom: calc(100vh + 1em);
+        }
+    }
+
+    &#feedback {
+        right: 4em;
+        &.sidebar-opened {
+            right: calc(4em + templates.$sidebar-width);
+            @media (max-width: templates.$mobile-breakpoint) {
+                right: 7em;
+            }
+        }
+
+        &.settings-opened {
+            bottom: calc(100vh + 1em);
+        }
+        
+        &:hover {
+            img {
+                transform: none;
+            }
+        }
+    }
+
+    &#clear-settings {
+        left: 1em;
+        align-items: start;
+
+        &:hover {
+            img {
+                transform: none;
+            }
         }
     }
 

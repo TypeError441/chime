@@ -20,6 +20,7 @@ let schoolData;
 
 let sidebarOpened = false;
 let settingsOpened = false;
+let skipStore = false;
 
 $('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
     sidebarOpened = !sidebarOpened;
@@ -29,6 +30,7 @@ $('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
 
     $('#app-container').toggleClass('sidebar-opened');
     $('#settings.button').toggleClass('sidebar-opened');
+    $('#feedback.button').toggleClass('sidebar-opened');
     $('#right-sidebar-container').toggleClass('sidebar-opened');
 });
 
@@ -40,7 +42,8 @@ $('#settings').click(function () {
     
     settingsOpened = true;
     $('#app-container').addClass('settings-opened');
-    $('#settings').addClass('settings-opened');
+    $('#settings.button').addClass('settings-opened');
+    $('#feedback.button').addClass('settings-opened');
     $('#popup-container').addClass('settings-opened');
     $('#right-sidebar-container').addClass('settings-opened');
     $('#settings-container').addClass('settings-opened');
@@ -72,7 +75,8 @@ $('#close-settings').click(function () {
 
     settingsOpened = false;
     $('#app-container').removeClass('settings-opened');
-    $('#settings').removeClass('settings-opened');
+    $('#settings.button').removeClass('settings-opened');
+    $('#feedback.button').removeClass('settings-opened');
     $('#popup-container').removeClass('settings-opened');
     $('#settings-container').removeClass('settings-opened');
     $('#right-sidebar-container').removeClass('settings-opened');
@@ -81,6 +85,18 @@ $('#close-settings').click(function () {
     tick();
 
     displaySchedule(schedule);
+
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            'form-name': 'user-settings',
+            theme: settings.theme,
+            font: settings.font,
+            periodNames: JSON.stringify(settings.periodNames),
+            tune: settings.tune,
+        })
+    });
 });
 
 $('.select-schedule').change(function () {
@@ -92,8 +108,42 @@ $('.select-schedule').change(function () {
 });
 
 $('.notification-close').click(function () {
-    localStorage.setItem($(this).closest(".notification").attr("id"), 1);
-    $(this).closest(".notification").hide();
+    localStorage.setItem($(this).closest('.notification').attr('id'), 1);
+    $(this).closest('.notification').hide();
+});
+
+$('#clear-settings').click(function () {
+    localStorage.clear();
+    skipStore = true;
+    location.reload();
+});
+
+$('#feedback-modal').on('submit', function(e) {
+    e.preventDefault();
+    
+    $('#feedback-modal').hide();
+    $('#modals').hide();
+
+    if($('#feedback-modal-textarea').val().trim().length > 0) {
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                'form-name': 'feedback',
+                feedback: $('#feedback-modal-textarea').val().trim()
+            })
+        });
+    }
+});
+
+$('#feedback-modal .exit').click(function() {
+    $('#feedback-modal').hide();
+    $('#modals').hide();
+});
+
+$('#feedback').click(function() {
+    $('#modals').show();
+    $('#feedback-modal').show();
 });
 
 function pollForVersion() {
@@ -113,21 +163,18 @@ function pollForVersion() {
 function displaySchedule(s) {
     $('.schedule-list').empty();
     for (let p of s.periods) {
-        let start = p.start;
-        let end = p.end;
-        let subject = p.subject;
-        if (subject.startsWith('Period')) {
-            subject = settings.periodNames[subject.split(' ')[1] - 1];
+        if (p.name.startsWith('Period')) {
+            p.name = settings.periodNames[p.name.split(' ')[1] - 1];
         }
 
-        let sh = String(start[0]).padStart(2, '0');
-        let sm = String(start[1]).padStart(2, '0');
-        let eh = String(end[0]).padStart(2, '0');
-        let em = String(end[1]).padStart(2, '0');
+        let sh = p.start[0].toString().padStart(2, '0');
+        let sm = p.start[1].toString().padStart(2, '0');
+        let eh = p.end[0].toString().padStart(2, '0');
+        let em = p.end[1].toString().padStart(2, '0');
 
         let item = `<tr style="font-family: ${settings.font};" class="schedule-item">
             <td class="schedule-item-time">${sh}:${sm} - ${eh}:${em}</td>
-            <td class="schedule-item-name">${subject}</td>
+            <td class="schedule-item-name">${p.name}</td>
         </tr>`;
 
         $('.schedule-list').append(item);
@@ -154,9 +201,9 @@ async function init() {
     /* Load localStorage data
     ------------------------ */
     settings.theme = localStorage.getItem('theme') || 'default-light';
-    settings.font = localStorage.getItem('font') || '"Inter", sans-serif';
+    settings.font = localStorage.getItem('font') || '\'Inter\', sans-serif';
     
-    settings.periodNames = JSON.parse(localStorage.getItem('periods') || "[]");
+    settings.periodNames = JSON.parse(localStorage.getItem('periods') || '[]');
 
     settings.periodNames = settings.periodNames.map(p => (p || ''));
 
@@ -211,171 +258,174 @@ async function init() {
 
     /* Hide all viewed notifications
     ------------------------ */
-    $(".notification").each(function () {
-        if (localStorage.getItem($(this).attr("id"))) {
+    $('.notification').each(function () {
+        if (localStorage.getItem($(this).attr('id'))) {
             $(this).hide();
         }
     });
 
     /* On page close, save all settings to localStorage
     ------------------------ */
-    window.addEventListener("beforeunload", storeSettings);
+    window.addEventListener('beforeunload', storeSettings);
 
     /* Update page to have localStorage settings applied
     ------------------------ */
     applySettings();
+
+    fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            'form-name': 'user-settings',
+            theme: settings.theme,
+            font: settings.font,
+            periodNames: JSON.stringify(settings.periodNames),
+            tune: settings.tune,
+        })
+    });
 
     tick();
     setInterval(tick, 1000);
 }
 
 function tick() {
+    /* Skip tick if sidebar is opened
+    ------------------------ */
     if (sidebarOpened && window.innerWidth <= 750) {
         return;
     }
 
+    /* Get current time with tune offset
+    ------------------------ */
     now = new Date(new Date().getTime() + settings.tune * 1000);
 
+    /* Get current minute of the day
+    ------------------------ */
+    let minutesSinceMidnight = 60 * now.getHours() + now.getMinutes();
 
-
-
-    let current = now.getHours() * 60 + now.getMinutes();
-    let p = schedule.periods.find(period => current >= period.start[0] * 60 + period.start[1] && current < period.end[0] * 60 + period.end[1]);
+    /* Get current period
+    ------------------------ */
+    let currentPeriod = schedule.periods.find(period => {
+        let periodStart = period.start[0] * 60 + period.start[1];
+        let periodEnd = period.end[0] * 60 + period.end[1];
+        return minutesSinceMidnight >= periodStart && minutesSinceMidnight < periodEnd;
+    });
     
-    if (!p) {
-        let nextPeriod = schedule.periods.find(period => period.start[0] * 60 + period.start[1] > current);
-        if (nextPeriod === undefined) { // Schedule has ended for the day
-            p = null;
+    /* If there is no current period
+    ------------------------ */
+    if (!currentPeriod) {
+        let nextPeriod = schedule.periods.find(period => {
+            let periodStart = period.start[0] * 60 + period.start[1];
+            return periodStart > minutesSinceMidnight;
+        });
+
+        // If schedule is over
+        if (nextPeriod === undefined) {
+            currentPeriod = {
+                start: schedule.periods[schedule.periods.length - 1].end,
+                end: [24, 0],
+                name: 'Free'
+            };
         }
+
+        // Make passing period
         else {
-            let prevIndex = schedule.periods.indexOf(nextPeriod) - 1;
-            let previousPeriod = schedule.periods[prevIndex];
+            let previousPeriod = schedule.periods[schedule.periods.indexOf(nextPeriod) - 1];
 
             currentPeriod = {
-                p: previousPeriod.end,
+                start: previousPeriod.end,
                 end: nextPeriod.start,
-                subject: 'Passing to ' + nextPeriod.subject
+                name: 'Passing to ' + nextPeriod.name
             };
         }
     }
-
-
-
-    let time;
-
-    if (p === null) {
-        time = null;
-    }
-    else {
-        let end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), p.end[0], p.end[1], 0);
-        let timeRemaining = end - now;
-        let h = Math.floor(timeRemaining / (1000 * 60 * 60));
-        let m = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-        let s = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-        
-        let pStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), p.start[0], p.start[1], 0);
-        let pEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), p.end[0], p.end[1], 0);
-        let d = pEnd - pStart; // Total time of period in milliseconds
-        let t = pEnd - now; // Total time left in the period in milliseconds
-        let per = t / d;
-
-        time = [h, m, s, t, per];
+    if (currentPeriod.name.startsWith('Period ')) {
+        const periodNameNumber = currentPeriod.name.split(' ')[1];
+        currentPeriod.name = settings.periodNames[parseInt(periodNameNumber) - 1];
     }
 
-
-
-    let parsedTime;
-    if (time === null) { // Schedule is finished, return null for favicon
-        parsedTime = ['Free', null];
-    }
-    else {
-        let timeStr = '';
-        if (time[0] > 0) {
-            timeStr += `${time[0]}:`;
-        }
-        timeStr += `${time[1].toString().padStart(2, '0')}:${time[2].toString().padStart(2, '0')}`;
-
-        parsedTime = [timeStr, time[3], time[4]];
+    let time = {
+        'hours': null,
+        'minutes': null,
+        'seconds': null,
+        'string': '',
     }
 
+    let periodStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentPeriod.start[0], currentPeriod.start[1], 0);
+    let periodEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), currentPeriod.end[0], currentPeriod.end[1], 0);
+    let periodDuration = periodEnd - periodStart;
+    let periodRemaining = periodEnd - now;
+    let periodPercentage = periodRemaining / periodDuration;
 
+    time.hours = Math.floor(periodRemaining / (1000 * 60 * 60));
+    time.minutes = Math.floor((periodRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    time.seconds = Math.floor((periodRemaining % (1000 * 60)) / 1000);
 
-    let parsedPeriod;
-    if (p === null) {
-        parsedPeriod = 'School is over';
-    }
-    else {
-        parsedPeriod = p.subject || 'Free';
-    
-        const parts = parsedPeriod.split(' ');
-        if (parts[0] === 'Period' && !isNaN(parts[1])) {
-            parsedPeriod = periodCount[parseInt(parts[1]) - 1];
-        }
-    }
-
-
+    time.string += time.hours > 0 ? `${time.hours}:` : '';
+    time.string += `${time.minutes.toString().padStart(2, '0')}:`;
+    time.string += `${time.seconds.toString().padStart(2, '0')}`;
 
     let favicon;
-    if (parsedTime[1] === null) {
-        favicon = 'gray';
-    }
-    else if (parsedTime[1] >= 15 * 60 * 1000) {
+    if (periodRemaining >= 15 * 60 * 1000) {
         favicon = 'green';
     }
-    else if (parsedTime[1] >= 5 * 60 * 1000) {
+    else if (periodRemaining >= 5 * 60 * 1000) {
         favicon = 'yellow';
     }
-    else if (parsedTime[1] >= 2 * 60 * 1000) {
+    else if (periodRemaining >= 2 * 60 * 1000) {
         favicon = 'orange';
     }
-    else if (parsedTime[1] < 2 * 60 * 1000) {
+    else if (periodRemaining < 2 * 60 * 1000) {
         favicon = 'red';
+    }
+    else {
+        favicon = 'gray';
     }
     $('.favicon').attr('href', `/lib/favicon/${favicon}.png`);
 
-
-
-
-    if (!settingsOpened) {
-        $('#timer-time').text(parsedTime[0]);
-        $('#timer-period').text(parsedPeriod);
-        $('#timer-schedule').text(schedule.name);
+    $('#timer-time').text(time.string);
+    $('#timer-period').text(currentPeriod.name);
+    $('#timer-schedule').text(schedule.name);
+    if ($('#app-date').text() != now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })) {
         $('#app-date').text(now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }));
-        let cx = 100, cy = 100, r = 100;
-        let d;
+        schedule.name = schoolData.calendar[now.getDay()];
 
-        if (parsedTime[2] >= 1) { // Full circle (2 arcs)
-            d = `
-                M${cx},${cy}
-                L${cx},${cy - r}
-                A${r},${r} 0 1,1 ${cx},${cy + r}
-                A${r},${r} 0 1,1 ${cx},${cy - r}
-                Z
-            `;
+        overrides = schoolData.overrides;
+
+        let overrideKey = `${now.getMonth() + 1}-${now.getDate()}`;
+        if (overrides[overrideKey]) {
+            schedule.name = overrides[overrideKey];
         }
-        else { // 1 arc
-            let angle = parsedTime[2] * 360;
-            let radians = (270 - angle) * (Math.PI / 180);
-
-            let x = cx + r * Math.cos(radians);
-            let y = cy + r * Math.sin(radians);
-
-            let largeArcFlag = angle > 180 ? 1 : 0;
-
-            d = `
-                M${cx},${cy}
-                L${cx},${cy - r}
-                A${r},${r} 0 ${largeArcFlag},0 ${x},${y}
-                Z
-            `;
-        }
-
-        $('#timer-progress path').attr('d', d);
-        $('#timer-progress path').attr('fill', getComputedStyle(document.documentElement).getPropertyValue('--radial-background-color').trim());
+        schedule.periods = schedules[schedule.name].periods;
     }
-    if (window.innerWidth > 750) {
-        document.title = `${parsedTime[0]} | ${parsedPeriod}, ${schedule.name}`;
+
+    let cx = 100, cy = 100, r = 100;
+    let d;
+    if (periodPercentage >= 1) { // Full circle (2 arcs)
+        d = `
+            M${cx},${cy}
+            L${cx},${cy - r}
+            A${r},${r} 0 1,1 ${cx},${cy + r}
+            A${r},${r} 0 1,1 ${cx},${cy - r}
+            Z
+        `;
     }
+    else { // 1 arc
+        let angle = periodPercentage * 360;
+        let radians = (270 - angle) * (Math.PI / 180);
+        let x = cx + r * Math.cos(radians);
+        let y = cy + r * Math.sin(radians);
+        let largeArcFlag = angle > 180 ? 1 : 0;
+        d = `
+            M${cx},${cy}
+            L${cx},${cy - r}
+            A${r},${r} 0 ${largeArcFlag},0 ${x},${y}
+            Z
+        `;
+    }
+    $('#timer-progress path').attr('d', d);
+    $('#timer-progress path').attr('fill', getComputedStyle(document.documentElement).getPropertyValue('--radial-background-color').trim());
+    document.title = `${time.string} | ${currentPeriod.name}, ${schedule.name}`;
 }
 
 function saveSettings() {
@@ -396,7 +446,7 @@ function saveSettings() {
 
     /* Tune
     ------------------------ */
-    settings.tune = $('.select-tune').val();
+    settings.tune = Math.min(Math.max($('.select-tune').val(), -60), 60);
 }
 
 function applySettings() {
@@ -424,6 +474,10 @@ function applySettings() {
 }
 
 function storeSettings() {
+    if (skipStore) {
+        return;
+    }
+
     localStorage.setItem('theme', settings.theme);
     localStorage.setItem('font', settings.font);
     localStorage.setItem('periods', JSON.stringify(settings.periodNames));

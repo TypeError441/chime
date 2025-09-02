@@ -5,7 +5,7 @@
 
     position: absolute;
     top: 0;
-    right: calc(-1 * min(30vw, 350px));
+    right: calc(-1 * templates.$sidebar-width);
     width: fit-content;
     height: 100vh;
     z-index: 2;
@@ -46,7 +46,7 @@
     .right-sidebar {
         @include templates.flex(none, column);
 
-        width: min(30vw, 350px);
+        width: templates.$sidebar-width;
         background-color: var(--sidebar-background-color);
         height: 100%;
         border-radius: 1em 0 0 1em;
@@ -113,35 +113,35 @@
 }
 
 @media (max-width: templates.$mobile-breakpoint) {
-  #right-sidebar-container {
-    .right-sidebar,
-    .right-sidebar-toggle,
-    #timer-progress {
-        filter: drop-shadow(0 0 0 #0000);
+    #right-sidebar-container {
+        .right-sidebar,
+        .right-sidebar-toggle,
+        #timer-progress {
+            filter: drop-shadow(0 0 0 #0000);
+        }
+
+        .right-sidebar {
+            width: 100vw;
+            border-radius: 0;
+        }
+
+        .right-sidebar-toggle {
+            position: absolute;
+            right: 100vw;
+            bottom: 7em;
+        }
+
+        .right-sidebar .right-sidebar-exit {
+            display: block;
+
+            @include templates.flex(both, column);
+            align-items: end;
+
+            transition: transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+        }
+
+        /* Schedule item font sizes */
+        .sidebar-schedule .schedule-item-time { font-size: 1.4em; }
+        .sidebar-schedule .schedule-item-name { font-size: 2em; }
     }
-
-    .right-sidebar {
-        width: 100vw;
-        border-radius: 0;
-    }
-
-    .right-sidebar-toggle {
-        position: absolute;
-        right: 100vw;
-        bottom: 7em;
-    }
-
-    .right-sidebar .right-sidebar-exit {
-        display: block;
-
-        @include templates.flex(both, column);
-        align-items: end;
-
-        transition: transform 0.3s cubic-bezier(0.7, 0, 0.6, 1);
-    }
-
-    /* Schedule item font sizes */
-    .sidebar-schedule .schedule-item-time { font-size: 1.4em; }
-    .sidebar-schedule .schedule-item-name { font-size: 2em; }
-  }
 }

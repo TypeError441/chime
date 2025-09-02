@@ -199,6 +199,30 @@
 .button#settings.settings-opened {
   bottom: calc(100vh + 1em);
 }
+.button#feedback {
+  right: 4em;
+}
+.button#feedback.sidebar-opened {
+  right: calc(4em + min(30vw, 350px));
+}
+@media (max-width: 750px) {
+  .button#feedback.sidebar-opened {
+    right: 7em;
+  }
+}
+.button#feedback.settings-opened {
+  bottom: calc(100vh + 1em);
+}
+.button#feedback:hover img {
+  transform: none;
+}
+.button#clear-settings {
+  left: 1em;
+  align-items: start;
+}
+.button#clear-settings:hover img {
+  transform: none;
+}
 .button .button-tooltip {
   background-color: var(--color);
   color: var(--background-color);
@@ -292,22 +316,21 @@
     width: 100%;
   }
 }
-#notification-container {
+#popup-container {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   width: 25em;
-  height: 100vh;
   position: absolute;
   top: 0;
   transition: top 0.6s cubic-bezier(0.7, 0, 0.6, 1);
 }
-#notification-container.empty {
+#popup-container.empty {
   display: none;
 }
-#notification-container.settings-opened {
+#popup-container.settings-opened {
   top: -100vh;
 }
-#notification-container .notification {
+#popup-container .notification {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -319,24 +342,24 @@
   background-color: var(--sidebar-background-color);
   border-radius: 1em;
 }
-#notification-container .notification .notification-content {
+#popup-container .notification .notification-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-#notification-container .notification .notification-close {
+#popup-container .notification .notification-close {
   padding: 1em;
   border: none;
 }
-#notification-container .notification .notification-close:hover {
+#popup-container .notification .notification-close:hover {
   cursor: pointer;
 }
-#notification-container .quick-links {
+#popup-container #quick-links {
   display: grid;
   grid-template-columns: repeat(auto-fit, 5em);
   gap: 1em;
 }
-#notification-container .quick-links .quick-link {
+#popup-container #quick-links .quick-link {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -349,12 +372,58 @@
   border: none;
   border-radius: 1em;
 }
-#notification-container .quick-links .quick-link:hover {
+#popup-container #quick-links .quick-link:hover {
   background-color: var(--radial-background-color);
   cursor: pointer;
 }
-#notification-container .quick-links .quick-link img {
+#popup-container #quick-links .quick-link img {
   width: 32px;
+}
+#popup-container #modals {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5333333333);
+}
+#popup-container #modals .modal {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  background-color: var(--background-color);
+  padding: 1em;
+  border-radius: 0.5em;
+  text-align: center;
+}
+#popup-container #modals .modal .title {
+  font-size: 3vw;
+}
+#popup-container #modals .modal textarea {
+  width: 100%;
+  height: 12cap;
+  background-color: var(--radial-background-color);
+  color: var(--color);
+  border: none;
+  resize: none;
+  margin: 1em 0;
+}
+#popup-container #modals .modal .submit, #popup-container #modals .modal .exit {
+  border: none;
+  padding: 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+#popup-container #modals .modal .submit.exit, #popup-container #modals .modal .exit.exit {
+  background-color: #ff4646;
+  color: #ffffff;
+}
+#popup-container #modals .modal .submit.exit:hover, #popup-container #modals .modal .exit.exit:hover {
+  background-color: #da3a3a;
+}
+#popup-container #modals .modal .submit.exit:active, #popup-container #modals .modal .exit.exit:active {
+  background-color: #bd3232;
 }
 
 #settings-container {
