@@ -85,18 +85,6 @@ $('#close-settings').click(function () {
     tick();
 
     displaySchedule(schedule);
-
-    fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-            'form-name': 'user-settings',
-            theme: settings.theme,
-            font: settings.font,
-            periodNames: JSON.stringify(settings.periodNames),
-            tune: settings.tune,
-        })
-    });
 });
 
 $('.select-schedule').change(function () {
@@ -271,18 +259,6 @@ async function init() {
     /* Update page to have localStorage settings applied
     ------------------------ */
     applySettings();
-
-    fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-            'form-name': 'user-settings',
-            theme: settings.theme,
-            font: settings.font,
-            periodNames: JSON.stringify(settings.periodNames),
-            tune: settings.tune,
-        })
-    });
 
     tick();
     setInterval(tick, 1000);
