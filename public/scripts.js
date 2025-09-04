@@ -202,6 +202,7 @@ async function init() {
     }
 
     settings.tune = Number(localStorage.getItem('tune') || '31');
+    if (settings.tune == '31') settings.tune = -10;
 
     /* Get schedules and current schedule
     ------------------------ */
