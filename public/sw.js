@@ -7,12 +7,9 @@ self.addEventListener("install", event => {
         caches.open(CACHE_NAME).then(cache =>
             cache.addAll([
                 "/",
-                "/index.html",
-                "/styles.css",
-                "/scripts.js",
-                "/manifest.json",
 
-                "/schools/egan.json",
+                "/css/main.css",
+                "/css/main.css.map",
 
                 "/lib/favicon/gray.png",
                 "/lib/favicon/green.png",
@@ -20,17 +17,35 @@ self.addEventListener("install", event => {
                 "/lib/favicon/red.png",
                 "/lib/favicon/yellow.png",
 
+                // "/lib/fonts/inter-v19-latin-700.woff2",
+                // "/lib/fonts/inter-v19-latin-regular.woff2",
+                // "/lib/fonts/noto-sans-runic-v17-latin-regular.woff2",
+                // "/lib/fonts/roboto-v48-latin-700.woff2",
+                // "/lib/fonts/roboto-v48-latin-regular.woff2",
+                // "/lib/fonts/wingding.woff",
+
+                "/lib/icon/quick-link/classroom.png",
+                "/lib/icon/quick-link/powerschool.png",
+
                 "/lib/icon/152.png",
                 "/lib/icon/192.png",
                 "/lib/icon/512.png",
 
                 "/lib/img/close.png",
+                "/lib/img/feedback.png",
                 "/lib/img/schedule.png",
                 "/lib/img/settings.png",
+                "/lib/img/trash.png",
 
                 "/lib/js/idb-helper.js",
                 "/lib/js/idb.js",
                 "/lib/js/jquery-3.7.1.slim.js",
+
+                "/schools/egan.json",
+
+                "/index.html",
+                "/manifest.json",
+                "/scripts.js",
             ])
         ).catch(err => {
             console.error("Service worker install failed:", err);

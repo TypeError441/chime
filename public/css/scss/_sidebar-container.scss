@@ -33,6 +33,10 @@
         background-color: var(--sidebar-toggle-background-color);
         filter: drop-shadow(0 0 10px var(--drop-shadow-color));
 
+        @media (max-width: templates.$mobile-breakpoint) {
+            filter: drop-shadow(0 0 0 #000);
+        }
+
         &:hover {
             background-color: var(--sidebar-toggle-hover-background-color);
         }
@@ -52,6 +56,10 @@
         border-radius: 1em 0 0 1em;
         padding: 1em;
         filter: drop-shadow(0 0 10px var(--drop-shadow-color));
+
+        @media (max-width: templates.$mobile-breakpoint) {
+            filter: drop-shadow(0 0 0 #000);
+        }
 
         .title {
             font-weight: bold;
@@ -114,11 +122,6 @@
 
 @media (max-width: templates.$mobile-breakpoint) {
     #right-sidebar-container {
-        .right-sidebar,
-        .right-sidebar-toggle,
-        #timer-progress {
-            filter: drop-shadow(0 0 0 #0000);
-        }
 
         .right-sidebar {
             width: 100vw;

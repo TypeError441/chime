@@ -118,7 +118,7 @@ $('#feedback-modal').on('submit', function(e) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
                 'form-name': 'feedback',
-                feedback: $('#feedback-modal-textarea').val().trim()
+                'feedback-modal': $('#feedback-modal-textarea').val().trim()
             })
         });
     }
@@ -133,20 +133,6 @@ $('#feedback').click(function() {
     $('#modals').show();
     $('#feedback-modal').show();
 });
-
-function pollForVersion() {
-    fetch('/manifest.json').then(response => response.json())
-    .then(data => {
-        if (data.ver !== version) {
-            window.location.reload(true);
-            if (navigator.userAgent.indexOf('Googlebot') === -1) {
-                window.location.href = window.location.href;
-            }
-        }
-    });
-    
-    setTimeout(pollForVersion, document.hidden ? 20 * 60000 : 30 * 1000);
-}
 
 function displaySchedule(s) {
     $('.schedule-list').empty();
@@ -201,8 +187,8 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '31');
-    if (settings.tune == '31') settings.tune = -10;
+    settings.tune = Number(localStorage.getItem('tune') || '-7');
+    if (settings.tune == '-10') settings.tune = -7;
 
     /* Get schedules and current schedule
     ------------------------ */

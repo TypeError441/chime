@@ -34,15 +34,27 @@
             <img src="/lib/img/feedback.png" alt="Settings">
         </button>
         <section id="popup-container">
-            <div id="notification-tune-01" class="notification">
+            <!-- <div id="notification-tune-01" class="notification">
                 <div class="notification-content">
                     <p class="notification-message">(OUTDATED) Bells are around 30 seconds early. Go to settings to tune Chime so that the timer is accurate.</p>
                 </div>
                 <button class="notification-close">OK</button>
-            </div>
+            </div> -->
             <div id="notification-tune-02" class="notification">
                 <div class="notification-content">
-                    <p class="notification-message">Bells are around 10 seconds late now. Go to settings to tune Chime so that the timer is accurate.</p>
+                    <p class="notification-message">Bells are around 7 seconds late now. Go to settings to tune Chime so that the timer is accurate.</p>
+                </div>
+                <button class="notification-close">OK</button>
+            </div>
+            <div id="notification-new-themes-01" class="notification">
+                <div class="notification-content">
+                    <p class="notification-message">There are new themes! <b>Forest</b> and <b>Arctic</b>.</p>
+                </div>
+                <button class="notification-close">OK</button>
+            </div>
+            <div id="notification-feedback-error-01" class="notification">
+                <div class="notification-content">
+                    <p class="notification-message">The feedback feature was broken; please resubmit any feedback you would like me to add.</p>
                 </div>
                 <button class="notification-close">OK</button>
             </div>
@@ -57,8 +69,9 @@
             </div>
             <div id="modals" style="display: none;">
                 <form name="feedback" id="feedback-modal" class="modal" netlify style="display: none;">
-                    <div class="title">Request a feature or error fix</div>
-                    <textarea name="feedback-modal-feature" id="feedback-modal-textarea"></textarea>
+                    <div class="title">Feedback</div>
+                    <div class="subtitle">Request a feature or error fix</div>
+                    <textarea name="feedback-modal" id="feedback-modal-textarea"></textarea>
                     <button type="submit" class="submit">Submit</button>
                     <button type="button" class="exit">Exit</button>
                 </form>
@@ -94,10 +107,10 @@
                         <select id="select-theme" class="select-theme">
                             <option value="default-light">Default (light)</option>
                             <option value="default-dark">Default (dark)</option>
-                            <option value="green-light">Green (light)</option>
-                            <option value="green-dark">Green (dark)</option>
                             <option value="blue-light">Blue (light)</option>
                             <option value="blue-dark">Blue (dark)</option>
+                            <option value="green-dark">Forest</option>
+                            <option value="arctic">Arctic</option>
                             <option value="coffee">Coffee</option>
                             <option value="space">Space</option>
                         </select>
@@ -115,7 +128,7 @@
                             <option value="'Garamond', serif">Garamond</option>
                             <option value="'Courier New', monospace">Courier New</option>
                             <option value="'Wingdings', sans-serif">Wingdings</option>
-                            <option value="'Noto Sans Runic', monospace">Runes</option>
+                            <!-- <option value="'Noto Sans Runic', monospace">Runes</option> -->
                         </select>
                     </div>
                     <div class="settings-item">

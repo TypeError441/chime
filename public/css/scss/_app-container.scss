@@ -68,6 +68,10 @@
             height: 90vmin;
             filter: drop-shadow(0 0 10px var(--drop-shadow-color));
             transition: height 0.3s cubic-bezier(0.7, 0, 0.6, 1);
+
+            @media (max-width: templates.$mobile-breakpoint) {
+                filter: drop-shadow(0 0 0 #000);
+            }
         }
     }
 
