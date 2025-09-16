@@ -52,6 +52,12 @@
                 </div>
                 <button class="notification-close">OK</button>
             </div>
+            <div id="notification-new-themes-02" class="notification">
+                <div class="notification-content">
+                    <p class="notification-message">If you don't like the current themes, you can make your own!</p>
+                </div>
+                <button class="notification-close">OK</button>
+            </div>
             <div id="notification-feedback-error-01" class="notification">
                 <div class="notification-content">
                     <p class="notification-message">The feedback feature was broken; please resubmit any feedback you would like me to add.</p>
@@ -87,7 +93,7 @@
                     <table class="schedule-list"></table>
                 </section>
                 <footer class="sidebar-footer">
-                    <select id="select-schedule" class="select-schedule"></select>
+                    <select id="select-schedule" class="user-interactable"></select>
                     <div class="version">version .....</div>
                 </footer>
                 <button class="right-sidebar-exit button">
@@ -103,21 +109,8 @@
             <section class="settings-content">
                 <fieldset class="settings-column">
                     <div class="settings-item">
-                        <label for="select-theme">Theme</label>
-                        <select id="select-theme" class="select-theme">
-                            <option value="default-light">Default (light)</option>
-                            <option value="default-dark">Default (dark)</option>
-                            <option value="blue-light">Blue (light)</option>
-                            <option value="blue-dark">Blue (dark)</option>
-                            <option value="green-dark">Forest</option>
-                            <option value="arctic">Arctic</option>
-                            <option value="coffee">Coffee</option>
-                            <option value="space">Space</option>
-                        </select>
-                    </div>
-                    <div class="settings-item">
                         <label for="select-font">Font</label>
-                        <select id="select-font" class="select-font">
+                        <select id="select-font" class="user-interactable">
                             <option value="'Inter', sans-serif">Sans Serif</option>
                             <option value="'Roboto', sans-serif">Bell.plus font</option>
                             <option value="'Verdana', sans-serif">Verdana</option>
@@ -133,7 +126,55 @@
                     </div>
                     <div class="settings-item">
                         <label for="select-tune">Tune (offset)</label>
-                        <input id="select-tune" class="select-tune" type="number" min="-60" max="60">
+                        <input id="select-tune" class="user-interactable" type="number" min="-60" max="60">
+                    </div>
+                    <div class="settings-item">
+                        <label for="select-theme">Theme</label>
+                        <select id="select-theme" class="user-interactable">
+                            <option value="default-light">Default (light)</option>
+                            <option value="default-dark">Default (dark)</option>
+                            <option value="blue-light">Blue (light)</option>
+                            <option value="blue-dark">Blue (dark)</option>
+                            <option value="green-dark">Forest</option>
+                            <option value="arctic">Arctic</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="space">Space</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <div id="custom-theme-creator-content" class="user-interactable">
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Background</p>
+                                <input type="color" name="custom-theme-creator-backgroundcolor" id="custom-theme-creator-backgroundcolor" value="#f9f9f9">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Text</p>
+                                <input type="color" name="custom-theme-creator-color" id="custom-theme-creator-color" value="#202124">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Sidebar Icon Brightness</p>
+                                <input type="number" name="custom-theme-creator-sidebartoggleimagebrightness" id="custom-theme-creator-sidebartoggleimagebrightness" min="0" max="1" step="0.1" value="1">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Settings Image Brightness</p>
+                                <input type="number" name="custom-theme-creator-settingsimagebrightness" id="custom-theme-creator-settingsimagebrightness" min="0" max="1" step="0.1" value="0">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Sidebar Toggle</p>
+                                <input type="color" name="custom-theme-creator-sidebartogglecolor" id="custom-theme-creator-sidebartogglecolor" value="#000000">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Sidebar Toggle Hover</p>
+                                <input type="color" name="custom-theme-creator-sidebartogglecolorhover" id="custom-theme-creator-sidebartogglecolorhover" value="#272727">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Sidebar</p>
+                                <input type="color" name="custom-theme-creator-sidebarbackgroundcolor" id="custom-theme-creator-sidebarbackgroundcolor" value="#f2f4f8">
+                            </div>
+                            <div class="custom-theme-creator-item">
+                                <p class="custom-theme-creator-item-name">Arc</p>
+                                <input type="color" name="custom-theme-creator-arcbackgroundcolor" id="custom-theme-creator-arcbackgroundcolor" value="#e5e6eb">
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
                 <fieldset class="settings-column periods">

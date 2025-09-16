@@ -115,6 +115,19 @@
   --drop-shadow-color: #0000;
 }
 
+[data-theme=custom] {
+  --background-color: #f9f9f9;
+  --background-image: none;
+  --color: #202124;
+  --sidebar-toggle-background-color: #000000;
+  --sidebar-toggle-hover-background-color: #272727;
+  --sidebar-background-color: #f2f4f8;
+  --radial-background-color: #e5e6eb;
+  --image-on-toggle-brightness: 1;
+  --image-on-bg-brightness: 0;
+  --drop-shadow-color: #0003;
+}
+
 /* roboto-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -369,6 +382,11 @@
   grid-template-columns: repeat(auto-fit, 5em);
   gap: 1em;
 }
+@media (max-width: 750px) {
+  #popup-container #quick-links {
+    display: none;
+  }
+}
 #popup-container #quick-links .quick-link {
   display: flex;
   flex-direction: column;
@@ -497,6 +515,20 @@
   top: 0;
 }
 
+#custom-theme-creator-content .custom-theme-creator-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+#custom-theme-creator-content .custom-theme-creator-item input {
+  border: none;
+  border-radius: 0.25em;
+  background-color: var(--background-color);
+  width: 3em;
+  color: var(--color);
+}
+
 @media (max-width: 750px) {
   .settings-column {
     margin: 0 1em;
@@ -573,12 +605,12 @@
   width: 100%;
   background-color: var(--sidebar-background-color);
 }
-#right-sidebar-container .right-sidebar .sidebar-footer .select-schedule {
+#right-sidebar-container .right-sidebar .sidebar-footer #select-schedule {
   margin: 0 0 0.5em 0;
   width: 100%;
 }
 @media (max-width: 750px) {
-  #right-sidebar-container .right-sidebar .sidebar-footer .select-schedule {
+  #right-sidebar-container .right-sidebar .sidebar-footer #select-schedule {
     margin-bottom: 1em;
   }
 }
@@ -664,7 +696,7 @@ body {
   color: var(--color);
 }
 
-select, input {
+.user-interactable {
   width: 16vw;
   border: none;
   padding: 0.75em;
@@ -673,7 +705,7 @@ select, input {
   color: var(--background-color);
 }
 @media (max-width: 750px) {
-  select, input {
+  .user-interactable {
     width: 32vw;
   }
 }

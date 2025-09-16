@@ -18,6 +18,7 @@
         background-color: var(--sidebar-background-color);
     }
 }
+
 /* Settings */
 .settings-content {
     @include templates.flex(horiz, row);
@@ -51,9 +52,25 @@
     font-size: 0.8em;
 }
 
-
 #settings-container.settings-opened {
     top: 0;
+}
+
+#custom-theme-creator-content {
+    .custom-theme-creator-item {
+        @include templates.flex(none, row);
+        justify-content: space-between;
+        margin: 0.5em 0;
+
+        input {
+            border: none;
+            border-radius: 0.25em;
+            background-color: var(--background-color);
+            width: 3em;
+
+            color: var(--color);
+        }
+    }
 }
 
 @media (max-width: templates.$mobile-breakpoint) {

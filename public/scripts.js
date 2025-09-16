@@ -2,6 +2,7 @@ let periodCount;
 
 let settings = {
     theme: null,
+    customtheme: null,
     font: null,
     periodNames: null,
     tune: null
@@ -48,24 +49,30 @@ $('#settings').click(function () {
     $('#right-sidebar-container').addClass('settings-opened');
     $('#settings-container').addClass('settings-opened');
 
-    $('.select-theme').val(settings.theme);
-    $('.select-font').val(settings.font);
-    $('.select-tune').val(settings.tune);
+    $('#select-theme').val(settings.theme);
+    $('#select-font').val(settings.font);
+    $('#select-tune').val(settings.tune);
+    if ($('#select-theme').val() == "custom") {
+        $("#custom-theme-creator-content").css("display", "");
+    }
+    else {
+        $("#custom-theme-creator-content").css("display", "none");
+    }
 
     for (let i = 0; i < periodCount; i++) {
-        $('.input-period#input-period-' + (i + 1)).val(periodCount[i] || 'Period ' + (i + 1));
+        $('.user-interactable#input-period-' + (i + 1)).val(periodCount[i] || 'Period ' + (i + 1));
     }
 });
 
 $('#close-settings').click(function () {
     // Set settings
-    settings.theme = $('.select-theme').val();
-    settings.font = $('.select-font').val();
+    settings.theme = $('#select-theme').val();
+    settings.font = $('#select-font').val();
     settings.periodNames = [];
     for (let i = 0; i < periodCount; i++) {
-        settings.periodNames.push($('.input-period#input-period-' + (i + 1)).val());
+        settings.periodNames.push($('.user-interactable#input-period-' + (i + 1)).val());
     }
-    settings.tune = Math.min(Math.max($('.select-tune').val(), -60), 60);
+    settings.tune = Math.min(Math.max($('#select-tune').val(), -60), 60);
 
     // Update UI
     $('#app-container').show();
@@ -87,12 +94,21 @@ $('#close-settings').click(function () {
     displaySchedule(schedule);
 });
 
-$('.select-schedule').change(function () {
+$('#select-schedule').change(function () {
     schedule = { name: $(this).val(), periods: schedules[$(this).val()].periods };
 
     displaySchedule(schedule);
 
     tick();
+});
+
+$('#select-theme').change(function () {
+    if ($('#select-theme').val() == "custom") {
+        $("#custom-theme-creator-content").css("display", "");
+    }
+    else {
+        $("#custom-theme-creator-content").css("display", "none");
+    }
 });
 
 $('.notification-close').click(function () {
@@ -122,6 +138,8 @@ $('#feedback-modal').on('submit', function(e) {
             })
         });
     }
+
+    $('#feedback-modal-textarea').val("");
 });
 
 $('#feedback-modal .exit').click(function() {
@@ -175,6 +193,16 @@ async function init() {
     /* Load localStorage data
     ------------------------ */
     settings.theme = localStorage.getItem('theme') || 'default-light';
+    settings.customtheme = localStorage.getItem('customtheme') || {
+        'backgroundcolor': "#000000",
+        'color': "#ffffffff",
+        'sidebartogglecolor': "#ffffffff",
+        'sidebartogglecolorhover': "#d8d8d8ff",
+        'sidebartoggleimagebrightness': "0",
+        'settingsimagebrightness': "1",
+        'sidebarbackgroundcolor': "#ffffffff",
+        'arcbackgroundcolor': "#ddddddff"
+    };
     settings.font = localStorage.getItem('font') || '\'Inter\', sans-serif';
     
     settings.periodNames = JSON.parse(localStorage.getItem('periods') || '[]');
@@ -207,17 +235,17 @@ async function init() {
 
     /* Populate schedule select
     ------------------------ */
-    $('.select-schedule').empty();
+    $('#select-schedule').empty();
     let keys = Object.keys(schedules);
     for (let i = 0; i < keys.length; i++) {
         if (schedules[keys[i]].special) {
-            $('.select-schedule').append(`<option value="${keys[i]}" hidden>${keys[i]}</option>`);
+            $('#select-schedule').append(`<option value="${keys[i]}" hidden>${keys[i]}</option>`);
         }
         else {
-            $('.select-schedule').append(`<option value="${keys[i]}">${keys[i]}</option>`);
+            $('#select-schedule').append(`<option value="${keys[i]}">${keys[i]}</option>`);
         }
     }
-    $('.select-schedule').val(schedule.name);
+    $('#select-schedule').val(schedule.name);
 
     /* Populate period name inputs
     ------------------------ */
@@ -227,7 +255,7 @@ async function init() {
     for (let i = 0; i < periodCount; i++) {
         $('.settings-column.periods > .settings-item').append(`
             <label class="label-input-periods" for="input-period-${i + 1}">Period ${i + 1}</label>
-            <input maxlength="16" type="text" id="input-period-${i + 1}" class="input-period" value="Period ${i + 1}" placeholder="Period ${i + 1}">
+            <input maxlength="16" type="text" id="input-period-${i + 1}" class="user-interactable" value="Period ${i + 1}" placeholder="Period ${i + 1}">
         `);
     }
 
@@ -391,31 +419,48 @@ function tick() {
     document.title = `${time.string} | ${currentPeriod.name}, ${schedule.name}`;
 }
 
-function saveSettings() {
-    /* Theme
-    ------------------------ */
-    settings.theme = $('.select-theme').val();
-
-    /* Font
-    ------------------------ */
-    settings.font = $('.select-font').val();
-
-    /* Periods
-    ------------------------ */
-    settings.periodNames = [];
-    for (let i = 0; i < periodCount; i++) {
-        settings.periodNames.push($('.input-period#input-period-' + (i + 1)).val());
-    }
-
-    /* Tune
-    ------------------------ */
-    settings.tune = Math.min(Math.max($('.select-tune').val(), -60), 60);
-}
-
 function applySettings() {
     /* Theme
     ------------------------ */
     $('html').attr('data-theme', settings.theme);
+
+    // Custom Theme
+    settings.customtheme = {
+        'backgroundcolor': $('#custom-theme-creator-backgroundcolor').val() || "#f9f9f9",
+        'color': $('#custom-theme-creator-color').val() || "#202124",
+        'sidebartogglecolor': $('#custom-theme-creator-sidebartogglecolor').val() || "#000000",
+        'sidebartogglecolorhover': $('#custom-theme-creator-sidebartogglecolorhover').val() || "#272727",
+        'sidebartoggleimagebrightness': $('#custom-theme-creator-sidebartoggleimagebrightness').val() || "1",
+        'settingsimagebrightness': $('#custom-theme-creator-settingsimagebrightness').val() || "0",
+        'sidebarbackgroundcolor': $('#custom-theme-creator-sidebarbackgroundcolor').val() || "#f2f4f8",
+        'arcbackgroundcolor': $('#custom-theme-creator-arcbackgroundcolor').val() || "#e5e6eb"
+    };
+
+    if (settings.theme == 'custom') {
+        $('html').css({
+            '--background-color': settings.customtheme.backgroundcolor,
+            '--color': settings.customtheme.color,
+            '--sidebar-toggle-background-color': settings.customtheme.sidebartogglecolor,
+            '--sidebar-toggle-hover-background-color': settings.customtheme.sidebartogglecolorhover,
+            '--image-on-toggle-brightness': settings.customtheme.sidebartoggleimagebrightness,
+            '--image-on-bg-brightness': settings.customtheme.settingsimagebrightness,
+            '--sidebar-background-color': settings.customtheme.sidebarbackgroundcolor,
+            '--radial-background-color': settings.customtheme.arcbackgroundcolor,
+            '--drop-shadow-color': '#0000'
+        });
+    } else {
+        $('html').css({
+            '--background-color': '',
+            '--color': '',
+            '--sidebar-toggle-background-color': '',
+            '--sidebar-toggle-hover-background-color': '',
+            '--image-on-toggle-brightness': '',
+            '--image-on-bg-brightness': '',
+            '--sidebar-background-color': '',
+            '--radial-background-color': '',
+            '--drop-shadow-color': ''
+        });
+    }
 
     /* Font
     ------------------------ */
@@ -428,7 +473,7 @@ function applySettings() {
         if (settings.periodNames[i] === '') {
             settings.periodNames[i] = `Period ${i + 1}`;
         }
-        settings.periodNames[i] = $('.input-period#input-period-' + (i + 1)).val();
+        settings.periodNames[i] = $('.user-interactable#input-period-' + (i + 1)).val();
     }
 
     /* Tune
@@ -442,6 +487,7 @@ function storeSettings() {
     }
 
     localStorage.setItem('theme', settings.theme);
+    localStorage.setItem('customtheme', JSON.stringify(settings.customtheme));
     localStorage.setItem('font', settings.font);
     localStorage.setItem('periods', JSON.stringify(settings.periodNames));
     localStorage.setItem('tune', settings.tune);

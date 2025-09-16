@@ -141,3 +141,21 @@
 
     --drop-shadow-color: #0000;
 }
+
+
+
+[data-theme="custom"] {
+    --background-color: #f9f9f9;
+    --background-image: none;
+    --color: #202124;
+
+    --sidebar-toggle-background-color: #000000;
+    --sidebar-toggle-hover-background-color: #272727;
+    --sidebar-background-color: #f2f4f8;
+    --radial-background-color: #e5e6eb;
+
+    --image-on-toggle-brightness: 1;
+    --image-on-bg-brightness: 0;
+
+    --drop-shadow-color: #0003;
+}
