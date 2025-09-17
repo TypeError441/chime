@@ -145,6 +145,8 @@ $('#feedback-modal').on('submit', function(e) {
 $('#feedback-modal .exit').click(function() {
     $('#feedback-modal').hide();
     $('#modals').hide();
+
+    $('#feedback-modal-textarea').val("");
 });
 
 $('#feedback').click(function() {
@@ -195,13 +197,13 @@ async function init() {
     settings.theme = localStorage.getItem('theme') || 'default-light';
     settings.customtheme = localStorage.getItem('customtheme') || {
         'backgroundcolor': "#000000",
-        'color': "#ffffffff",
-        'sidebartogglecolor': "#ffffffff",
-        'sidebartogglecolorhover': "#d8d8d8ff",
+        'color': "#ffffff",
+        'sidebartogglecolor': "#ffffff",
+        'sidebartogglecolorhover': "#d8d8d8",
         'sidebartoggleimagebrightness': "0",
         'settingsimagebrightness': "1",
-        'sidebarbackgroundcolor': "#ffffffff",
-        'arcbackgroundcolor': "#ddddddff"
+        'sidebarbackgroundcolor': "#eaedf3",
+        'arcbackgroundcolor': "#dddddd"
     };
     settings.font = localStorage.getItem('font') || '\'Inter\', sans-serif';
     
@@ -446,7 +448,6 @@ function applySettings() {
             '--image-on-bg-brightness': settings.customtheme.settingsimagebrightness,
             '--sidebar-background-color': settings.customtheme.sidebarbackgroundcolor,
             '--radial-background-color': settings.customtheme.arcbackgroundcolor,
-            '--drop-shadow-color': '#0000'
         });
     } else {
         $('html').css({
@@ -457,8 +458,7 @@ function applySettings() {
             '--image-on-toggle-brightness': '',
             '--image-on-bg-brightness': '',
             '--sidebar-background-color': '',
-            '--radial-background-color': '',
-            '--drop-shadow-color': ''
+            '--radial-background-color': ''
         });
     }
 

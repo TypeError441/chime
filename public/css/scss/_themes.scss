@@ -5,13 +5,11 @@
 
     --sidebar-toggle-background-color: #000000;
     --sidebar-toggle-hover-background-color: #272727;
-    --sidebar-background-color: #f2f4f8;
+    --sidebar-background-color: #eaedf3;
     --radial-background-color: #e5e6eb;
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 0;
-
-    --drop-shadow-color: #0003;
 }
 
 [data-theme="default-light"] {
@@ -21,13 +19,11 @@
 
     --sidebar-toggle-background-color: #000000;
     --sidebar-toggle-hover-background-color: #272727;
-    --sidebar-background-color: #f2f4f8;
+    --sidebar-background-color: #eaedf3;
     --radial-background-color: #e5e6eb;
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 0;
-
-    --drop-shadow-color: #0003;
 }
 
 [data-theme="default-dark"] {
@@ -42,8 +38,20 @@
 
     --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 1;
+}
 
-    --drop-shadow-color: #0009;
+[data-theme="space"] {
+    --background-color: #000000;
+    --background-image: none;
+    --color: #ffffff;
+
+    --sidebar-toggle-background-color: #ffffff;
+    --sidebar-toggle-hover-background-color: #d6d6d6;
+    --sidebar-background-color: #19191b;
+    --radial-background-color: #24242e;
+
+    --image-on-toggle-brightness: 0;
+    --image-on-bg-brightness: 1;
 }
 
 [data-theme="blue-light"] {
@@ -58,8 +66,6 @@
 
     --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 0;
-
-    --drop-shadow-color: #a3d6ff;
 }
 
 [data-theme="blue-dark"] {
@@ -74,8 +80,6 @@
 
     --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 1;
-
-    --drop-shadow-color: #223;
 }
 
 [data-theme="green-dark"] {
@@ -90,8 +94,6 @@
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 1;
-
-    --drop-shadow-color: #1219;
 }
 
 [data-theme="arctic"] {
@@ -106,8 +108,6 @@
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 0;
-
-    --drop-shadow-color: #0000;
 }
 
 [data-theme="coffee"] {
@@ -122,27 +122,21 @@
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 1;
-
-    --drop-shadow-color: #3229;
 }
 
-[data-theme="space"] {
+[data-theme="space-real"] {
     --background-color: #000000;
     --background-image: url("https://images.pond5.com/black-empty-space-stars-dark-footage-073036484_iconl.jpeg");
     --color: #ffffff;
 
     --sidebar-toggle-background-color: #ffffff;
     --sidebar-toggle-hover-background-color: #d6d6d6;
-    --sidebar-background-color: #19191b;
+    --sidebar-background-color: #2e0a2e;
     --radial-background-color: #232353;
 
     --image-on-toggle-brightness: 0;
     --image-on-bg-brightness: 1;
-
-    --drop-shadow-color: #0000;
 }
-
-
 
 [data-theme="custom"] {
     --background-color: #f9f9f9;
@@ -152,10 +146,8 @@
     --sidebar-toggle-background-color: #000000;
     --sidebar-toggle-hover-background-color: #272727;
     --sidebar-background-color: #f2f4f8;
-    --radial-background-color: #e5e6eb;
+    --sidebar-background-color: #eaedf3;
 
     --image-on-toggle-brightness: 1;
     --image-on-bg-brightness: 0;
-
-    --drop-shadow-color: #0003;
 }

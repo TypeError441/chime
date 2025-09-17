@@ -4,11 +4,10 @@
   --color: #202124;
   --sidebar-toggle-background-color: #000000;
   --sidebar-toggle-hover-background-color: #272727;
-  --sidebar-background-color: #f2f4f8;
+  --sidebar-background-color: #eaedf3;
   --radial-background-color: #e5e6eb;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
-  --drop-shadow-color: #0003;
 }
 
 [data-theme=default-light] {
@@ -17,11 +16,10 @@
   --color: #202124;
   --sidebar-toggle-background-color: #000000;
   --sidebar-toggle-hover-background-color: #272727;
-  --sidebar-background-color: #f2f4f8;
+  --sidebar-background-color: #eaedf3;
   --radial-background-color: #e5e6eb;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
-  --drop-shadow-color: #0003;
 }
 
 [data-theme=default-dark] {
@@ -34,7 +32,18 @@
   --radial-background-color: #4e555f;
   --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
-  --drop-shadow-color: #0009;
+}
+
+[data-theme=space] {
+  --background-color: #000000;
+  --background-image: none;
+  --color: #ffffff;
+  --sidebar-toggle-background-color: #ffffff;
+  --sidebar-toggle-hover-background-color: #d6d6d6;
+  --sidebar-background-color: #19191b;
+  --radial-background-color: #24242e;
+  --image-on-toggle-brightness: 0;
+  --image-on-bg-brightness: 1;
 }
 
 [data-theme=blue-light] {
@@ -47,7 +56,6 @@
   --radial-background-color: #85bdea;
   --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 0;
-  --drop-shadow-color: #a3d6ff;
 }
 
 [data-theme=blue-dark] {
@@ -60,7 +68,6 @@
   --radial-background-color: #34415f;
   --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
-  --drop-shadow-color: #223;
 }
 
 [data-theme=green-dark] {
@@ -73,7 +80,6 @@
   --radial-background-color: #3a5f46;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 1;
-  --drop-shadow-color: #1219;
 }
 
 [data-theme=arctic] {
@@ -86,7 +92,6 @@
   --radial-background-color: #d8dee9;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
-  --drop-shadow-color: #0000;
 }
 
 [data-theme=coffee] {
@@ -99,20 +104,18 @@
   --radial-background-color: #8a683d;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 1;
-  --drop-shadow-color: #3229;
 }
 
-[data-theme=space] {
+[data-theme=space-real] {
   --background-color: #000000;
   --background-image: url("https://images.pond5.com/black-empty-space-stars-dark-footage-073036484_iconl.jpeg");
   --color: #ffffff;
   --sidebar-toggle-background-color: #ffffff;
   --sidebar-toggle-hover-background-color: #d6d6d6;
-  --sidebar-background-color: #19191b;
+  --sidebar-background-color: #2e0a2e;
   --radial-background-color: #232353;
   --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
-  --drop-shadow-color: #0000;
 }
 
 [data-theme=custom] {
@@ -122,10 +125,9 @@
   --sidebar-toggle-background-color: #000000;
   --sidebar-toggle-hover-background-color: #272727;
   --sidebar-background-color: #f2f4f8;
-  --radial-background-color: #e5e6eb;
+  --sidebar-background-color: #eaedf3;
   --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
-  --drop-shadow-color: #0003;
 }
 
 /* roboto-regular - latin */
@@ -311,13 +313,7 @@
   z-index: -1;
   transform: translate(-50%, -50%);
   height: 90vmin;
-  filter: drop-shadow(0 0 10px var(--drop-shadow-color));
   transition: height 0.3s cubic-bezier(0.7, 0, 0.6, 1);
-}
-@media (max-width: 750px) {
-  #app-container #timer #timer-progress {
-    filter: drop-shadow(0 0 0 #000);
-  }
 }
 #app-container #app-date {
   font-size: 2rem;
@@ -566,12 +562,6 @@
   border: none;
   cursor: pointer;
   background-color: var(--sidebar-toggle-background-color);
-  filter: drop-shadow(0 0 10px var(--drop-shadow-color));
-}
-@media (max-width: 750px) {
-  #right-sidebar-container .right-sidebar-toggle {
-    filter: drop-shadow(0 0 0 #000);
-  }
 }
 #right-sidebar-container .right-sidebar-toggle:hover {
   background-color: var(--sidebar-toggle-hover-background-color);
@@ -588,12 +578,6 @@
   height: 100%;
   border-radius: 1em 0 0 1em;
   padding: 1em;
-  filter: drop-shadow(0 0 10px var(--drop-shadow-color));
-}
-@media (max-width: 750px) {
-  #right-sidebar-container .right-sidebar {
-    filter: drop-shadow(0 0 0 #000);
-  }
 }
 #right-sidebar-container .right-sidebar .title {
   font-weight: bold;
