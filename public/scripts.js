@@ -60,7 +60,7 @@ $('#settings').click(function () {
     }
 
     for (let i = 0; i < periodCount; i++) {
-        $('.user-interactable#input-period-' + (i + 1)).val(periodCount[i] || 'Period ' + (i + 1));
+        $('.user-interactable#input-period-' + (i + 1)).val(settings.periodNames[i] || 'Period ' + (i + 1));
     }
 });
 
