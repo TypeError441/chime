@@ -218,7 +218,11 @@ async function init() {
     }
 
     settings.tune = Number(localStorage.getItem('tune') || '-7');
-    if (settings.tune == '-10') settings.tune = -7;
+    if (settings.tune == '-10'
+        || settings.tune == '-7'
+        || settings.tune == '-31'
+        || settings.tune == '0'
+    ) settings.tune = 16;
 
     /* Get schedules and current schedule
     ------------------------ */
@@ -257,7 +261,7 @@ async function init() {
     for (let i = 0; i < periodCount; i++) {
         $('.settings-column.periods > .settings-item').append(`
             <label class="label-input-periods" for="input-period-${i + 1}">Period ${i + 1}</label>
-            <input maxlength="16" type="text" id="input-period-${i + 1}" class="user-interactable" value="Period ${i + 1}" placeholder="Period ${i + 1}">
+            <input maxlength="16" type="text" id="input-period-${i + 1}" class="user-interactable" value="${settings.periodNames[i]}" placeholder="Period ${i + 1}">
         `);
     }
 
@@ -470,10 +474,10 @@ function applySettings() {
     ------------------------ */
     settings.periodNames = settings.periodNames.map(period => period.trim());
     for (let i = 0; i < periodCount; i++) {
+        settings.periodNames[i] = $('.user-interactable#input-period-' + (i + 1)).val();
         if (settings.periodNames[i] === '') {
             settings.periodNames[i] = `Period ${i + 1}`;
         }
-        settings.periodNames[i] = $('.user-interactable#input-period-' + (i + 1)).val();
     }
 
     /* Tune
