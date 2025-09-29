@@ -140,7 +140,7 @@ $('#feedback-modal').on('submit', function(e) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
                 'form-name': 'feedback',
-                'feedback-modal': `id${id}: $('#feedback-modal-textarea').val().trim()`
+                'feedback-modal': `id${id}: ${$('#feedback-modal-textarea').val().trim()}`
             })
         });
     }
