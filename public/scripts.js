@@ -23,6 +23,12 @@ let sidebarOpened = false;
 let settingsOpened = false;
 let skipStore = false;
 
+let id = getCookie("id");
+if (!id) {
+    id = Math.floor(Math.random() * 9999) + 1;
+    document.cookie = `id=${id}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/`;
+}
+
 $('.right-sidebar-toggle,.right-sidebar-exit').click(function () {
     sidebarOpened = !sidebarOpened;
     if (sidebarOpened) {
@@ -134,7 +140,7 @@ $('#feedback-modal').on('submit', function(e) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
                 'form-name': 'feedback',
-                'feedback-modal': $('#feedback-modal-textarea').val().trim()
+                'feedback-modal': `id${id}: $('#feedback-modal-textarea').val().trim()`
             })
         });
     }
@@ -173,6 +179,15 @@ function displaySchedule(s) {
 
         $('.schedule-list').append(item);
     };
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split("; ");
+    for (let c of cookies) {
+        const [key, value] = c.split("=");
+        if (key === name) return value;
+    }
+    return null;
 }
 
 async function init() {
@@ -217,12 +232,7 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '-7');
-    if (settings.tune == '-10'
-        || settings.tune == '-7'
-        || settings.tune == '-31'
-        || settings.tune == '0'
-    ) settings.tune = 16;
+    settings.tune = Number(localStorage.getItem('tune') || '-30');
 
     /* Get schedules and current schedule
     ------------------------ */

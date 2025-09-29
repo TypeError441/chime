@@ -46,6 +46,12 @@
                 </div>
                 <button class="notification-close">OK</button>
             </div> -->
+            <div id="notification-tune-03" class="notification">
+                <div class="notification-content">
+                    <p class="notification-message">Bells are off by a few seconds every day. Go to settings to make the timer accurate.</p>
+                </div>
+                <button class="notification-close">OK</button>
+            </div>
             <!-- <div id="notification-new-themes-01" class="notification">
                 <div class="notification-content">
                     <p class="notification-message">There are new themes! <b>Forest</b> and <b>Arctic</b>.</p>
@@ -125,8 +131,9 @@
                         </select>
                     </div>
                     <div class="settings-item">
-                        <label for="select-tune">Tune (offset)</label>
-                        <input id="select-tune" class="user-interactable" type="number" min="-60" max="60">
+                        <label for="select-tune">Tune (offset in seconds)</label>
+                        <label class="label-input-periods">Recommended as of Sep 26: -30</label>
+                        <input id="select-tune" class="user-interactable" type="number" min="-90" max="90">
                     </div>
                     <div class="settings-item">
                         <label for="select-theme">Theme</label>
