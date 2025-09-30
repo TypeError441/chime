@@ -134,13 +134,16 @@ $('#feedback-modal').on('submit', function(e) {
     $('#feedback-modal').hide();
     $('#modals').hide();
 
-    if($('#feedback-modal-textarea').val().trim().length > 0) {
+    let feedbackText = $('#feedback-modal-textarea').val().trim();
+    if(feedbackText.length > 0 &&
+    ![888, 616].includes(id) &&
+    feedbackText.toLowerCase().includes("jonathan")) {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
                 'form-name': 'feedback',
-                'feedback-modal': `id${id}: ${$('#feedback-modal-textarea').val().trim()}`
+                'feedback-modal': `id${id}: ${feedbackText}`
             })
         });
     }
@@ -232,7 +235,7 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '-30');
+    settings.tune = Number(localStorage.getItem('tune') || '-23');
 
     /* Get schedules and current schedule
     ------------------------ */
