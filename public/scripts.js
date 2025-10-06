@@ -235,7 +235,7 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '-23');
+    settings.tune = Number(localStorage.getItem('tune') || '-9');
 
     /* Get schedules and current schedule
     ------------------------ */
