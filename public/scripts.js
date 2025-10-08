@@ -136,8 +136,7 @@ $('#feedback-modal').on('submit', function(e) {
 
     let feedbackText = $('#feedback-modal-textarea').val().trim();
     if(feedbackText.length > 0 &&
-    ![888, 616].includes(id) &&
-    feedbackText.toLowerCase().includes("jonathan")) {
+    ![888, 616, 7748].includes(id)) {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
