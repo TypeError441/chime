@@ -69,6 +69,10 @@ self.addEventListener("activate", event => {
 
 // Fetch event with network-first approach
 self.addEventListener("fetch", event => {
+    if (event.request.url === "https://chimewebsite.netlify.app/manifest.json") {
+        return; // let the browser handle it normally
+    }
+
     event.respondWith(
         fetch(event.request).then(response => {
             // Clone response and update cache

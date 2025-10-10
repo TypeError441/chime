@@ -302,7 +302,7 @@ function pollForUpdate() {
     fetch("https://chimewebsite.netlify.app/manifest.json", { cache: "no-store" })
     .then(res => res.json())
     .then(data => {
-        if (version !== data.version) { 
+        if (version !== data.ver) { 
             window.location.reload();
         }
     })
