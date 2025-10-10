@@ -10,7 +10,7 @@ let settings = {
 
 let now = new Date(new Date().getTime() + settings.tune * 1000);
 
-let dfsdjkfhsdjfhsdjf;
+let version;
 
 let schedule = { name: '', periods: [] };
 
@@ -203,9 +203,9 @@ async function init() {
 
     /* Version and service worker
     ------------------------ */
-    dfsdjkfhsdjfhsdjf = manifest.ver;
-    $('.version').text('version ' + dfsdjkfhsdjfhsdjf);
-    navigator.serviceWorker.register(`/sw.js?version=${dfsdjkfhsdjfhsdjf}`);
+    version = manifest.ver;
+    $('.version').text('version ' + version);
+    navigator.serviceWorker.register(`/sw.js?version=${version}`);
 
     periodCount = schoolData.periods; 
 
