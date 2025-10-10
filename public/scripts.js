@@ -10,7 +10,7 @@ let settings = {
 
 let now = new Date(new Date().getTime() + settings.tune * 1000);
 
-let version;
+let dfsdjkfhsdjfhsdjf;
 
 let schedule = { name: '', periods: [] };
 
@@ -203,9 +203,9 @@ async function init() {
 
     /* Version and service worker
     ------------------------ */
-    version = manifest.ver;
-    $('.version').text('version ' + version);
-    navigator.serviceWorker.register(`/sw.js?version=${version}`);
+    dfsdjkfhsdjfhsdjf = manifest.ver;
+    $('.version').text('version ' + dfsdjkfhsdjfhsdjf);
+    navigator.serviceWorker.register(`/sw.js?version=${dfsdjkfhsdjfhsdjf}`);
 
     periodCount = schoolData.periods; 
 
@@ -294,7 +294,19 @@ async function init() {
     applySettings();
 
     tick();
-    setInterval(tick, 1000);
+    setInterval(tick, 1000); // 1 second
+    setInterval(pollForUpdate, 5 * 60 * 1000); // 5 minutes
+}
+
+function pollForUpdate() {
+    fetch("https://chimewebsite.netlify.app/manifest.json", { cache: "no-store" })
+    .then(res => res.json())
+    .then(data => {
+        if (version !== data.version) { 
+            window.location.reload();
+        }
+    })
+    .catch(err => console.error("Version check failed", err));
 }
 
 function tick() {
