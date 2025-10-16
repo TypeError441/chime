@@ -2,11 +2,8 @@
   --background-color: #f9f9f9;
   --background-image: none;
   --color: #202124;
-  --sidebar-toggle-background-color: #000000;
-  --sidebar-toggle-hover-background-color: #272727;
   --sidebar-background-color: #eaedf3;
   --radial-background-color: #e5e6eb;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
 }
 
@@ -14,11 +11,8 @@
   --background-color: #f9f9f9;
   --background-image: none;
   --color: #202124;
-  --sidebar-toggle-background-color: #000000;
-  --sidebar-toggle-hover-background-color: #272727;
   --sidebar-background-color: #eaedf3;
   --radial-background-color: #e5e6eb;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
 }
 
@@ -26,11 +20,8 @@
   --background-color: #1e1e1e;
   --background-image: none;
   --color: #f5f5f5;
-  --sidebar-toggle-background-color: #ffffff;
-  --sidebar-toggle-hover-background-color: #e0e0e0;
   --sidebar-background-color: #292d32;
   --radial-background-color: #4e555f;
-  --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
 }
 
@@ -38,11 +29,8 @@
   --background-color: #000000;
   --background-image: none;
   --color: #ffffff;
-  --sidebar-toggle-background-color: #ffffff;
-  --sidebar-toggle-hover-background-color: #d6d6d6;
   --sidebar-background-color: #19191b;
   --radial-background-color: #24242e;
-  --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
 }
 
@@ -50,11 +38,8 @@
   --background-color: #b7dfff;
   --background-image: none;
   --color: #1a1d26;
-  --sidebar-toggle-background-color: #ffffff;
-  --sidebar-toggle-hover-background-color: #e8edff;
   --sidebar-background-color: #a3d6ff;
   --radial-background-color: #85bdea;
-  --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 0;
 }
 
@@ -62,11 +47,8 @@
   --background-color: #1a1d26;
   --background-image: none;
   --color: #e0e7ff;
-  --sidebar-toggle-background-color: #ffffff;
-  --sidebar-toggle-hover-background-color: #d0daff;
   --sidebar-background-color: #2d364b;
   --radial-background-color: #34415f;
-  --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
 }
 
@@ -74,11 +56,8 @@
   --background-color: #31432c;
   --background-image: none;
   --color: #efe7d7;
-  --sidebar-toggle-background-color: #4c604b;
-  --sidebar-toggle-hover-background-color: #55704f;
   --sidebar-background-color: #507a4c;
   --radial-background-color: #3a5f46;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 1;
 }
 
@@ -86,11 +65,8 @@
   --background-color: #eceff4;
   --background-image: none;
   --color: #5e81ac;
-  --sidebar-toggle-background-color: #4b5260;
-  --sidebar-toggle-hover-background-color: #2f343f;
   --sidebar-background-color: #e5e9f0;
   --radial-background-color: #d8dee9;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
 }
 
@@ -98,11 +74,8 @@
   --background-color: #47372a;
   --background-image: none;
   --color: #f5e1a4;
-  --sidebar-toggle-background-color: #d1a56d;
-  --sidebar-toggle-hover-background-color: #a67c39;
   --sidebar-background-color: #4a2c2a;
   --radial-background-color: #8a683d;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 1;
 }
 
@@ -110,11 +83,8 @@
   --background-color: #000000;
   --background-image: url("https://images.pond5.com/black-empty-space-stars-dark-footage-073036484_iconl.jpeg");
   --color: #ffffff;
-  --sidebar-toggle-background-color: #ffffff;
-  --sidebar-toggle-hover-background-color: #d6d6d6;
   --sidebar-background-color: #2e0a2e;
   --radial-background-color: #232353;
-  --image-on-toggle-brightness: 0;
   --image-on-bg-brightness: 1;
 }
 
@@ -122,11 +92,8 @@
   --background-color: #f9f9f9;
   --background-image: none;
   --color: #202124;
-  --sidebar-toggle-background-color: #000000;
-  --sidebar-toggle-hover-background-color: #272727;
   --sidebar-background-color: #f2f4f8;
   --sidebar-background-color: #eaedf3;
-  --image-on-toggle-brightness: 1;
   --image-on-bg-brightness: 0;
 }
 
@@ -534,7 +501,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
   position: absolute;
   top: 0;
   right: calc(-1 * min(30vw, 350px));
@@ -555,20 +521,15 @@
   }
 }
 #right-sidebar-container .right-sidebar-toggle {
-  transform: translate(0, -50%);
-  border-radius: 6em 0 0 6em;
-  width: 3em;
-  height: 6em;
+  border-radius: 2em;
+  padding: 1em;
+  height: fit-content;
+  margin: 1em;
   border: none;
   cursor: pointer;
-  background-color: var(--sidebar-toggle-background-color);
-}
-#right-sidebar-container .right-sidebar-toggle:hover {
-  background-color: var(--sidebar-toggle-hover-background-color);
-}
-#right-sidebar-container .right-sidebar-toggle img {
-  filter: brightness(var(--image-on-toggle-brightness));
-  width: 32px;
+  background-color: var(--color);
+  color: var(--background-color);
+  font-size: 1rem;
 }
 #right-sidebar-container .right-sidebar {
   display: flex;
@@ -636,11 +597,6 @@
   #right-sidebar-container .right-sidebar {
     width: 100vw;
     border-radius: 0;
-  }
-  #right-sidebar-container .right-sidebar-toggle {
-    position: absolute;
-    right: 100vw;
-    bottom: 7em;
   }
   #right-sidebar-container .right-sidebar .right-sidebar-exit {
     display: block;

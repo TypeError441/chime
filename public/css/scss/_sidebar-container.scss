@@ -1,7 +1,7 @@
 @use "templates";
 
 #right-sidebar-container {
-    @include templates.flex(both, row);
+    @include templates.flex(horiz, row);
 
     position: absolute;
     top: 0;
@@ -24,22 +24,15 @@
     }
 
     .right-sidebar-toggle {
-        transform: translate(0, -50%);
-        border-radius: 6em 0 0 6em;
-        width: 3em;
-        height: 6em;
+        border-radius: 2em;
+        padding: 1em;
+        height: fit-content;
+        margin: 1em;
         border: none;
         cursor: pointer;
-        background-color: var(--sidebar-toggle-background-color);
-
-        &:hover {
-            background-color: var(--sidebar-toggle-hover-background-color);
-        }
-
-        img {
-            filter: brightness(var(--image-on-toggle-brightness));
-            width: 32px;
-        }
+        background-color: var(--color);
+        color: var(--background-color);
+        font-size: 1rem;
     }
 
     .right-sidebar {
@@ -116,12 +109,6 @@
         .right-sidebar {
             width: 100vw;
             border-radius: 0;
-        }
-
-        .right-sidebar-toggle {
-            position: absolute;
-            right: 100vw;
-            bottom: 7em;
         }
 
         .right-sidebar .right-sidebar-exit {

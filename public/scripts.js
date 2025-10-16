@@ -215,9 +215,6 @@ async function init() {
     settings.customtheme = localStorage.getItem('customtheme') || {
         'backgroundcolor': "#000000",
         'color': "#ffffff",
-        'sidebartogglecolor': "#ffffff",
-        'sidebartogglecolorhover': "#d8d8d8",
-        'sidebartoggleimagebrightness': "0",
         'settingsimagebrightness': "1",
         'sidebarbackgroundcolor': "#eaedf3",
         'arcbackgroundcolor': "#dddddd"
@@ -234,7 +231,7 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '3');
+    settings.tune = Number(localStorage.getItem('tune') || '8');
 
     /* Get schedules and current schedule
     ------------------------ */
@@ -458,9 +455,6 @@ function applySettings() {
     settings.customtheme = {
         'backgroundcolor': $('#custom-theme-creator-backgroundcolor').val() || "#f9f9f9",
         'color': $('#custom-theme-creator-color').val() || "#202124",
-        'sidebartogglecolor': $('#custom-theme-creator-sidebartogglecolor').val() || "#000000",
-        'sidebartogglecolorhover': $('#custom-theme-creator-sidebartogglecolorhover').val() || "#272727",
-        'sidebartoggleimagebrightness': $('#custom-theme-creator-sidebartoggleimagebrightness').val() || "1",
         'settingsimagebrightness': $('#custom-theme-creator-settingsimagebrightness').val() || "0",
         'sidebarbackgroundcolor': $('#custom-theme-creator-sidebarbackgroundcolor').val() || "#f2f4f8",
         'arcbackgroundcolor': $('#custom-theme-creator-arcbackgroundcolor').val() || "#e5e6eb"
@@ -470,9 +464,6 @@ function applySettings() {
         $('html').css({
             '--background-color': settings.customtheme.backgroundcolor,
             '--color': settings.customtheme.color,
-            '--sidebar-toggle-background-color': settings.customtheme.sidebartogglecolor,
-            '--sidebar-toggle-hover-background-color': settings.customtheme.sidebartogglecolorhover,
-            '--image-on-toggle-brightness': settings.customtheme.sidebartoggleimagebrightness,
             '--image-on-bg-brightness': settings.customtheme.settingsimagebrightness,
             '--sidebar-background-color': settings.customtheme.sidebarbackgroundcolor,
             '--radial-background-color': settings.customtheme.arcbackgroundcolor,
