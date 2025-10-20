@@ -37,7 +37,12 @@
         "10-10": "Holiday",
 
         "10-14": "Odd",
-        "10-16": "Assembly C"
+        "10-16": "Assembly C",
+
+        "10-21": "Normal",
+        "10-22": "Wednesday Non-block",
+        "10-23": "Normal",
+        "10-24": "Normal"
     },
     "schedules": {
         "Normal": {
