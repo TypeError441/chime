@@ -7,6 +7,15 @@
   --image-on-bg-brightness: 0;
 }
 
+[data-theme=fall] {
+  --background-color: #201e1c;
+  --background-image: none;
+  --color: #ff9100;
+  --sidebar-background-color: #3d2f23;
+  --radial-background-color: #66564b;
+  --image-on-bg-brightness: 1;
+}
+
 [data-theme=default-light] {
   --background-color: #f9f9f9;
   --background-image: none;

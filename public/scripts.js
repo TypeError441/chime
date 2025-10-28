@@ -231,7 +231,7 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '13');
+    settings.tune = Number(localStorage.getItem('tune') || '-30');
 
     /* Get schedules and current schedule
     ------------------------ */
@@ -281,6 +281,10 @@ async function init() {
             $(this).hide();
         }
     });
+
+    /* Sidebar
+    ------------------------ */
+    sidebarOpened = localStorage.getItem('sidebarOpened') == "true";
 
     /* On page close, save all settings to localStorage
     ------------------------ */
@@ -495,12 +499,25 @@ function applySettings() {
         }
     }
 
+    /* Sidebar
+    ------------------------ */
+    if (sidebarOpened) {
+        console.log(sidebarOpened)
+        displaySchedule(schedule);
+        $('#app-container').toggleClass('sidebar-opened');
+        $('#settings.button').toggleClass('sidebar-opened');
+        $('#feedback.button').toggleClass('sidebar-opened');
+        $('#right-sidebar-container').toggleClass('sidebar-opened');
+    }
+
     /* Tune
     ------------------------ */
     /* Not necessary since it's just calculated in tick() */
 }
 
 function storeSettings() {
+    localStorage.setItem('sidebarOpened', sidebarOpened);
+
     if (skipStore) {
         return;
     }
