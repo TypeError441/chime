@@ -78,7 +78,7 @@ $('#close-settings').click(function () {
     for (let i = 0; i < periodCount; i++) {
         settings.periodNames.push($('.user-interactable#input-period-' + (i + 1)).val());
     }
-    settings.tune = Math.min(Math.max($('#select-tune').val(), -60), 60);
+    settings.tune = Math.min(Math.max($('#select-tune').val(), -90), 90);
 
     // Update UI
     $('#app-container').show();
@@ -231,7 +231,8 @@ async function init() {
         }
     }
 
-    settings.tune = Number(localStorage.getItem('tune') || '-30');
+    localStorage.removeItem('tune');
+    settings.tune = -24;
 
     /* Get schedules and current schedule
     ------------------------ */
@@ -502,7 +503,6 @@ function applySettings() {
     /* Sidebar
     ------------------------ */
     if (sidebarOpened) {
-        console.log(sidebarOpened)
         displaySchedule(schedule);
         $('#app-container').toggleClass('sidebar-opened');
         $('#settings.button').toggleClass('sidebar-opened');
@@ -516,6 +516,15 @@ function applySettings() {
 }
 
 function storeSettings() {
+    if (settingsOpened) {
+        settings.theme = $('#select-theme').val();
+        settings.font = $('#select-font').val();
+        settings.periodNames = [];
+        for (let i = 0; i < periodCount; i++) {
+            settings.periodNames.push($('.user-interactable#input-period-' + (i + 1)).val());
+        }
+        settings.tune = Math.min(Math.max($('#select-tune').val(), -90), 90);
+    }
     localStorage.setItem('sidebarOpened', sidebarOpened);
 
     if (skipStore) {
@@ -526,7 +535,6 @@ function storeSettings() {
     localStorage.setItem('customtheme', JSON.stringify(settings.customtheme));
     localStorage.setItem('font', settings.font);
     localStorage.setItem('periods', JSON.stringify(settings.periodNames));
-    localStorage.setItem('tune', settings.tune);
 }
 
 await init();

@@ -66,7 +66,7 @@
             </div> -->
             <div id="notification-new-themes-03" class="notification">
                 <div class="notification-content">
-                    <p class="notification-message">New Halloween theme until Friday</p>
+                    <p class="notification-message">New Halloween theme until Nov 7. If you have the theme on, it will stay on even after Nov 7.</p>
                 </div>
                 <button class="notification-close">OK</button>
             </div>
@@ -141,10 +141,19 @@
                         </select>
                     </div>
                     <div class="settings-item">
-                        <label for="select-tune">Tune (offset in seconds)</label>
-                        <label class="label-input-periods">Recommended as of Oct 27: -30</label>
-                        <input id="select-tune" class="user-interactable" type="number" min="-90" max="90">
+                        <label for="select-tune">Tune (seconds)</label>
+                        <label class="label-input-periods">Recommended as of Oct 30: -24</label>
+                        <input id="select-tune" class="user-interactable" style="margin-bottom: 5px;" type="number" min="-90" max="90">
+                        <label class="label-input-periods" style="margin-bottom: 1em;" >(on reload this will reset to the recommended value)</label>
                     </div>
+                    <!-- <div class="settings-item">
+                        <label>Quick Links</label>
+                        <button class="user-interactable">Add link</button>
+                        <input class="user-interactable quick-link-input" type="text" value="https://powerschool.losaltos.k12.ca.us/public/">
+                        <button class="user-interactable">Remove link</button>
+                        <input class="user-interactable quick-link-input" type="text" value="https://classroom.google.com/">
+                        <button class="user-interactable">Remove link</button>
+                    </div> -->
                     <div class="settings-item">
                         <label for="select-theme">Theme</label>
                         <select id="select-theme" class="user-interactable">
@@ -170,8 +179,8 @@
                                 <input type="color" name="custom-theme-creator-color" id="custom-theme-creator-color" value="#202124">
                             </div>
                             <div class="custom-theme-creator-item">
-                                <p class="custom-theme-creator-item-name">Sidebar Icon Brightness</p>
-                                <input type="number" name="custom-theme-creator-sidebartoggleimagebrightness" id="custom-theme-creator-sidebartoggleimagebrightness" min="0" max="1" step="0.1" value="1">
+                                <p class="custom-theme-creator-item-name">Settings Image Brightness</p>
+                                <input type="number" name="custom-theme-creator-settingsimagebrightness" id="custom-theme-creator-settingsimagebrightness" min="0" max="1" step="0.1" value="1">
                             </div>
                             <div class="custom-theme-creator-item">
                                 <p class="custom-theme-creator-item-name">Sidebar</p>
