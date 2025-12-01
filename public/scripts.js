@@ -231,7 +231,7 @@ async function init() {
     }
 
     localStorage.removeItem('tune');
-    settings.tune = 11;
+    settings.tune = 0;
 
     /* Get schedules and current schedule
     ------------------------ */
