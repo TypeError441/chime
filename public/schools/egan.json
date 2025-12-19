@@ -48,7 +48,9 @@
         
         "12-5": "Minimum",
         
-        "12-12": "Assembly E"
+        "12-12": "Assembly E",
+        
+        "12-19": "Normal"
     },
     "schedules": {
         "Normal": {
