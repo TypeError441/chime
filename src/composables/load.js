@@ -46,21 +46,13 @@ export function useLoadLocalStorageSettings() {
     async function loadLocalStorageSettings() {
         let settings = await idb.get("settings");
 
+        console.log("Loaded settings from IDB:", settings);
+
         // Appearance
         let loadedAppearance = defaultAppearance;
 
         if (settings?.appearance !== undefined) {
             loadedAppearance = settings.appearance;
-        }
-
-        const usedLocalStorageTheme = localStorage.getItem("theme") !== null;
-        if (usedLocalStorageTheme) {
-            loadedAppearance.theme = localStorage.getItem("theme");
-        }
-
-        const usedLocalStorageFont = localStorage.getItem("font") !== null;
-        if (usedLocalStorageFont) {
-            loadedAppearance.font = localStorage.getItem("font");
         }
 
         Object.assign(appearance, loadedAppearance);
@@ -70,11 +62,6 @@ export function useLoadLocalStorageSettings() {
 
         if (settings?.customtheme !== undefined) {
             loadedCustomtheme = settings.customtheme;
-        }
-
-        const usedLocalStorageCustomtheme = localStorage.getItem("customtheme") !== null;
-        if (usedLocalStorageCustomtheme) {
-            loadedCustomtheme = JSON.parse(localStorage.getItem("customtheme"));
         }
 
         Object.assign(customtheme, loadedCustomtheme);
@@ -101,12 +88,7 @@ export function useLoadLocalStorageSettings() {
         }
 
         // Handle background image object URL lifecycle
-        if (customtheme.backgroundBlob) {
-
-            if (!(customtheme.backgroundBlob instanceof Blob)) {
-                customtheme.backgroundImage = null;
-                return;
-            }
+        if (customtheme.backgroundBlob instanceof Blob) {
 
             if (backgroundObjectURL) {
                 URL.revokeObjectURL(backgroundObjectURL);
@@ -117,6 +99,77 @@ export function useLoadLocalStorageSettings() {
         } else {
             customtheme.backgroundImage = null;
         }
+
+        // Periods
+        let loadedPeriods = {};
+
+        if (settings?.periods !== undefined) {
+            loadedPeriods = settings.periods;
+        }
+        
+        Object.assign(periods, loadedPeriods);
+
+        // Sidebar Opened
+        let loadedSidebarOpened = false;
+
+        if (settings?.sidebarOpened !== undefined) {
+            loadedSidebarOpened = settings.sidebarOpened;
+        }
+
+        sidebarOpened.value = loadedSidebarOpened;
+
+        // School
+        let loadedSchool = defaultSchool;
+
+        if (settings?.school !== undefined) {
+            loadedSchool = settings.school;
+        }
+
+        school.value = loadedSchool;
+
+        // Quick Links
+        let loadedQuickLinks = defaultQuickLinks;
+
+        if (settings?.quickLinks !== undefined) {
+            loadedQuickLinks = settings.quickLinks;
+        }
+        
+        quickLinks.value = loadedQuickLinks;
+
+        // ID
+        let loadedId = Math.floor(Math.random() * 9999) + 1;
+
+        if (settings?.id !== undefined) {
+            loadedId = settings.id;
+        }
+
+        const usedCookiesId = getCookie("id") !== null;
+        if (usedCookiesId) {
+            loadedId = getCookie("id");
+        }
+        
+        id.value = loadedId;
+
+        // Notifications
+        let loadedNotifications = {};
+        notificationNames
+            .filter(n => !notificationData[n].hidden)
+            .forEach(n => loadedNotifications[n] = false);
+
+        if (settings?.notifications !== undefined) {
+            loadedNotifications = settings.notifications;
+        } else {
+            notificationNames
+                .filter(n => !notificationData[n].hidden)
+                .forEach(n => {
+                    const ls = localStorage.getItem(n);
+                    if (ls !== null) {
+                        loadedNotifications[n] = ls === "1";
+                    }
+                });
+        }
+        
+        Object.assign(notifications, loadedNotifications);
 
         // Watch for runtime changes to backgroundBlob
         watch(
@@ -142,85 +195,6 @@ export function useLoadLocalStorageSettings() {
                 }
             }
         );
-
-        // Periods
-        let loadedPeriods = {};
-
-        if (settings?.periods !== undefined) {
-            loadedPeriods = settings.periods;
-        }
-        
-        Object.assign(periods, loadedPeriods);
-
-        // Sidebar Opened
-        let loadedSidebarOpened = false;
-
-        if (settings?.sidebarOpened !== undefined) {
-            loadedSidebarOpened = settings.sidebarOpened;
-        }
-
-        const usedLocalStorageSidebarOpened = localStorage.getItem("sidebarOpened") !== null;
-        if (usedLocalStorageSidebarOpened) {
-            loadedSidebarOpened = localStorage.getItem("sidebarOpened") == "true";
-        }
-
-        sidebarOpened.value = loadedSidebarOpened;
-
-        // School
-        let loadedSchool = defaultSchool;
-
-        if (settings?.school !== undefined) {
-            loadedSchool = settings.school;
-        }
-
-        school.value = loadedSchool;
-
-        // Quick Links
-        let loadedQuickLinks = defaultQuickLinks;
-
-        if (settings?.quickLinks !== undefined) {
-            loadedQuickLinks = settings.quickLinks;
-        }
-        
-        quickLinks.value = loadedQuickLinks;
-
-        // ID (priority: localStorage -> cookie -> IDB -> random)
-        let loadedId = Math.floor(Math.random() * 9999) + 1;
-
-        const lsId = localStorage.getItem("id");
-        if (lsId !== null) {
-            loadedId = Number(lsId);
-        } else {
-            const cookieId = getCookie("id");
-            if (cookieId !== null) {
-                loadedId = Number(cookieId);
-            } else if (settings?.id !== undefined) {
-                loadedId = settings.id;
-            }
-        }
-
-        id.value = loadedId;
-
-        // Notifications
-        let loadedNotifications = {};
-        notificationNames
-            .filter(n => !notificationData[n].hidden)
-            .forEach(n => loadedNotifications[n] = false);
-
-        if (settings?.notifications !== undefined) {
-            loadedNotifications = settings.notifications;
-        } else {
-            notificationNames
-                .filter(n => !notificationData[n].hidden)
-                .forEach(n => {
-                    const ls = localStorage.getItem(n);
-                    if (ls !== null) {
-                        loadedNotifications[n] = ls === "1";
-                    }
-                });
-        }
-        
-        Object.assign(notifications, loadedNotifications);
     }
 
     return { loadLocalStorageSettings };
@@ -252,48 +226,25 @@ export function useDetectSaveSettings() {
     const quickLinks = useQuickLinks();
     const id = useId();
     const notifications = useNotifications();
-    const { getCookie, setCookie } = useCookies();
 
-    async function detectSaveSettings() {
-        watch(
-            [
-                appearance,
-                customtheme,
-                periods,
-                quickLinks,
-                notifications,
-                id,
-                sidebarOpened,
-                school,
-            ],
-            async () => {
-                if (id.value == null) return;
+    function detectSaveSettings() {
+        window.addEventListener("beforeunload", async (event) => {
+            const settings = {
+                appearance: toRaw(appearance),
+                customtheme: toRaw(customtheme),
+                periods: toRaw(periods),
+                sidebarOpened: sidebarOpened.value,
+                school: school.value,
+                quickLinks: toRaw(quickLinks),
+                id: id.value,
+                notifications: toRaw(notifications),
+            };
 
-                const settings = {
-                    appearance: toRaw(appearance),
-                    customtheme: toRaw(customtheme),
-                    periods: toRaw(periods),
-                    sidebarOpened: sidebarOpened.value,
-                    school: school.value,
-                    quickLinks: toRaw(quickLinks),
-                    id: id.value,
-                    notifications: toRaw(notifications),
-                };
-
-                // legacy support
-                setCookie("id", id.value);
-                localStorage.setItem("id", id.value);
-
-                await idb.set("settings", settings);
-                console.log("Saved settings to IDB");
-                localStorage.clear();
-            },
-            {
-                deep: true,
-                flush: "post",
-                immediate: true,
-            }
-        );
+            await idb.set("settings", settings);
+            console.log("Saved settings to IDB");
+            localStorage.clear();
+            document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        });
     }
 
     return { detectSaveSettings };

@@ -39,8 +39,6 @@ tick();
         <Overlay />
         <Dashboard />
         <Settings />
-        <div>{{  getCookie("id") }}</div>
-        
     </div>
     <Sidebar />
 </template>

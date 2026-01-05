@@ -32,7 +32,7 @@ function setBackground(file) {
             name="Background" :obj="customtheme" model="backgroundColor" type="color"
         />
         <CustomThemeProperty
-            name="Background Image" :obj="customtheme" model="backgroundImage" type="file" @file="setBackground"
+            name="Background Image" :obj="customtheme" model="backgroundImage" type="file" @file="setBackground" :blob="customtheme.backgroundBlob"
         />
         <CustomThemeProperty
             name="Text" :obj="customtheme" model="color" type="color"

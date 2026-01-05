@@ -1,6 +1,8 @@
 <script setup>
-import { toRef, watchEffect } from "vue";
+import { ref, toRef, watchEffect } from "vue";
 import ColorInput from "./ColorInput.vue";
+
+const fileInput = ref(null);
 
 const props = defineProps({
     name: String,
@@ -11,7 +13,8 @@ const props = defineProps({
     max: Number,
     step: Number,
     transparency: Boolean,
-    transparencyModel: Boolean
+    transparencyModel: Boolean,
+    blob: File
 });
 
 const modelRef = toRef(props.obj, props.model);
@@ -24,9 +27,15 @@ watchEffect(() => {
     }
 });
 
+const file = ref(props.blob);
+
 function onFileChange(event) {
-    const file = event.target.files?.[0] ?? null;
+    file.value = event.target.files?.[0] ?? null;
     emit("file", file);
+}
+
+function clearFile() {
+    emit("file", null);
 }
 </script>
 
@@ -47,18 +56,29 @@ function onFileChange(event) {
         v-model="modelRef"
         placeholder="none"
     >
-    <input
-        v-else-if="props.type === 'file'"
-        type="file"
-        accept="image/*"
-        @change="onFileChange"
-    />
     <ColorInput
         v-else-if="props.type === 'color'"
         v-model="modelRef"
         v-model:alpha="props.obj.radialTransparency"
         :transparency="props.transparency"
     />
+    <div v-else-if="props.type === 'file'">
+        <input
+            type="file"
+            accept="image/*"
+            ref="fileInput"
+            @change="onFileChange"
+            style="display: none;"
+        />
+        <button type="button" @click="fileInput.click()">Browse...</button>
+        <button
+            v-if="file"
+            type="button"
+            @click="clearFile"
+        >
+            Clear
+        </button>
+    </div>
     <input
         v-else
         :type="props.type"
