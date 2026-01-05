@@ -26,7 +26,7 @@ const periods = reactive({});
 
 const quickLinks = reactive(createDefaultQuickLinks());
 
-const id = ref(2763);
+const id = ref(-1);
 
 const notifications = reactive({});
 

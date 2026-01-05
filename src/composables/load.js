@@ -184,18 +184,21 @@ export function useLoadLocalStorageSettings() {
         
         quickLinks.value = loadedQuickLinks;
 
-        // ID
+        // ID (priority: localStorage -> cookie -> IDB -> random)
         let loadedId = Math.floor(Math.random() * 9999) + 1;
 
-        if (settings?.id !== undefined) {
-            loadedId = settings.id;
+        const lsId = localStorage.getItem("id");
+        if (lsId !== null) {
+            loadedId = Number(lsId);
+        } else {
+            const cookieId = getCookie("id");
+            if (cookieId !== null) {
+                loadedId = Number(cookieId);
+            } else if (settings?.id !== undefined) {
+                loadedId = settings.id;
+            }
         }
 
-        const usedCookiesId = getCookie("id") !== null;
-        if (usedCookiesId) {
-            loadedId = getCookie("id");
-        }
-        
         id.value = loadedId;
 
         // Notifications
@@ -249,32 +252,48 @@ export function useDetectSaveSettings() {
     const quickLinks = useQuickLinks();
     const id = useId();
     const notifications = useNotifications();
+    const { getCookie, setCookie } = useCookies();
 
     async function detectSaveSettings() {
-        window.addEventListener("beforeunload", async () => {
-            if (backgroundObjectURL) {
-                URL.revokeObjectURL(backgroundObjectURL);
-                backgroundObjectURL = null;
-            }
+        watch(
+            [
+                appearance,
+                customtheme,
+                periods,
+                quickLinks,
+                notifications,
+                id,
+                sidebarOpened,
+                school,
+            ],
+            async () => {
+                if (id.value == null) return;
 
-            const settings = {
-                appearance: toRaw(appearance),
-                customtheme: toRaw(customtheme),
-                periods: toRaw(periods),
-                sidebarOpened: sidebarOpened.value,
-                school: school.value,
-                quickLinks: toRaw(quickLinks),
-                id: id.value,
-                notifications: toRaw(notifications),
-            };
+                const settings = {
+                    appearance: toRaw(appearance),
+                    customtheme: toRaw(customtheme),
+                    periods: toRaw(periods),
+                    sidebarOpened: sidebarOpened.value,
+                    school: school.value,
+                    quickLinks: toRaw(quickLinks),
+                    id: id.value,
+                    notifications: toRaw(notifications),
+                };
 
-            document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            
-            await idb.set("settings", settings)
-            .finally(() => {
+                // legacy support
+                setCookie("id", id.value);
+                localStorage.setItem("id", id.value);
+
+                await idb.set("settings", settings);
+                console.log("Saved settings to IDB");
                 localStorage.clear();
-            });
-        });
+            },
+            {
+                deep: true,
+                flush: "post",
+                immediate: true,
+            }
+        );
     }
 
     return { detectSaveSettings };

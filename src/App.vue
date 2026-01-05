@@ -1,5 +1,8 @@
 <script setup>
+import { onBeforeMount } from "vue";
+
 import { useSidebarOpened } from "./composables/settings";
+import { useCookies } from "./composables/cookie";
 import { useLoadLocalStorageSettings, useDisableTransitions, useDetectSaveSettings } from "./composables/load";
 import { tick } from "./composables/tick";
 import { useApplySettings } from "./composables/apply";
@@ -11,16 +14,19 @@ import Sidebar from "./components/sidebar/Sidebar.vue";
 
 const sidebarOpened = useSidebarOpened();
 
-const { loadLocalStorageSettings } = useLoadLocalStorageSettings();
-loadLocalStorageSettings();
+onBeforeMount(async () => {
+    const { loadLocalStorageSettings } = useLoadLocalStorageSettings();
+    await loadLocalStorageSettings();
 
-const { disableTransitions } = useDisableTransitions();
-disableTransitions();
+    const { disableTransitions } = useDisableTransitions();
+    disableTransitions();
 
-const { detectSaveSettings } = useDetectSaveSettings();
-detectSaveSettings();
+    const { detectSaveSettings } = useDetectSaveSettings();
+    await detectSaveSettings();
+});
 
 const { applyTheme, applyFont } = useApplySettings();
+const { getCookie, setCookie } = useCookies();
 
 applyTheme();
 applyFont();
@@ -33,6 +39,8 @@ tick();
         <Overlay />
         <Dashboard />
         <Settings />
+        <div>{{  getCookie("id") }}</div>
+        
     </div>
     <Sidebar />
 </template>
