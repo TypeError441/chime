@@ -1,0 +1,55 @@
+{
+    "notification-tune-04": {
+        "hidden": false,
+        "content": "Bells are off by a few seconds every day. Scroll down to the settings to make the timer accurate."
+    },
+    "notification-new-themes-04": {
+        "hidden": false,
+        "content": "You can upload background images now! Go to settings to upload your own background image."
+    },
+    "notification-new-features-01": {
+        "hidden": false,
+        "content": "There are more customization options now! Go to settings to check them out."
+    },
+    "notification-new-features-02": {
+        "hidden": false,
+        "content": "You can add custom quick links now! Go to settings to add or remove quick links."
+    },
+
+
+
+    "notification-tune-01": {
+        "hidden": true,
+        "content": "Bells are around 30 seconds early. Go to settings to tune Chime so that the timer is accurate."
+    },
+    "notification-tune-02": {
+        "hidden": true,
+        "content": "Bells are around 7 seconds late now. Go to settings to tune Chime so that the timer is accurate."
+    },
+    "notification-tune-03": {
+        "hidden": true,
+        "content": "Bells are off by a few seconds every day. Go to settings to make the timer accurate."
+    },
+
+    "notification-new-themes-01": {
+        "hidden": true,
+        "content": "There are new themes! <b>Forest</b> and </b>Arctic</b>."
+    },
+    "notification-new-themes-02": {
+        "hidden": true,
+        "content": "If you don't like the current themes, you can make your own!"
+    },
+    "notification-new-themes-03": {
+        "hidden": true,
+        "content": "New Halloween theme until Nov 7. If you have the theme on, it will stay on even after Nov 7."
+    },
+
+    "notification-feedback-error-01": {
+        "hidden": true,
+        "content": "The feedback feature was broken; please resubmit any feedback you would like me to add."
+    },
+    "notification-feedback-error-02": {
+        "hidden": true,
+        "content": "The feedback broke again if you submitted feedback in the past 12 days please resubmit"
+    }
+}

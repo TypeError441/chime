@@ -1,0 +1,146 @@
+// Basic styling //
+* {
+    box-sizing: border-box;
+}
+
+// Default Theme //
+:root {
+    --background-color: #fff;
+    --background-image: none;
+    --color: #fff;
+
+    --sidebar-background-color: #fff;
+    --radial-background-color: #fff;
+
+    --image-on-bg-brightness: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    user-select: none;
+}
+
+#app {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: rgb(var(--background-color));
+    background-image: var(--background-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(var(--color));
+}
+
+// When resizing window //
+.disable-transitions * {
+    transition: none !important;
+}
+
+// Shared classes/styles //
+.button {
+    display: block;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    width: 80%;
+    border: none;
+    cursor: pointer;
+}
+
+.button__danger {
+    background-color: #ff5e68;
+    color: white;
+
+    &:hover {
+        background-color: #da3a3a;
+    }
+
+    &:active {
+        background-color: #bd3232;
+    }
+}
+
+.button__contrast {
+    background-color: rgb(var(--color));
+    color: rgb(var(--background-color));
+}
+
+// Settings //
+.settings--item {
+    break-inside: avoid;
+    
+    .item--title {
+        font-weight: bold;
+        margin: 0.5em 0;
+        font-size: 2rem;
+    }
+}
+
+.item--feature {
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+
+#settings--corner button { margin: 0.25em 0; }
+
+// Notice Board Item
+.overlay--item {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 1rem;
+    background-color: rgb(var(--sidebar-background-color));
+    border: none;
+    border-radius: 1rem;
+    pointer-events: all;
+}
+
+// Fonts //
+/* roboto-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/src/assets/fonts/roboto-v48-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* roboto-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/src/assets/fonts/roboto-v48-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/src/assets/fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-700 - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    src: url("/src/assets/fonts/inter-v19-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* wingdings */
+@font-face {
+    font-family: "Wingdings";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Wingdings"), url("/src/assets/fonts/wingding.woff") format("woff");
+}
