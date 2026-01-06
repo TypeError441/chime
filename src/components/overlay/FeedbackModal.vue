@@ -12,16 +12,19 @@ const emit = defineEmits(["close"]);
 const feedbackText = ref("");
 
 function submit() {
-    if(feedbackText.length > 0) {
-        fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                'form-name': 'feedback',
-                'feedback-modal': `v:${version},i:${id},f:${feedbackText}`
-            })
-        });
+    if (!feedbackText.value) {
+        emit("close");
+        return;
     }
+
+    fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            "form-name": "feedback",
+            "feedback-modal": `v:${version.value},i:${id.value},f:${feedbackText.value}`
+        }).toString()
+    });
 
     emit("close");
 }
@@ -32,12 +35,12 @@ function exit() {
 </script>
 
 <template>
-<form name="feedback" id="feedback-modal" netlify>
+<form name="feedback" id="feedback-modal" @submit.prevent="submit" netlify>
     <div id="feedback--title">Feedback</div>
     <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
     <textarea name="feedback-modal" id="feedback--textarea" maxlength="200" v-model.trim="feedbackText"></textarea>
     <div id="feedback--choice-area">
-        <button type="submit" class="button" @click="submit">Submit</button>
+        <button type="submit" class="button">Submit</button>
         <button type="button" class="button button__danger" @click="exit">Exit</button>
     </div>
 </form>

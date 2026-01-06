@@ -16,6 +16,11 @@
         "content": "You can add custom quick links now! Go to settings to add or remove quick links."
     },
 
+    "notification-feedback-error-03": {
+        "hidden": false,
+        "content": "Feedback was broken yesterday due to the new update please resubmit or tell me in person"
+    },
+
 
 
     "notification-tune-01": {

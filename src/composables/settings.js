@@ -12,7 +12,7 @@ const school = ref(createDefaultSchool());
 const stats = reactive({
     now: Date.now(),
     time: 0,
-    tune: 0,
+    tune: -4,
     percent: 0,
     period: reactive({
         start: [0, 0],
