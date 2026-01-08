@@ -15,7 +15,7 @@ function disable() {
 
 <template>
 <div :id="props.id" class="widget__notification overlay--item" v-if="!notifications[props.id]">
-    <button class="notification--close button__danger" @click="disable">X</button>
+    <button class="notification--close button__danger" @click="disable">×</button>
     <p class="notification--content">{{ content }}</p>
 </div>
 </template>
@@ -43,7 +43,8 @@ function disable() {
         left: 0.5rem;
         top: 0.5rem;
         border: none;
-        border-radius: 100000%;
+        border-radius: 100%;
+        aspect-ratio: 1 / 1;
 
         &:hover {
             cursor: pointer;

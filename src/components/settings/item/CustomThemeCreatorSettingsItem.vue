@@ -1,7 +1,8 @@
 <script setup>
-import { watch } from "vue";
+import { ref, watch } from "vue";
 
 import CustomThemeProperty from "./child/CustomThemeProperty.vue";
+import ToggleSettingsItem from "../ToggleSettingsItem.vue";
 
 import { useAppearance, useCustomtheme } from "../../../composables/settings";
 import { useApplySettings } from "../../../composables/apply";
@@ -20,6 +21,8 @@ function setBackground(file) {
     }
     customtheme.backgroundBlob = file;
 }
+
+const hidden = ref(true);
 </script>
 
 <template>
@@ -27,7 +30,8 @@ function setBackground(file) {
     <div class="item--title">
         Custom Theme
     </div>
-    <div id="item--custom-theme-creator" class="button__contrast">
+    <ToggleSettingsItem v-model="hidden" />
+    <div id="item--custom-theme-creator" class="button__contrast" v-if="!hidden">
         <CustomThemeProperty
             name="Background" :obj="customtheme" model="backgroundColor" type="color"
         />
