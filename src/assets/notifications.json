@@ -16,11 +16,6 @@
         "content": "You can add custom quick links now! Go to settings to add or remove quick links."
     },
 
-    "notification-feedback-error-03": {
-        "hidden": false,
-        "content": "Feedback was broken yesterday due to the new update please resubmit or tell me in person"
-    },
-
 
 
     "notification-tune-01": {
@@ -56,5 +51,9 @@
     "notification-feedback-error-02": {
         "hidden": true,
         "content": "The feedback broke again if you submitted feedback in the past 12 days please resubmit"
+    },
+    "notification-feedback-error-03": {
+        "hidden": true,
+        "content": "Feedback was broken yesterday due to the new update please resubmit or tell me in person"
     }
 }

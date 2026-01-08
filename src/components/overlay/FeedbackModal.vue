@@ -40,8 +40,8 @@ function exit() {
     <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
     <textarea name="feedback-modal" id="feedback--textarea" maxlength="200" v-model.trim="feedbackText"></textarea>
     <div id="feedback--choice-area">
-        <button type="submit" class="button">Submit</button>
         <button type="button" class="button button__danger" @click="exit">Exit</button>
+        <button type="submit" class="button button__success">Submit</button>
     </div>
 </form>
 </template>

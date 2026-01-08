@@ -31,11 +31,12 @@ const file = ref(props.blob);
 
 function onFileChange(event) {
     file.value = event.target.files?.[0] ?? null;
-    emit("file", file);
+    emit("file", file.value);
 }
 
 function clearFile() {
-    emit("file", null);
+    file.value = null;
+    emit("file", file.value);
 }
 </script>
 

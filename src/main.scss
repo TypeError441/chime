@@ -65,6 +65,19 @@ html, body {
     }
 }
 
+.button__success {
+    background-color: #7dd54e;
+    color: white;
+
+    &:hover {
+        background-color: #5fb830;
+    }
+
+    &:active {
+        background-color: #479a28;
+    }
+}
+
 .button__contrast {
     background-color: rgb(var(--color));
     color: rgb(var(--background-color));
