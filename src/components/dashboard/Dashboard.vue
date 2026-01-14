@@ -14,12 +14,13 @@ const parsedPeriod = computed(() => {
 });
 
 const timeStr = computed(() => {
-    const hours = Math.floor(stats.time / 1000 / 60 / 60);
-    const minutes = `${Math.floor(stats.time / 1000 / 60) % 60}`.padStart(2, "0");
-    const seconds = `${Math.round(stats.time / 1000) % 60}`.padStart(2, "0");
+    const totalSeconds = Math.round(stats.time / 1000);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
 
-    document.title = `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds} | ${parsedPeriod.value}, ${stats.schedule}`;
-    return `${hours > 0 ? `${hours}:` : ""}${minutes}:${seconds}`;
+    document.title = `${hours > 0 ? `${hours}:` : ""}${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")} | ${parsedPeriod.value}, ${stats.schedule}`;
+    return `${hours > 0 ? `${hours}:` : ""}${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
 });
 </script>
 
@@ -60,8 +61,12 @@ const timeStr = computed(() => {
         }
 
         #status--period, #status--schedule {
-            font-size: 16vmin;
+            font-size: 10vmin;
             transition: font-size 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+
+            &#status--schedule {
+                opacity: 0.6;
+            }
         }
     }
 }

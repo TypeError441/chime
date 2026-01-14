@@ -1,19 +1,19 @@
 {
+    "notification-bellx-01": {
+        "hidden": false,
+        "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
+    },
+    "notification-banned-01": {
+        "hidden": false,
+        "content": "If my website's banned you might have to re-enter the URL in the browser"
+    },
+    "notification-feedback-01": {
+        "hidden": false,
+        "content": "To all the people saying your theme doesn't save can you explain more because for me it is working fine I don't know why it's broken for you"
+    },
     "notification-tune-04": {
         "hidden": false,
-        "content": "Bells are off by a few seconds every day. Scroll down to the settings to make the timer accurate."
-    },
-    "notification-new-themes-04": {
-        "hidden": false,
-        "content": "You can upload background images now! Go to settings to upload your own background image."
-    },
-    "notification-new-features-01": {
-        "hidden": false,
-        "content": "There are more customization options now! Go to settings to check them out."
-    },
-    "notification-new-features-02": {
-        "hidden": false,
-        "content": "You can add custom quick links now! Go to settings to add or remove quick links."
+        "content": "The bells are off by a few seconds every day. Scroll down to the settings to make the timer accurate."
     },
 
 

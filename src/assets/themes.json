@@ -68,6 +68,7 @@
         "color": "26, 29, 38",
         "sidebarBackgroundColor": "163, 214, 255",
         "radialBackgroundColor": "133, 189, 234",
+        "radialTransparency": "1",
         "imageOnBgBrightness": "0"
     },
     "blue-dark": {
