@@ -42,6 +42,13 @@ const hidden = ref(true);
             :values="{left: 'Left', right: 'Right', off: 'Off'}"
         />
         <RadioFeature
+            v-if="appearance.weather !== 'off'"
+            display="Unit"
+            id="weather-unit"
+            v-model="appearance.weatherUnit"
+            :values="{f: '°F', c: '°C'}"
+        />
+        <RadioFeature
             display="Sidebar Button"
             id="sidebarButton"
             v-model="appearance.sidebarButton"

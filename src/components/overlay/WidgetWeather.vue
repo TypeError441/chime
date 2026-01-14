@@ -10,6 +10,7 @@ const customtheme = useCustomtheme();
 
 const data = ref(null);
 const temp = ref(null);
+const icon = ref(null);
 const errorMsg = ref("");
 
 onMounted(async () => {
@@ -21,7 +22,11 @@ onMounted(async () => {
         if (!res.ok) throw new Error("Network error");
 
         data.value = await res.json();
-        temp.value = Math.round(data.value.current.temp);
+
+
+        temp.value = data.value.current.temp;
+
+        icon.value = data.value.current.weather[0].icon;
 
     } catch (err) {
         console.error(err);
@@ -51,7 +56,9 @@ const textBrightness = computed(() => {
 
 <template>
 <button id="widget__weather" class="overlay--item" :style="`color: ${textBrightness}`" @click="openWeather">
-    {{ temp }}°F{{ errorMsg }}
+    {{ Math.round(appearance.weatherUnit == "f" ? temp : (temp - 32) * 5 / 9) }}{{ appearance.weatherUnit == "f" ? "°F" : "°C" }}
+    {{ errorMsg }}
+    <img :src="`https://openweathermap.org/img/wn/${icon}@2x.png`" alt="">
 </button>
 </template>
 
@@ -63,5 +70,11 @@ const textBrightness = computed(() => {
     flex-direction: row;
     grid-column: span 4;
     font-size: 2rem;
+
+    img {
+        filter: brightness(var(--image-on-bg-brightness));
+        height: 100%;
+        aspect-ratio: 1 / 1;
+    }
 }
 </style>

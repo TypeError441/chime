@@ -5,6 +5,7 @@ export function createDefaultAppearance() {
         theme: "default-light",
         font: "'Inter', sans-serif",
         weather: "right",
+        weatherUnit: "f",
         pie: "true",
         newtabquicklinks: "false",
         piesize: 90,
