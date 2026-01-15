@@ -1,15 +1,19 @@
 {
-    "notification-bellx-01": {
+    "notification-bellx-02": {
         "hidden": false,
-        "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
+        "content": "Nevermind bell x is good"
+    },
+    "notification-caps-01": {
+        "hidden": false,
+        "content": "To turn off caps lock on chromebook press alt + search"
     },
     "notification-banned-01": {
         "hidden": false,
         "content": "If my website's banned you might have to re-enter the URL in the browser"
     },
-    "notification-feedback-01": {
+    "notification-save-01": {
         "hidden": false,
-        "content": "To all the people saying your theme doesn't save can you explain more because for me it is working fine I don't know why it's broken for you"
+        "content": "I think i fixed the save issue, if your settings aren't saving please tell me"
     },
     "notification-tune-04": {
         "hidden": false,
@@ -55,5 +59,13 @@
     "notification-feedback-error-03": {
         "hidden": true,
         "content": "Feedback was broken yesterday due to the new update please resubmit or tell me in person"
+    },
+    "notification-bellx-01": {
+        "hidden": true,
+        "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
+    },
+    "notification-feedback-01": {
+        "hidden": true,
+        "content": "To all the people saying your theme doesn't save can you explain more because for me it is working fine I don't know why it's broken for you"
     }
 }

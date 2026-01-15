@@ -227,24 +227,44 @@ export function useDetectSaveSettings() {
     const id = useId();
     const notifications = useNotifications();
 
-    function detectSaveSettings() {
-        window.addEventListener("beforeunload", async (event) => {
+    let saveTimeout;
+
+    function debouncedSave() {
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(async () => {
             const settings = {
-                appearance: toRaw(appearance),
-                customtheme: toRaw(customtheme),
-                periods: toRaw(periods),
-                sidebarOpened: sidebarOpened.value,
-                school: school.value,
-                quickLinks: toRaw(quickLinks),
-                id: id.value,
-                notifications: toRaw(notifications),
+            appearance: toRaw(appearance),
+            customtheme: toRaw(customtheme),
+            periods: toRaw(periods),
+            sidebarOpened: sidebarOpened.value,
+            school: school.value,
+            quickLinks: toRaw(quickLinks),
+            id: id.value,
+            notifications: toRaw(notifications),
             };
 
             await idb.set("settings", settings);
             console.log("Saved settings to IDB");
-            localStorage.clear();
-            document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        });
+        }, 200);
+    }
+
+    function detectSaveSettings() {
+        watch(
+            [
+                appearance,
+                customtheme,
+                periods,
+                sidebarOpened,
+                school,
+                quickLinks,
+                id,
+                notifications
+            ],
+            () => {
+                debouncedSave();
+            },
+            { deep: true }
+        );
     }
 
     return { detectSaveSettings };
