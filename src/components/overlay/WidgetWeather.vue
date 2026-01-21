@@ -28,6 +28,8 @@ onMounted(async () => {
 
         icon.value = data.value.current.weather[0].icon;
 
+        icon.value = icon.value.substring(0, 2);
+
     } catch (err) {
         console.error(err);
         errorMsg.value = typeof err === "string" ? err : err.message;
@@ -36,9 +38,9 @@ onMounted(async () => {
 
 function openWeather() {
     if (appearance.newtabquicklinks) {
-        window.open("https://weather.com/weather/today/", "_blank");
+        window.open("https://weather.com/weather/today/l/61fb84737ec46bae66bc22152751259aa6a42553037a5fc9796b1be0c14fe53c", "_blank");
     } else {
-        window.location.href = "https://weather.com/weather/today/";
+        window.location.href = "https://weather.com/weather/today/l/61fb84737ec46bae66bc22152751259aa6a42553037a5fc9796b1be0c14fe53c";
     }
 }
 
@@ -55,26 +57,28 @@ const textBrightness = computed(() => {
 </script>
 
 <template>
-<button id="widget__weather" class="overlay--item" :style="`color: ${textBrightness}`" @click="openWeather">
+<button id="widget__weather" class="notice-board-display--item glass" :style="`color: ${textBrightness}`" @click="openWeather">
+    <img :src="`/images/weather/${icon}d.png`" alt="">
     {{ Math.round(appearance.weatherUnit == "f" ? temp : (temp - 32) * 5 / 9) }}{{ appearance.weatherUnit == "f" ? "°F" : "°C" }}
     {{ errorMsg }}
-    <img :src="`https://openweathermap.org/img/wn/${icon}@2x.png`" alt="">
 </button>
 </template>
 
 <style scoped type="scss">
 #widget__weather {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    grid-column: span 4;
     font-size: 2rem;
+    grid-column: span 2;
+    grid-row: span 2;
+    cursor: pointer;
 
     img {
         filter: brightness(var(--image-on-bg-brightness));
-        height: 100%;
+        height: 75%;
         aspect-ratio: 1 / 1;
+        margin-right: 0.5em;
     }
 }
 </style>

@@ -44,73 +44,166 @@ html, body {
 
 // Shared classes/styles //
 .button {
+    --glass-color: 217, 217, 217;
     display: block;
     padding: 0.75em;
-    margin-bottom: 1em;
-    width: 80%;
+    width: 100%;
     border: none;
     cursor: pointer;
+
+    &.glass:hover {
+        filter: brightness(0.95);
+    }
+
+    &.glass:active {
+        filter: brightness(0.9);
+    }
 }
 
 .button__danger {
-    background-color: #ff5e68;
-    color: white;
-
-    &:hover {
-        background-color: #da3a3a;
-    }
-
-    &:active {
-        background-color: #bd3232;
-    }
+    --glass-color: 255, 94, 104 !important;
 }
 
 .button__success {
-    background-color: #7dd54e;
-    color: white;
-
-    &:hover {
-        background-color: #5fb830;
-    }
-
-    &:active {
-        background-color: #479a28;
-    }
+    --glass-color: 125, 213, 78 !important;
 }
 
 .button__contrast {
+    --glass-color: var(--color) !important;
+
     background-color: rgb(var(--color));
-    color: rgb(var(--background-color));
+    color: white;
 }
 
-// Settings //
-.settings--item {
-    break-inside: avoid;
+.glass {
+    --glass-color: 255, 255, 255;
+    background-color: rgba(var(--glass-color), 0.4);
+    border: 1px solid rgb(var(--glass-color));
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+}
+
+.glass__child {
+    background-color: rgba(var(--glass-color), 0.6);
+    border: none;
+    border-radius: 1.5rem;
+}
+
+.overlay--dialog {
+    --glass-color: var(--sidebar-background-color) !important;
     
-    .item--title {
-        font-weight: bold;
-        margin: 0.5em 0;
-        font-size: 2rem;
+    width: calc(100% - 5em);
+    height: calc(100% - 5em);
+    border: none;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+    pointer-events: all;
+    padding: 0;
+}
+
+.categories--option {
+    --glass-color: var(--radial-background-color);
+    padding: 0.5em;
+    margin: 0.25em 0;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    background-color: rgba(var(--glass-color), 0);
+
+    &:hover {
+        background-color: rgba(var(--glass-color), 0.3);
+    }
+
+    &.selected {
+        background-color: rgba(var(--glass-color), 0.7);
+        cursor: default;
+    }
+
+    &.category__tabbed {
+        margin-left: 2em;
     }
 }
 
-.item--feature {
-    display: flex;
-    flex-direction: column;
-    cursor: default;
+.settings--category-content {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(300px, 100%), 1fr)
+    );
+    grid-auto-flow: dense;
+    gap: 0.5rem;
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
 }
 
-#settings--corner button { margin: 0.25em 0; }
-
 // Notice Board Item
-.overlay--item {
+.notice-board-display--item {
+    --glass-color: var(--sidebar-background-color);
     grid-column: span 2;
     grid-row: span 2;
     padding: 1rem;
-    background-color: rgb(var(--sidebar-background-color));
-    border: none;
     border-radius: 1rem;
     pointer-events: all;
+}
+
+// Settings //
+.item--title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    font-size: 2rem;
+}
+
+.item--subtitle {
+    font-weight: bold;
+    margin-top: 0.5em;
+    font-size: 1.5rem;
+}
+
+.pinned--button {
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &:hover {
+        background-color: rgb(var(--radial-background-color));
+        cursor: pointer;
+
+        img {
+            opacity: 0;
+        }
+
+        .button--tooltip {
+            visibility: visible;
+            background-color: rgb(var(--radial-background-color));
+            opacity: 1;
+        }
+    }
+
+    img {
+        width: 32px;
+        transition: opacity 0.1s linear;
+    }
+
+    .button--tooltip {
+        visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 50%;
+        border-radius: 1rem;
+        color: rgb(var(--color));
+        font-weight: bold;
+        font-size: 1rem;
+        opacity: 0;
+        margin: 0;
+
+        transition: opacity 0.1s linear;
+    }
 }
 
 // Fonts //

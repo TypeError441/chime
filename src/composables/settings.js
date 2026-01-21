@@ -6,7 +6,7 @@ const appearance = reactive(createDefaultAppearance());
 
 const customtheme = reactive(createDefaultCustomtheme());
 
-const sidebarOpened = ref(false);
+const currentDialog = ref("settings");
 const school = ref(createDefaultSchool());
 
 const stats = reactive({
@@ -38,8 +38,8 @@ export function useCustomtheme() {
     return customtheme;
 }
 
-export function useSidebarOpened() {
-    return sidebarOpened;
+export function useCurrentDialog() {
+    return currentDialog;
 }
 
 export function useSchool() {

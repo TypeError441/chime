@@ -1,13 +1,18 @@
 <script setup>
 import { computed } from "vue";
 
-import { useAppearance, useStats } from "../../composables/settings";
+import { useAppearance, useQuickLinks, useStats, useCurrentDialog } from "../../composables/settings";
 import { parsePeriod } from "../../composables/tick";
 
-import RadialTimer from "../dashboard/RadialTimer.vue";
+import RadialTimer from "./RadialTimer.vue";
+import PinnedButton from "./PinnedButton.vue";
+import WidgetQuickLink from "./WidgetQuickLink.vue";
+import Sidebar from "../schedule/Schedule.vue";
 
 const appearance = useAppearance();
+const quickLinks = useQuickLinks();
 const stats = useStats();
+const currentDialog = useCurrentDialog();
 
 const parsedPeriod = computed(() => {
     return parsePeriod(stats.period.name);
@@ -25,14 +30,28 @@ const timeStr = computed(() => {
 </script>
 
 <template>
-<div id="dashboard">
-    <RadialTimer v-if="appearance.pie"/>
-    <div id="dashboard--status">
-        <div id="status--time">{{ timeStr }}</div>
-        <div id="status--period">{{ parsedPeriod }}</div>
-        <div id="status--schedule">{{ stats.schedule }}</div>
+<main id="dashboard">
+    <div id="dashboard--visual" v-if="currentDialog != 'schedule'">
+        <RadialTimer v-if="appearance.pie"/>
+        <div id="visual--status">
+            <div id="status--time">{{ timeStr }}</div>
+            <div id="status--period">{{ parsedPeriod }}</div>
+            <div id="status--schedule">{{ stats.schedule }}</div>
+        </div>
     </div>
-</div>
+    <Sidebar v-if="currentDialog == 'schedule'" />
+    <div id="dashboard--pinned" class="glass">
+        <PinnedButton func="Settings" @click="() => currentDialog = 'settings'" />
+        <PinnedButton func="Schedule" @click="() => currentDialog = currentDialog == 'schedule' ? 'none' : 'schedule'" />
+        <WidgetQuickLink
+            v-for="link in quickLinks"
+            :key="link.id"
+            :title="link.title"
+            :url="link.url"
+        />
+        <PinnedButton func="Feedback" @click="() => currentDialog = 'feedback'" />
+    </div>
+</main>
 </template>
 
 <style scoped type="scss">
@@ -42,32 +61,46 @@ const timeStr = computed(() => {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100vh;
-    flex: 0 0 100vh;
+    max-height: 100vh;
 
-    #dashboard--status {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: rgb(var(--color));
-        width: 95%;
-        max-width: 95vh;
+    #dashboard--visual {
+        #visual--status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgb(var(--color));
+            width: 95%;
+            max-width: 95vh;
 
-        #status--time {
-            font-size: 24vmin;
-            text-align: center;
-            transition: font-size 0.4s cubic-bezier(0.76, 0, 0.24, 1);
-        }
+            #status--time {
+                font-size: 24vmin;
+                text-align: center;
+                transition: font-size 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+            }
 
-        #status--period, #status--schedule {
-            font-size: 10vmin;
-            transition: font-size 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+            #status--period, #status--schedule {
+                font-size: 10vmin;
+                transition: font-size 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 
-            &#status--schedule {
-                opacity: 0.6;
+                &#status--schedule {
+                    opacity: 0.6;
+                }
             }
         }
+    }
+
+    #dashboard--pinned {
+        z-index: 999;
+        position: absolute;
+        bottom: 2rem;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        max-width: calc(100vw - 4rem);
+        backdrop-filter: blur(0px);
     }
 }
 </style>

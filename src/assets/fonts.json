@@ -1,42 +1,42 @@
 {
     "'Inter', sans-serif": {
         "name": "Sans Serif",
-        "hidden": false
+        "special": false
     },
     "'Roboto', sans-serif": {
         "name": "Bell.plus font",
-        "hidden": false
+        "special": false
     },
     "'Verdana', sans-serif": {
         "name": "Verdana",
-        "hidden": false
+        "special": false
     },
     "'Tahoma', sans-serif": {
         "name": "Tahoma",
-        "hidden": false
+        "special": false
     },
     "'Trebuchet MS', sans-serif": {
         "name": "Trebuchet MS",
-        "hidden": false
+        "special": false
     },
     "'Times New Roman', serif": {
         "name": "Times New Roman",
-        "hidden": false
+        "special": false
     },
     "'Georgia', serif": {
         "name": "Georgia",
-        "hidden": false
+        "special": false
     },
     "'Garamond', serif": {
         "name": "Garamond",
-        "hidden": false
+        "special": false
     },
     "'Courier New', monospace": {
         "name": "Courier New",
-        "hidden": false
+        "special": false
     },
     "'Wingdings', sans-serif": {
         "name": "Wingdings",
-        "hidden": false
+        "special": false
     }
 }

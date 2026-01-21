@@ -4,7 +4,7 @@ import { toRaw, watch } from 'vue';
 
 import notificationData from "../assets/notifications.json";
 
-import { useAppearance, useCustomtheme, usePeriods, useSidebarOpened, useSchool, useQuickLinks, useId, useNotifications } from "../composables/settings";
+import { useAppearance, useCustomtheme, usePeriods, useCurrentDialog, useSchool, useQuickLinks, useId, useNotifications } from "../composables/settings";
 import { createDefaultAppearance, createDefaultCustomtheme, createDefaultSchool, createDefaultQuickLinks } from "./default";
 import { useCookies } from "../composables/cookie";
 
@@ -20,7 +20,7 @@ export function useLoadLocalStorageSettings() {
     const appearance = useAppearance();
     const customtheme = useCustomtheme();
     const periods = usePeriods();
-    const sidebarOpened = useSidebarOpened();
+    const currentDialog = useCurrentDialog();
     const school = useSchool();
     const quickLinks = useQuickLinks();
     const id = useId();
@@ -45,8 +45,6 @@ export function useLoadLocalStorageSettings() {
 
     async function loadLocalStorageSettings() {
         let settings = await idb.get("settings");
-
-        console.log("Loaded settings from IDB:", settings);
 
         // Appearance
         let loadedAppearance = defaultAppearance;
@@ -109,14 +107,14 @@ export function useLoadLocalStorageSettings() {
         
         Object.assign(periods, loadedPeriods);
 
-        // Sidebar Opened
-        let loadedSidebarOpened = false;
+        // Current Dialog
+        let loadedCurrentDialog = false;
 
-        if (settings?.sidebarOpened !== undefined) {
-            loadedSidebarOpened = settings.sidebarOpened;
+        if (settings?.loadedCurrentDialog !== undefined) {
+            loadedCurrentDialog = settings.loadedCurrentDialog;
         }
 
-        sidebarOpened.value = loadedSidebarOpened;
+        currentDialog.value = loadedCurrentDialog;
 
         // School
         let loadedSchool = defaultSchool;
@@ -134,7 +132,11 @@ export function useLoadLocalStorageSettings() {
             loadedQuickLinks = settings.quickLinks;
         }
         
-        quickLinks.value = loadedQuickLinks;
+        quickLinks.splice(0, quickLinks.length);
+
+        loadedQuickLinks.forEach(quickLink => {
+            quickLinks.push(quickLink);
+        });
 
         // ID
         let loadedId = Math.floor(Math.random() * 9999) + 1;
@@ -221,7 +223,7 @@ export function useDetectSaveSettings() {
     const appearance = useAppearance();
     const customtheme = useCustomtheme();
     const periods = usePeriods();
-    const sidebarOpened = useSidebarOpened();
+    const currentDialog = useCurrentDialog();
     const school = useSchool();
     const quickLinks = useQuickLinks();
     const id = useId();
@@ -236,7 +238,7 @@ export function useDetectSaveSettings() {
             appearance: toRaw(appearance),
             customtheme: toRaw(customtheme),
             periods: toRaw(periods),
-            sidebarOpened: sidebarOpened.value,
+            currentDialog: currentDialog.value,
             school: school.value,
             quickLinks: toRaw(quickLinks),
             id: id.value,
@@ -244,7 +246,6 @@ export function useDetectSaveSettings() {
             };
 
             await idb.set("settings", settings);
-            console.log("Saved settings to IDB");
         }, 200);
     }
 
@@ -254,7 +255,7 @@ export function useDetectSaveSettings() {
                 appearance,
                 customtheme,
                 periods,
-                sidebarOpened,
+                currentDialog,
                 school,
                 quickLinks,
                 id,

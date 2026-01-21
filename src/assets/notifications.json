@@ -1,71 +1,75 @@
 {
-    "notification-bellx-02": {
-        "hidden": false,
-        "content": "Nevermind bell x is good"
-    },
-    "notification-caps-01": {
-        "hidden": false,
-        "content": "To turn off caps lock on chromebook press alt + search"
+    "notification-ui-01": {
+        "special": false,
+        "content": "What do you guys think about the new ui be honest i will improve it"
     },
     "notification-banned-01": {
-        "hidden": false,
+        "special": false,
         "content": "If my website's banned you might have to re-enter the URL in the browser"
     },
     "notification-save-01": {
-        "hidden": false,
+        "special": false,
         "content": "I think i fixed the save issue, if your settings aren't saving please tell me"
     },
     "notification-tune-04": {
-        "hidden": false,
+        "special": false,
         "content": "The bells are off by a few seconds every day. Scroll down to the settings to make the timer accurate."
     },
 
 
 
     "notification-tune-01": {
-        "hidden": true,
+        "special": true,
         "content": "Bells are around 30 seconds early. Go to settings to tune Chime so that the timer is accurate."
     },
     "notification-tune-02": {
-        "hidden": true,
+        "special": true,
         "content": "Bells are around 7 seconds late now. Go to settings to tune Chime so that the timer is accurate."
     },
     "notification-tune-03": {
-        "hidden": true,
+        "special": true,
         "content": "Bells are off by a few seconds every day. Go to settings to make the timer accurate."
     },
 
     "notification-new-themes-01": {
-        "hidden": true,
+        "special": true,
         "content": "There are new themes! <b>Forest</b> and </b>Arctic</b>."
     },
     "notification-new-themes-02": {
-        "hidden": true,
+        "special": true,
         "content": "If you don't like the current themes, you can make your own!"
     },
     "notification-new-themes-03": {
-        "hidden": true,
+        "special": true,
         "content": "New Halloween theme until Nov 7. If you have the theme on, it will stay on even after Nov 7."
     },
 
     "notification-feedback-error-01": {
-        "hidden": true,
+        "special": true,
         "content": "The feedback feature was broken; please resubmit any feedback you would like me to add."
     },
     "notification-feedback-error-02": {
-        "hidden": true,
+        "special": true,
         "content": "The feedback broke again if you submitted feedback in the past 12 days please resubmit"
     },
     "notification-feedback-error-03": {
-        "hidden": true,
+        "special": true,
         "content": "Feedback was broken yesterday due to the new update please resubmit or tell me in person"
     },
     "notification-bellx-01": {
-        "hidden": true,
+        "special": true,
         "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
     },
+    "notification-bellx-02": {
+        "special": true,
+        "content": "Nevermind bell x is good"
+    },
     "notification-feedback-01": {
-        "hidden": true,
+        "special": true,
         "content": "To all the people saying your theme doesn't save can you explain more because for me it is working fine I don't know why it's broken for you"
+    },
+    "notification-caps-01": {
+        "special": true,
+        "content": "To turn off caps lock on chromebook press alt + search"
     }
 }

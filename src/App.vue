@@ -1,18 +1,14 @@
 <script setup>
 import { onBeforeMount } from "vue";
 
-import { useSidebarOpened } from "./composables/settings";
-import { useCookies } from "./composables/cookie";
 import { useLoadLocalStorageSettings, useDisableTransitions, useDetectSaveSettings } from "./composables/load";
 import { tick } from "./composables/tick";
 import { useApplySettings } from "./composables/apply";
 
 import Dashboard from "./components/dashboard/Dashboard.vue";
 import Overlay from "./components/overlay/Overlay.vue";
-import Settings from "./components/settings/Settings.vue";
-import Sidebar from "./components/sidebar/Sidebar.vue";
+import Background from "./components/background/Background.vue";
 
-const sidebarOpened = useSidebarOpened();
 
 onBeforeMount(async () => {
     const { loadLocalStorageSettings } = useLoadLocalStorageSettings();
@@ -26,7 +22,6 @@ onBeforeMount(async () => {
 });
 
 const { applyTheme, applyFont } = useApplySettings();
-const { getCookie, setCookie } = useCookies();
 
 applyTheme();
 applyFont();
@@ -35,12 +30,9 @@ tick();
 </script>
 
 <template>
-    <div id="workspace" :class="{'workspace__sidebar-opened': sidebarOpened}">
-        <Overlay />
-        <Dashboard />
-        <Settings />
-    </div>
-    <Sidebar />
+    <Overlay />
+    <Dashboard />
+    <Background />
 </template>
 
 <style scoped type="scss">

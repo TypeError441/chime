@@ -23,9 +23,18 @@ function clearSettings() {
 
     Object.assign(appearance, defaultAppearance);
     Object.assign(customtheme, defaultCustomtheme);
-    periods.value = {};
+    
+    Object.keys(periods).forEach(period => {
+        delete periods[period];
+    });
+
     school.value = defaultSchool;
-    quickLinks.value = defaultQuickLinks;
+
+    quickLinks.splice(0, quickLinks.length);
+    defaultQuickLinks.forEach(quickLink => {
+        quickLinks.push(quickLink);
+    });
+
     level.value = 0;
 }
 
@@ -33,13 +42,11 @@ const level = ref(0);
 </script>
 
 <template>
-<button id="settings--clear-settings" class="button__contrast" @click="clearSettings">{{ level == 0 ? "Clear Settings" : "Are you sure?" }}</button>
+<div id="settings--clear-settings" class="glass glass__child categories--option" @click="clearSettings">{{ level == 0 ? "Clear Settings" : "Are you sure?" }}</div>
 </template>
 
 <style scoped type="scss">
 #settings--clear-settings {
-    padding: 0.5em;
-    border: none;
-    cursor: pointer;
+    margin-top: auto;
 }
 </style>

@@ -11,7 +11,7 @@ function resetNotifications() {
 </script>
 
 <template>
-<button id="settings--reset-notifications" class="button__contrast" @click="resetNotifications">Show all notifications</button>
+<div id="settings--reset-notifications" class="glass glass__child categories--option" @click="resetNotifications">Show All Notifications</div>
 </template>
 
 <style scoped type="scss">

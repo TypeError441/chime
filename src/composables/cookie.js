@@ -7,7 +7,6 @@ export function useCookies() {
         if (parts.length === 2) {
             return parts.pop().split(";").shift();
         }
-        console.log("Cookie not found:", name);
         
         return null;
     };

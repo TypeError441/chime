@@ -1,7 +1,39 @@
 {
+    "template": {
+        "special": true,
+        "meta": {
+            "name": "Template",
+            "special": true,
+            "version": "2"
+        },
+        "colors": {
+            "backgroundColor": "32, 30, 28",
+            "color": "255, 145, 0",
+            "accentColor": "61, 47, 35",
+            "accentColor2": "102, 86, 75"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [
+            {
+                "path": "/background/fall.jpg",
+                "position": [0, 0],
+                "scale": 1.0
+            }
+        ],
+        "useParticles": false,
+        "particles": [
+            {
+                "type": "leaf",
+                "speed": 1.0,
+                "frequency": 1
+            }
+        ],
+        "radialTransparency": "1",
+        "imageOnBgBrightness": "1"
+    },
     "fall": {
         "name": "Fall",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "32, 30, 28",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -13,7 +45,7 @@
     },
     "christmas": {
         "name": "Christmas",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "17, 25, 38",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -25,7 +57,7 @@
     },
     "default-light": {
         "name": "Default (light)",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "249, 249, 249",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -37,7 +69,7 @@
     },
     "default-dark": {
         "name": "Default (dark)",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "30, 30, 30",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -49,7 +81,7 @@
     },
     "space": {
         "name": "Default (extra dark)",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "0, 0, 0",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -61,19 +93,19 @@
     },
     "blue-light": {
         "name": "Blue (light)",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "183, 223, 255",
         "backgroundImage": "none",
         "backgroundBlob": null,
-        "color": "26, 29, 38",
+        "color": "59, 132, 227",
         "sidebarBackgroundColor": "163, 214, 255",
-        "radialBackgroundColor": "133, 189, 234",
+        "radialBackgroundColor": "112, 191, 255",
         "radialTransparency": "1",
         "imageOnBgBrightness": "0"
     },
     "blue-dark": {
         "name": "Blue (dark)",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "26, 29, 38",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -85,7 +117,7 @@
     },
     "green-dark": {
         "name": "Forest",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "49, 67, 44",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -97,7 +129,7 @@
     },
     "arctic": {
         "name": "Arctic",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "236, 239, 244",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -109,7 +141,7 @@
     },
     "coffee": {
         "name": "Coffee",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "71, 55, 42",
         "backgroundImage": "none",
         "backgroundBlob": null,
@@ -121,7 +153,7 @@
     },
     "space-real": {
         "name": "Space",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "0, 0, 0",
         "backgroundImage": "/background/space-real.jpeg",
         "backgroundBlob": null,
@@ -133,7 +165,7 @@
     },
     "custom": {
         "name": "Custom",
-        "secret": "false",
+        "special": false,
         "backgroundColor": "249, 249, 249",
         "backgroundImage": "none",
         "backgroundBlob": null,

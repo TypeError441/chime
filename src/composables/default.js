@@ -2,7 +2,7 @@ import themes from "../assets/themes.json";
 
 export function createDefaultAppearance() {
     return {
-        theme: "default-light",
+        theme: "arctic",
         font: "'Inter', sans-serif",
         weather: "right",
         weatherUnit: "f",

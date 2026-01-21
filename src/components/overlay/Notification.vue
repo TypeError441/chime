@@ -14,7 +14,7 @@ function disable() {
 </script>
 
 <template>
-<div :id="props.id" class="widget__notification overlay--item" v-if="!notifications[props.id]">
+<div :id="props.id" class="widget__notification notice-board-display--item glass" v-if="!notifications[props.id]">
     <button class="notification--close button__danger" @click="disable">×</button>
     <p class="notification--content">{{ content }}</p>
 </div>
@@ -27,7 +27,8 @@ function disable() {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    grid-column: span 6;
+    grid-column: span 2;
+    grid-row: span 2;
 
     .notification--content {
         display: flex;
