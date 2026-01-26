@@ -7,7 +7,6 @@ import { parsePeriod } from "../../composables/tick";
 import RadialTimer from "./RadialTimer.vue";
 import PinnedButton from "./PinnedButton.vue";
 import WidgetQuickLink from "./WidgetQuickLink.vue";
-import Sidebar from "../schedule/Schedule.vue";
 
 const appearance = useAppearance();
 const quickLinks = useQuickLinks();
@@ -31,7 +30,7 @@ const timeStr = computed(() => {
 
 <template>
 <main id="dashboard">
-    <div id="dashboard--visual" v-if="currentDialog != 'schedule'">
+    <div id="dashboard--visual">
         <RadialTimer v-if="appearance.pie"/>
         <div id="visual--status">
             <div id="status--time">{{ timeStr }}</div>
@@ -39,10 +38,9 @@ const timeStr = computed(() => {
             <div id="status--schedule">{{ stats.schedule }}</div>
         </div>
     </div>
-    <Sidebar v-if="currentDialog == 'schedule'" />
     <div id="dashboard--pinned" class="glass">
         <PinnedButton func="Settings" @click="() => currentDialog = 'settings'" />
-        <PinnedButton func="Schedule" @click="() => currentDialog = currentDialog == 'schedule' ? 'none' : 'schedule'" />
+        <PinnedButton func="Schedule" @click="() => currentDialog = 'schedule'" />
         <WidgetQuickLink
             v-for="link in quickLinks"
             :key="link.id"
@@ -91,6 +89,7 @@ const timeStr = computed(() => {
     }
 
     #dashboard--pinned {
+        --glass-color: var(--sidebar-background-color);
         z-index: 999;
         position: absolute;
         bottom: 2rem;

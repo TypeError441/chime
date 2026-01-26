@@ -1,7 +1,7 @@
 {
-    "notification-ui-01": {
+    "notification-feedback-error-04": {
         "special": false,
-        "content": "What do you guys think about the new ui be honest i will improve it"
+        "content": "Somehow notifications were broken since wednesday please send it again or tell me irl"
     },
     "notification-banned-01": {
         "special": false,
@@ -71,5 +71,9 @@
     "notification-caps-01": {
         "special": true,
         "content": "To turn off caps lock on chromebook press alt + search"
+    },
+    "notification-ui-01": {
+        "special": true,
+        "content": "What do you guys think about the new ui be honest i will improve it"
     }
 }
