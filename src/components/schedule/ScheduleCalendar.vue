@@ -165,6 +165,7 @@ const calendarHeight = computed(() => {
     width: 90%;
     flex-grow: 1;
     overflow-y: auto;
+    margin-bottom: 2rem;
 
     .calendar-spacer {
         width: 1px;

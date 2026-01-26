@@ -12,18 +12,18 @@ const version = ref(pkg.version);
 
 const feedbackText = ref("");
 
-function submit() {
+async function submit() {
     if (!feedbackText.value) {
         exit();
         return;
     }
 
-    fetch("/", {
+    const res = await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
             "form-name": "feedback",
-            "dialog__feedback--form": `v:${version.value},i:${id.value},f:${feedbackText.value}`
+            "feedback--textarea": `v:${version.value},i:${id.value},f:${feedbackText.value}`
         }).toString()
     });
 
@@ -37,11 +37,12 @@ function exit() {
 
 <template>
 <dialog id="overlay--dialog__feedback" class="overlay--dialog glass" :open="currentDialog == 'feedback'">
-    <form name="feedback" id="dialog__feedback--form" @submit.prevent="submit" netlify>
+    <form name="feedback" id="dialog__feedback--form" @submit.prevent="submit" netlify netlify-honeypot="bot-field">
         <CloseDialog />
+        <input type="hidden" name="bot-field" />
         <div id="feedback--title">Feedback</div>
         <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
-        <textarea name="dialog__feedback--form" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
+        <textarea name="feedback--textarea" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
         <button type="submit" class="button glass glass__child">Submit</button>
     </form>
 </dialog>
@@ -84,6 +85,8 @@ function exit() {
     }
 
     .button {
+        --glass-color: var(--color);
+        color: rgb(var(--background-color));
         flex: 0;
         margin: 0 0.25em;
         width: 10rem;

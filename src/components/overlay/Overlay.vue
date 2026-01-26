@@ -2,6 +2,7 @@
 import NoticeBoardDisplay from "./NoticeBoardDisplay.vue";
 import FeedbackDialog from "./dialog/FeedbackDialog.vue";
 import SettingsDialog from "./dialog/SettingsDialog.vue";
+import ScheduleDialog from "./dialog/ScheduleDialog.vue";
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import SettingsDialog from "./dialog/SettingsDialog.vue";
         <div id="overlay--dialogs">
             <FeedbackDialog />
             <SettingsDialog />
+            <ScheduleDialog />
         </div>
     </div>
 </template>
