@@ -53,7 +53,7 @@ watch(() => customtheme, applyTheme, { deep: true });
         <SettingsRangeFeature
             v-model="appearance.piesize"
             :min="30"
-            :max="200"
+            :max="300"
         />
     </div>
 </div>

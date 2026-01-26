@@ -89,6 +89,13 @@ html, body {
     border-radius: 1.5rem;
 }
 
+select.glass {
+    option {
+        background-color: rgb(var(--color));
+        color: rgb(var(--background-color));
+    }
+}
+
 .overlay--dialog {
     --glass-color: var(--sidebar-background-color) !important;
     width: 1200px;
