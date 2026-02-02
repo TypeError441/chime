@@ -1,26 +1,28 @@
 {
     "template": {
+        "special": true,
         "meta": {
             "name": "Template",
             "special": true,
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "32, 30, 28"
             ]
         },
         "colors": {
-            "text": "255, 145, 0",
+            "backgroundColor": "32, 30, 28",
+            "color": "255, 145, 0",
             "accentColor": "61, 47, 35",
-            "secondaryAccentColor": "102, 86, 75"
+            "accentColor2": "102, 86, 75"
         },
         "useBackgroundImage": false,
         "backgroundImages": [
             {
-                "path": "/background/template.png",
+                "path": "/background/fall.jpg",
                 "position": [0, 0],
                 "scale": 1.0
             }
@@ -43,8 +45,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "249, 249, 249"
             ]
@@ -68,8 +70,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "30, 30, 30"
             ]
@@ -93,8 +95,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "0, 0, 0"
             ]
@@ -118,8 +120,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "183, 223, 255"
             ]
@@ -143,8 +145,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "26, 29, 38"
             ]
@@ -168,8 +170,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "49, 67, 44"
             ]
@@ -193,8 +195,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "236, 239, 244"
             ]
@@ -218,8 +220,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "71, 55, 42"
             ]
@@ -243,8 +245,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "0, 0, 0"
             ]
@@ -274,8 +276,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "32, 30, 28"
             ]
@@ -299,8 +301,8 @@
             "version": "2"
         },
         "background": {
-            "speed": 0,
-            "type": "linear",
+            "speed": 1000,
+            "type": "transition",
             "colors": [
                 "17, 25, 38"
             ]

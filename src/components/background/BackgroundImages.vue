@@ -45,11 +45,11 @@ const images = computed(() => {
 });    
 
 const backgroundCoverImage = computed(() => {
-    return images.value.find(img => img.scale === 10) || null;
+    return images.value.find(img => img.scale === 10 && img.position[0] == 0 && img.position[1] == 0) || null;
 });
 
 const foregroundImages = computed(() => {
-    return images.value.filter(img => img.scale !== 10);
+    return images.value.filter(img => img.scale !== 10 || img.position[0] != 0 || img.position[1] != 0);
 });
 </script>
 
@@ -60,7 +60,8 @@ const foregroundImages = computed(() => {
             backgroundImage: `url(${backgroundCoverImage.path})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            height: '100%'
         } : {}"
     >
         <img
@@ -80,7 +81,6 @@ const foregroundImages = computed(() => {
 <style>
 #background--images {
     width: 100%;
-    height: 100%;
     
     .background--image {
         position: absolute;

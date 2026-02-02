@@ -32,7 +32,6 @@ watch(theme, () => {
     
     changeColor();
     intervalID = setInterval(changeColor, 1000 / theme.background.speed );
-    console.log(1000 / theme.background.speed)
 }, { immediate: true });
 </script>
 

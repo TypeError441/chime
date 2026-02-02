@@ -47,6 +47,19 @@ export function useLoadLocalStorageSettings() {
             Object.assign(customtheme, defaultCustomtheme);
         }
 
+        customtheme.backgroundImages.forEach(image => {
+            if (image.path) {
+                URL.revokeObjectURL(image.path);
+                image.path = null;
+            }
+
+            if (image.blob instanceof Blob) {
+                image.path = URL.createObjectURL(image.blob);
+            } else {
+                image.path = null;
+            }
+        });
+
         // Periods
         let loadedPeriods = {};
 
