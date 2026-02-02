@@ -1,13 +1,9 @@
 <script setup>
-import { toRaw } from "vue";
-
 const props = defineProps([
     "optionIDs",
     "options",
     "name"
 ]);
-
-const rawOptions = toRaw(props.options);
 
 const model = defineModel();
 
@@ -19,9 +15,9 @@ const model = defineModel();
             v-for="optionID in props.optionIDs"
             :id="optionID"
             :value="optionID"
-            :hidden="props.options[optionID].special"
+            :hidden="props.options[optionID].meta.special"
         >
-        {{ props.name == "none" ? optionID : props.options[optionID].name }}
+        {{ props.name == "none" ? optionID : props.options[optionID].meta.name }}
         </option>
     </select>
 </template>

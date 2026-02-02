@@ -9,8 +9,8 @@
     --background-image: none;
     --color: #fff;
 
-    --sidebar-background-color: #fff;
-    --radial-background-color: #fff;
+    --accent-color: #fff;
+    --secondary-accent-color: #fff;
 
     --image-on-bg-brightness: 0;
 }
@@ -19,7 +19,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     user-select: none;
 }
 
@@ -28,8 +28,6 @@ html, body {
     flex-direction: row;
     width: 100vw;
     min-height: 100vh;
-    background-color: rgb(var(--background-color));
-    background-image: var(--background-image);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -97,7 +95,7 @@ select.glass {
 }
 
 .overlay--dialog {
-    --glass-color: var(--sidebar-background-color) !important;
+    --glass-color: var(--accent-color) !important;
     width: 1200px;
     height: 600px;
     max-width: calc(100% - 5em);
@@ -119,7 +117,7 @@ select.glass {
 }
 
 .categories--option {
-    --glass-color: var(--radial-background-color);
+    --glass-color: var(--secondary-accent-color);
     padding: 0.5em;
     margin: 0.25em 0;
     border: none;
@@ -162,7 +160,7 @@ select.glass {
 
 // Notice Board Item
 .notice-board-display--item {
-    --glass-color: var(--sidebar-background-color);
+    --glass-color: var(--accent-color);
     grid-column: span 2;
     grid-row: span 2;
     padding: 1rem;
@@ -184,7 +182,7 @@ select.glass {
 }
 
 .pinned--button {
-    --glass-color: var(--sidebar-background-color);
+    --glass-color: var(--accent-color);
     position: relative;
     padding: 1rem;
     border-radius: 1rem;

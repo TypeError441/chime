@@ -1,21 +1,26 @@
 {
     "template": {
-        "special": true,
         "meta": {
             "name": "Template",
             "special": true,
             "version": "2"
         },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "32, 30, 28"
+            ]
+        },
         "colors": {
-            "backgroundColor": "32, 30, 28",
-            "color": "255, 145, 0",
+            "text": "255, 145, 0",
             "accentColor": "61, 47, 35",
-            "accentColor2": "102, 86, 75"
+            "secondaryAccentColor": "102, 86, 75"
         },
         "useBackgroundImage": false,
         "backgroundImages": [
             {
-                "path": "/background/fall.jpg",
+                "path": "/background/template.png",
                 "position": [0, 0],
                 "scale": 1.0
             }
@@ -31,148 +36,292 @@
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
-    "fall": {
-        "name": "Fall",
-        "special": false,
-        "backgroundColor": "32, 30, 28",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "255, 145, 0",
-        "sidebarBackgroundColor": "61, 47, 35",
-        "radialBackgroundColor": "102, 86, 75",
-        "radialTransparency": "1",
-        "imageOnBgBrightness": "1"
-    },
-    "christmas": {
-        "name": "Christmas",
-        "special": false,
-        "backgroundColor": "17, 25, 38",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "228, 65, 48",
-        "sidebarBackgroundColor": "29, 54, 37",
-        "radialBackgroundColor": "21, 31, 47",
-        "radialTransparency": "1",
-        "imageOnBgBrightness": "1"
-    },
     "default-light": {
-        "name": "Default (light)",
-        "special": false,
-        "backgroundColor": "249, 249, 249",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "32, 33, 36",
-        "sidebarBackgroundColor": "242, 244, 248",
-        "radialBackgroundColor": "234, 237, 243",
+        "meta": {
+            "name": "Default (light)",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "249, 249, 249"
+            ]
+        },
+        "colors": {
+            "text": "32, 33, 36",
+            "accentColor": "242, 244, 248",
+            "secondaryAccentColor": "234, 237, 243"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "0"
     },
     "default-dark": {
-        "name": "Default (dark)",
-        "special": false,
-        "backgroundColor": "30, 30, 30",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "245, 245, 245",
-        "sidebarBackgroundColor": "41, 45, 50",
-        "radialBackgroundColor": "78, 85, 95",
+        "meta": {
+            "name": "Default (dark)",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "30, 30, 30"
+            ]
+        },
+        "colors": {
+            "text": "245, 245, 245",
+            "accentColor": "41, 45, 50",
+            "secondaryAccentColor": "78, 85, 95"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "space": {
-        "name": "Default (extra dark)",
-        "special": false,
-        "backgroundColor": "0, 0, 0",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "255, 255, 255",
-        "sidebarBackgroundColor": "25, 25, 27",
-        "radialBackgroundColor": "36, 36, 46",
+        "meta": {
+            "name": "Default (extra dark)",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "0, 0, 0"
+            ]
+        },
+        "colors": {
+            "text": "255, 255, 255",
+            "accentColor": "25, 25, 27",
+            "secondaryAccentColor": "36, 36, 46"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "blue-light": {
-        "name": "Blue (light)",
-        "special": false,
-        "backgroundColor": "183, 223, 255",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "59, 132, 227",
-        "sidebarBackgroundColor": "163, 214, 255",
-        "radialBackgroundColor": "112, 191, 255",
+        "meta": {
+            "name": "Blue (light)",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "183, 223, 255"
+            ]
+        },
+        "colors": {
+            "text": "59, 132, 227",
+            "accentColor": "163, 214, 255",
+            "secondaryAccentColor": "112, 191, 255"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "0"
     },
     "blue-dark": {
-        "name": "Blue (dark)",
-        "special": false,
-        "backgroundColor": "26, 29, 38",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "224, 231, 255",
-        "sidebarBackgroundColor": "45, 54, 75",
-        "radialBackgroundColor": "52, 65, 95",
+        "meta": {
+            "name": "Blue (dark)",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "26, 29, 38"
+            ]
+        },
+        "colors": {
+            "text": "224, 231, 255",
+            "accentColor": "45, 54, 75",
+            "secondaryAccentColor": "52, 65, 95"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "green-dark": {
-        "name": "Forest",
-        "special": false,
-        "backgroundColor": "49, 67, 44",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "239, 231, 215",
-        "sidebarBackgroundColor": "80, 122, 76",
-        "radialBackgroundColor": "58, 95, 70",
+        "meta": {
+            "name": "Forest",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "49, 67, 44"
+            ]
+        },
+        "colors": {
+            "text": "239, 231, 215",
+            "accentColor": "80, 122, 76",
+            "secondaryAccentColor": "58, 95, 70"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "arctic": {
-        "name": "Arctic",
-        "special": false,
-        "backgroundColor": "236, 239, 244",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "94, 129, 172",
-        "sidebarBackgroundColor": "229, 233, 240",
-        "radialBackgroundColor": "216, 221, 233",
+        "meta": {
+            "name": "Arctic",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "236, 239, 244"
+            ]
+        },
+        "colors": {
+            "text": "94, 129, 172",
+            "accentColor": "229, 233, 240",
+            "secondaryAccentColor": "216, 221, 233"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "0"
     },
     "coffee": {
-        "name": "Coffee",
-        "special": false,
-        "backgroundColor": "71, 55, 42",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "245, 225, 164",
-        "sidebarBackgroundColor": "74, 44, 42",
-        "radialBackgroundColor": "138, 104, 61",
+        "meta": {
+            "name": "Coffee",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "71, 55, 42"
+            ]
+        },
+        "colors": {
+            "text": "245, 225, 164",
+            "accentColor": "74, 44, 42",
+            "secondaryAccentColor": "138, 104, 61"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "space-real": {
-        "name": "Space",
-        "special": false,
-        "backgroundColor": "0, 0, 0",
-        "backgroundImage": "/background/space-real.jpeg",
-        "backgroundBlob": null,
-        "color": "255, 255, 255",
-        "sidebarBackgroundColor": "19, 18, 38",
-        "radialBackgroundColor": "18, 23, 38",
+        "meta": {
+            "name": "Space",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "0, 0, 0"
+            ]
+        },
+        "colors": {
+            "text": "255, 255, 255",
+            "accentColor": "19, 18, 38",
+            "secondaryAccentColor": "18, 23, 38"
+        },
+        "useBackgroundImage": true,
+        "backgroundImages": [
+            {
+                "path": "/background/space-real.jpeg",
+                "position": [0, 0],
+                "scale": 10.0
+            }
+        ],
+        "useParticles": false,
+        "particles": [],
+        "radialTransparency": "1",
+        "imageOnBgBrightness": "1"
+    },
+    "fall": {
+        "meta": {
+            "name": "Fall",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "32, 30, 28"
+            ]
+        },
+        "colors": {
+            "text": "255, 145, 0",
+            "accentColor": "61, 47, 35",
+            "secondaryAccentColor": "102, 86, 75"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
+        "radialTransparency": "1",
+        "imageOnBgBrightness": "1"
+    },
+    "christmas": {
+        "meta": {
+            "name": "Christmas",
+            "special": false,
+            "version": "2"
+        },
+        "background": {
+            "speed": 0,
+            "type": "linear",
+            "colors": [
+                "17, 25, 38"
+            ]
+        },
+        "colors": {
+            "text": "228, 65, 48",
+            "accentColor": "29, 54, 37",
+            "secondaryAccentColor": "21, 31, 47"
+        },
+        "useBackgroundImage": false,
+        "backgroundImages": [],
+        "useParticles": false,
+        "particles": [],
         "radialTransparency": "1",
         "imageOnBgBrightness": "1"
     },
     "custom": {
-        "name": "Custom",
-        "special": false,
-        "backgroundColor": "249, 249, 249",
-        "backgroundImage": "none",
-        "backgroundBlob": null,
-        "color": "32, 33, 36",
-        "sidebarBackgroundColor": "242, 244, 248",
-        "radialBackgroundColor": "234, 237, 243",
-        "radialTransparency": "1",
-        "imageOnBgBrightness": "0"
+        "meta": {
+            "name": "Custom",
+            "special": false,
+            "version": "2"
+        }
     }
 }

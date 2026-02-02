@@ -23,7 +23,7 @@ defineProps({
 
 <style scoped type="scss">
 .schedule--item {
-    --glass-color: var(--radial-background-color);
+    --glass-color: var(--secondary-accent-color);
     position: absolute;
     z-index: 5;
     display: flex;

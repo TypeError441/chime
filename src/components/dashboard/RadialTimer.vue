@@ -1,13 +1,13 @@
 <script setup>
 import { computed } from "vue";
 
-import { useStats, useAppearance, useCustomtheme } from "../../composables/settings";
-
-import themes from "../../assets/themes.json";
+import { useStats, useAppearance } from "../../composables/settings";
+import { useApplySettings } from "../../composables/apply";
 
 const stats = useStats();
 const appearance = useAppearance();
-const customtheme = useCustomtheme();
+
+const { getTheme } = useApplySettings();
 
 let cx = 100, cy = 100, r = 100;
 const d = computed(() => {
@@ -35,18 +35,21 @@ else {
 }
 });
 
+const theme = getTheme();
+
 const fill = computed(() => {
-    return `
-        rgba(
-            ${appearance.theme == "custom"
-            ? customtheme.radialBackgroundColor
-            : themes[appearance.theme].radialBackgroundColor},
-            
-            ${appearance.theme == "custom"
-            ? customtheme.radialTransparency
-            : themes[appearance.theme].radialTransparency}
-        )
-    `;
+    if (!theme) {
+        return "rgba(255, 255, 255, 0)";
+    }
+
+    let secondaryAccentColor =
+        theme.meta?.version === undefined
+            ? theme.radialBackgroundColor
+            : (theme.meta?.version >= 2
+                ? theme.colors.secondaryAccentColor
+                : "255, 255, 255");
+
+    return `rgba(${secondaryAccentColor}, ${theme.radialTransparency})`;
 });
 </script>
 

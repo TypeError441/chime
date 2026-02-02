@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { ref } from "vue";
 
 import { useCurrentDialog, useId } from "../../../composables/settings";
 import pkg from "../../../../package.json";
@@ -23,7 +23,9 @@ async function submit() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
             "form-name": "feedback",
-            "feedback--textarea": `v:${version.value},i:${id.value},f:${feedbackText.value}`
+            "version": "${version.value}",
+            "id": "feedback",
+            "feedback-form": `v:${version.value},i:${id.value},f:${feedbackText.value}`
         }).toString()
     });
 
@@ -31,18 +33,21 @@ async function submit() {
 }
 
 function exit() {
+    feedbackText.value = "";
     currentDialog.value = "none";
 }
 </script>
 
 <template>
 <dialog id="overlay--dialog__feedback" class="overlay--dialog glass" :open="currentDialog == 'feedback'">
-    <form name="feedback" id="dialog__feedback--form" @submit.prevent="submit" netlify netlify-honeypot="bot-field">
+    <form name="feedback" id="dialog__feedback--form" @submit.prevent="exit" netlify netlify-honeypot="bot-field">
         <CloseDialog />
         <input type="hidden" name="bot-field" />
+        <input type="hidden" name="version" v-model="version" />
+        <input type="hidden" name="id" v-model="id" />
         <div id="feedback--title">Feedback</div>
         <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
-        <textarea name="feedback--textarea" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
+        <textarea name="content" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
         <button type="submit" class="button glass glass__child">Submit</button>
     </form>
 </dialog>
@@ -76,7 +81,7 @@ function exit() {
     }
 
     #feedback--textarea {
-        --glass-color: var(--radial-background-color) !important;
+        --glass-color: var(--secondary-accent-color) !important;
         width: 100%;
         padding: 2em;
         resize: none;

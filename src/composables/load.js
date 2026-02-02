@@ -28,21 +28,6 @@ export function useLoadLocalStorageSettings() {
     const notificationNames = Object.keys(notificationData);
     const { getCookie, setCookie } = useCookies();
 
-    // Helper: Convert hex color string to "R, G, B" string
-    function hexToRgbString(hex) {
-        hex = hex.replace(/^#/, "");
-        if (hex.length === 3) {
-            hex = hex.split("").map((c) => c + c).join("");
-        }
-        if (hex.length !== 6) return null;
-        const num = parseInt(hex, 16);
-        if (isNaN(num)) return null;
-        const r = (num >> 16) & 255;
-        const g = (num >> 8) & 255;
-        const b = num & 255;
-        return `${r}, ${g}, ${b}`;
-    }
-
     async function loadLocalStorageSettings() {
         let settings = await idb.get("settings");
 
@@ -56,46 +41,10 @@ export function useLoadLocalStorageSettings() {
         Object.assign(appearance, loadedAppearance);
 
         // Custom Theme
-        let loadedCustomtheme = defaultCustomtheme;
-
-        if (settings?.customtheme !== undefined) {
-            loadedCustomtheme = settings.customtheme;
-        }
-
-        Object.assign(customtheme, loadedCustomtheme);
-
-        // Convert any hex color string properties to "R, G, B" format
-        for (const key in customtheme) {
-            const value = customtheme[key];
-            const keyConversions = {
-                backgroundcolor: "backgroundColor",
-                "color": "color",
-                "settingsimagebrightness": "imageOnBgBrightness",
-                "sidebarbackgroundcolor": "sidebarBackgroundColor",
-                "arcbackgroundcolor": "radialBackgroundColor",
-            }
-            if (
-                typeof value === "string" &&
-                /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(value)
-            ) {
-                const rgb = hexToRgbString(value);
-                if (rgb !== null) {
-                    customtheme[keyConversions[key]] = rgb;
-                }
-            }
-        }
-
-        // Handle background image object URL lifecycle
-        if (customtheme.backgroundBlob instanceof Blob) {
-
-            if (backgroundObjectURL) {
-                URL.revokeObjectURL(backgroundObjectURL);
-            }
-
-            backgroundObjectURL = URL.createObjectURL(customtheme.backgroundBlob);
-            customtheme.backgroundImage = `url("${backgroundObjectURL}")`;
+        if (settings?.customtheme?.meta?.version !== undefined) {
+            Object.assign(customtheme, settings.customtheme);
         } else {
-            customtheme.backgroundImage = null;
+            Object.assign(customtheme, defaultCustomtheme);
         }
 
         // Periods
@@ -191,7 +140,7 @@ export function useLoadLocalStorageSettings() {
                     }
 
                     backgroundObjectURL = URL.createObjectURL(blob);
-                    customtheme.backgroundImage = `url("${backgroundObjectURL}")`;
+                    customtheme.backgroundImage = backgroundObjectURL;
                 } else {
                     customtheme.backgroundImage = null;
                 }

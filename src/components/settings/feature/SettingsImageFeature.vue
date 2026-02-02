@@ -1,7 +1,8 @@
 <script setup>
 import { ref, watch } from "vue";
 
-const model = defineModel({ type: [Blob, null] });
+const fileModel = defineModel({ type: [Blob, null] });
+const pathModel = defineModel("path", { type: String, default: null });
 
 const fileInput = ref(null);
 const previewUrl = ref(null);
@@ -14,14 +15,14 @@ function onFileChange(e) {
     const file = e.target.files[0];
     if (!file) return;
 
-    model.value = file;
+    fileModel.value = file;
 }
 
 function clearImage() {
-    model.value = null;
+    fileModel.value = null;
 }
 
-watch(model, (newVal) => {
+watch(fileModel, (newVal) => {
     if (previewUrl.value) {
         URL.revokeObjectURL(previewUrl.value);
         previewUrl.value = null;
@@ -29,6 +30,9 @@ watch(model, (newVal) => {
 
     if (newVal instanceof Blob) {
         previewUrl.value = URL.createObjectURL(newVal);
+        pathModel.value = previewUrl.value;
+    } else {
+        pathModel.value = null;
     }
 }, { immediate: true });
 </script>
@@ -53,7 +57,7 @@ watch(model, (newVal) => {
         </button>
 
         <button
-            v-if="model"
+            v-if="fileModel"
             class="feature--display button glass"
             type="button"
             @click="clearImage"
@@ -65,6 +69,7 @@ watch(model, (newVal) => {
 
 <style scoped lang="scss">
 .feature__image {
+    color: rgb(var(--background-color));
     display: flex;
     flex-direction: row;
     align-items: center;
