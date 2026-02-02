@@ -2,7 +2,6 @@
 import { ref} from "vue";
 
 import SettingsQuickLink from "./child/SettingsQuickLink.vue";
-import ToggleSettingsItem from "../ToggleSettingsItem.vue";
 
 import { useQuickLinks } from "../../../composables/settings";
 

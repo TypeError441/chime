@@ -1,42 +1,62 @@
 {
     "'Inter', sans-serif": {
-        "name": "Sans Serif",
-        "special": false
+        "meta": {
+            "name": "Sans Serif",
+            "special": false
+        }
     },
     "'Roboto', sans-serif": {
-        "name": "Bell.plus font",
-        "special": false
+        "meta": {
+            "name": "Bell.plus font",
+            "special": false
+        }
     },
     "'Verdana', sans-serif": {
-        "name": "Verdana",
-        "special": false
+        "meta": {
+            "name": "Verdana",
+            "special": false
+        }
     },
     "'Tahoma', sans-serif": {
-        "name": "Tahoma",
-        "special": false
+        "meta": {
+            "name": "Tahoma",
+            "special": false
+        }
     },
     "'Trebuchet MS', sans-serif": {
-        "name": "Trebuchet MS",
-        "special": false
+        "meta": {
+            "name": "Trebuchet MS",
+            "special": false
+        }
     },
     "'Times New Roman', serif": {
-        "name": "Times New Roman",
-        "special": false
+        "meta": {
+            "name": "Times New Roman",
+            "special": false
+        }
     },
     "'Georgia', serif": {
-        "name": "Georgia",
-        "special": false
+        "meta": {
+            "name": "Georgia",
+            "special": false
+        }
     },
     "'Garamond', serif": {
-        "name": "Garamond",
-        "special": false
+        "meta": {
+            "name": "Garamond",
+            "special": false
+        }
     },
     "'Courier New', monospace": {
-        "name": "Courier New",
-        "special": false
+        "meta": {
+            "name": "Courier New",
+            "special": false
+        }
     },
     "'Wingdings', sans-serif": {
-        "name": "Wingdings",
-        "special": false
+        "meta": {
+            "name": "Wingdings",
+            "special": false
+        }
     }
 }

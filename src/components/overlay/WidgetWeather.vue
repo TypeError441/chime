@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 
-import { useAppearance, useCustomtheme } from "../../composables/settings";
-
-import themes from "../../assets/themes.json";
+import { useAppearance } from "../../composables/settings";
+import { useApplySettings } from "../../composables/apply";
 
 const appearance = useAppearance();
-const customtheme = useCustomtheme();
+const { getTheme } = useApplySettings();
 
 const data = ref(null);
 const temp = ref(null);
@@ -45,7 +44,7 @@ function openWeather() {
 }
 
 const textBrightness = computed(() => {
-    const theme = appearance.theme === "custom" ? customtheme : themes[appearance.theme];
+    const theme = getTheme();
     const value = Math.max(
         0,
         Math.min(15, Math.floor(Number(theme.imageOnBgBrightness) * 16))

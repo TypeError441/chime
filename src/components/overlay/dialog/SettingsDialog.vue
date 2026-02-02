@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref } from "vue";
 import pkg from "../../../../package.json";
 
 import CloseDialog from "../CloseDialog.vue";
@@ -71,7 +71,7 @@ function selectCategory(category) {
     }
 
     #dialog__settings--categories {
-        --glass-color: var(--sidebar-background-color);
+        --glass-color: var(--accent-color);
         position: relative;
         display: flex;
         flex-direction: column;

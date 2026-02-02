@@ -89,7 +89,7 @@ const timeStr = computed(() => {
     }
 
     #dashboard--pinned {
-        --glass-color: var(--sidebar-background-color);
+        --glass-color: var(--accent-color);
         z-index: 999;
         position: absolute;
         bottom: 2rem;

@@ -3,9 +3,10 @@ import { computed } from "vue";
 
 const props = defineProps(["side"]);
 
-import { useAppearance, useCustomtheme, useNotifications } from "../../composables/settings";
+import { useAppearance, useNotifications } from "../../composables/settings";
+import { useApplySettings } from "../../composables/apply";
+
 import notificationData from "../../assets/notifications.json";
-import themes from "../../assets/themes.json";
 
 import Notification from "../overlay/Notification.vue";
 import WidgetWeather from "./WidgetWeather.vue";
@@ -13,8 +14,9 @@ import WidgetWeather from "./WidgetWeather.vue";
 const notificationIDs = Object.keys(notificationData).filter(id => !notificationData[id].special);
 
 const appearance = useAppearance();
-const customtheme = useCustomtheme();
 const notifications = useNotifications();
+
+const { getTheme } = useApplySettings();
 
 function clearAllNotifications() {
     notificationIDs.forEach(id => {
@@ -23,7 +25,7 @@ function clearAllNotifications() {
 }
 
 const textBrightness = computed(() => {
-    const theme = appearance.theme === "custom" ? customtheme : themes[appearance.theme];
+    const theme = getTheme();
     const value = Math.max(
         0,
         Math.min(15, Math.floor(Number(theme.imageOnBgBrightness) * 16))

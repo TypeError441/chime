@@ -10,51 +10,19 @@
         "Weekend"
     ],
     "overrides" : {
-        "8-14": "First Three Days",
-        "8-15": "First Three Days",
-
-        "8-19": "Normal",
-        "8-20": "Even Without Tutorial",
-
-        "8-26": "Normal",
-        "8-27": "Even Without Tutorial",
-        "8-29": "Minimum",
-
-        "9-1": "Holiday",
-        "9-2": "Normal",
-        "9-3": "Even Without Tutorial",
-
-        "9-9": "Assembly",
-
-
-
-        "9-26": "Assembly",
-
-        "10-3": "Assembly E",
-
-        "10-7": "Odd",
-        "10-9": "Minimum",
-        "10-10": "Holiday",
-
-        "10-14": "Odd",
-        "10-16": "Assembly C",
-
-        "10-21": "Normal",
-        "10-22": "Wednesday Non-block",
-        "10-23": "Normal",
-        "10-24": "Normal",
+        "2-2": "Assembly A",
         
-        "11-21": "Normal",
+        
 
-        "11-24": "Holiday",
-        "11-25": "Holiday",
-        "11-26": "Holiday",
-        "11-27": "Holiday",
-        "11-28": "Holiday"
+        "2-16": "Holiday",
+        "2-17": "Holiday",
+        "2-18": "Holiday",
+        "2-19": "Holiday",
+        "2-20": "Holiday"
     },
     "schedules": {
         "Normal": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -169,7 +137,7 @@
             ]
         },
         "Tutorial": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -295,7 +263,7 @@
             ]
         },
         "Even": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -377,7 +345,7 @@
             ]
         },
         "Odd": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -470,7 +438,7 @@
             ]
         },
         "Advisory": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -596,7 +564,7 @@
             ]
         },
         "Minimum": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -700,7 +668,7 @@
             ]
         },
         "Assembly": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -826,7 +794,7 @@
             ]
         },
         "Wednesday Non-block": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -941,7 +909,7 @@
             ]
         },
         "Holiday": {
-            "special": false,
+            "meta": { "special": false },
             "periods": [
                 {
                     "start": [
@@ -958,7 +926,7 @@
         },
 
         "Weekend": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -974,7 +942,7 @@
             ]
         },
         "First Three Days": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1111,7 +1079,7 @@
             ]
         },
         "Even Without Tutorial": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1194,7 +1162,7 @@
         },
 
         "Assembly A": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1320,7 +1288,7 @@
             ]
         },
         "Assembly B": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1446,7 +1414,7 @@
             ]
         },
         "Assembly C": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1572,7 +1540,7 @@
             ]
         },
         "Assembly D": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1698,7 +1666,7 @@
             ]
         },
         "Assembly E": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1824,7 +1792,7 @@
             ]
         },
         "Assembly F": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -1950,7 +1918,7 @@
             ]
         },
         "Assembly G": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [
@@ -2076,7 +2044,7 @@
             ]
         },
         "Assembly H": {
-            "special": true,
+            "meta": { "special": true },
             "periods": [
                 {
                     "start": [

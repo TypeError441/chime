@@ -24,7 +24,7 @@ const model = defineModel();
 <style scoped type="scss">
 .feature__radio {
     .feature--radio {
-        --glass-color: var(--sidebar-background-color);
+        --glass-color: var(--accent-color);
         display: flex;
         flex-direction: row;
         font-size: 1rem;
@@ -34,7 +34,7 @@ const model = defineModel();
         width: fit-content;
 
         &.selected {
-            --glass-color: var(--radial-background-color);
+            --glass-color: var(--secondary-accent-color);
             font-weight: bold;
         }
     }
