@@ -1,7 +1,7 @@
 {
-    "notification-feedback-error-05": {
+    "notification-feedback-error-06": {
         "special": false,
-        "content": "Feedback is broken currently i am trying to fix it please just tell me in person"
+        "content": "Im gonna fix feedback soon and ima add a lot more features tell me what u want and ill try adding it in the next update"
     },
     "notification-banned-01": {
         "special": false,
@@ -54,6 +54,10 @@
     "notification-feedback-error-04": {
         "special": true,
         "content": "Somehow feedback was broken since wednesday jan 21 please send it again or tell me irl"
+    },
+    "notification-feedback-error-05": {
+        "special": true,
+        "content": "Feedback is broken currently i am trying to fix it please just tell me in person"
     },
     "notification-bellx-01": {
         "special": true,

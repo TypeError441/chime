@@ -18,7 +18,12 @@
         "2-17": "Holiday",
         "2-18": "Holiday",
         "2-19": "Holiday",
-        "2-20": "Holiday"
+        "2-20": "Holiday",
+
+        "3-10": "Odd",
+        "3-11": "Even Advisory",
+        "3-12": "Minimum",
+        "3-13": "Normal"
     },
     "schedules": {
         "Normal": {
@@ -1078,7 +1083,7 @@
                 }
             ]
         },
-        "Even Without Tutorial": {
+        "Even Advisory": {
             "meta": { "special": true },
             "periods": [
                 {
@@ -1156,7 +1161,7 @@
                         15,
                         3
                     ],
-                    "name": "Assembly"
+                    "name": "Advisory"
                 }
             ]
         },
