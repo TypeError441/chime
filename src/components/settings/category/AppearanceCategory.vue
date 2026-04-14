@@ -35,13 +35,6 @@ const currentDialog = useCurrentDialog();
             :optionIDs="themeIDs"
             :options="themes"
         />
-        <button
-            v-if="appearance.theme === 'custom'"
-            class="button glass edit-custom-theme"
-            @click="currentDialog = 'customtheme'"
-        >
-            Edit custom theme...
-        </button>
     </div>
     <div class="settings--item">
         <div class="item--title">Font</div>

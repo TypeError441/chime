@@ -25,7 +25,7 @@ function submit() {
                 'form-name': 'feedback',
                 'version': `${version.value}`,
                 'id': `${id.value}`,
-                'content': `${feedbackText}`
+                'content': `${feedbackText.value}`
             })
         });
     }
@@ -42,7 +42,7 @@ function submit() {
         <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
         <input type="text" name="version" hidden>
         <input type="text" name="id" hidden>
-        <textarea name="content" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
+        <textarea name="feedback-modal" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
         <button type="submit" class="button glass glass__child">Submit</button>
     </form>
 </dialog>
