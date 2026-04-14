@@ -1,11 +1,11 @@
 {
-    "notification-feedback-error-06": {
+    "notification-feedback-error-07": {
         "special": false,
-        "content": "Im gonna fix feedback soon and ima add a lot more features tell me what u want and ill try adding it in the next update"
+        "content": "feedback is fixed"
     },
-    "notification-banned-01": {
+    "notification-banned-02": {
         "special": false,
-        "content": "If my website's banned you might have to re-enter the URL in the browser"
+        "content": "A lot of people are saying my websites banned if reentering the URL doesn't work tell me irl"
     },
     "notification-tune-04": {
         "special": false,
@@ -59,6 +59,10 @@
         "special": true,
         "content": "Feedback is broken currently i am trying to fix it please just tell me in person"
     },
+    "notification-feedback-error-06": {
+        "special": false,
+        "content": "Im gonna fix feedback soon and ima add a lot more features tell me what u want and ill try adding it in the next update"
+    },
     "notification-bellx-01": {
         "special": true,
         "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
@@ -82,5 +86,9 @@
     "notification-save-01": {
         "special": true,
         "content": "I think i fixed the save issue, if your settings aren't saving please tell me"
+    },
+    "notification-banned-01": {
+        "special": true,
+        "content": "If my website's banned you might have to re-enter the URL in the browser"
     }
 }

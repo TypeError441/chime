@@ -47,7 +47,7 @@ const timeStr = computed(() => {
             :title="link.title"
             :url="link.url"
         />
-        <!-- <PinnedButton func="Feedback" @click="() => currentDialog = 'feedback'" /> -->
+        <PinnedButton func="Feedback" @click="() => currentDialog = 'feedback'" />
     </div>
 </main>
 </template>

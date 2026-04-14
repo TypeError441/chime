@@ -8,7 +8,7 @@ import SettingsDropdownFeature from "../feature/SettingsDropdownFeature.vue";
 import SettingsBoolFeature from "../feature/SettingsBoolFeature.vue";
 import SettingsRangeFeature from "../feature/SettingsRangeFeature.vue";
 
-import { useAppearance, useCustomtheme } from "../../../composables/settings";
+import { useAppearance, useCustomtheme, useCurrentDialog } from "../../../composables/settings";
 import { useApplySettings } from "../../../composables/apply";
 
 const themeIDs = ref(Object.keys(themes));
@@ -22,6 +22,8 @@ watch(() => appearance.font, applyFont);
 
 const customtheme = useCustomtheme();
 watch(() => customtheme, applyTheme, { deep: true });
+
+const currentDialog = useCurrentDialog();
 </script>
 
 <template>
@@ -33,6 +35,13 @@ watch(() => customtheme, applyTheme, { deep: true });
             :optionIDs="themeIDs"
             :options="themes"
         />
+        <button
+            v-if="appearance.theme === 'custom'"
+            class="button glass edit-custom-theme"
+            @click="currentDialog = 'customtheme'"
+        >
+            Edit custom theme...
+        </button>
     </div>
     <div class="settings--item">
         <div class="item--title">Font</div>
@@ -58,3 +67,10 @@ watch(() => customtheme, applyTheme, { deep: true });
     </div>
 </div>
 </template>
+
+<style scoped>
+.edit-custom-theme {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+</style>

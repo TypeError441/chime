@@ -3,8 +3,6 @@ import { ref, watch } from 'vue';
 
 import { useCustomtheme } from '../../../composables/settings';
 
-import SettingsRangeFeature from './SettingsRangeFeature.vue';
-
 const props = defineProps({
     color: { type: String, default: '255, 255, 255' },
     remove: Boolean,

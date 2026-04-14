@@ -23,7 +23,14 @@
         "3-10": "Odd",
         "3-11": "Even Advisory",
         "3-12": "Minimum",
-        "3-13": "Normal"
+        "3-13": "Normal",
+
+
+
+
+
+        "4-14": "Advisory",
+        "4-17": "Tutorial"
     },
     "schedules": {
         "Normal": {

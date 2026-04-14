@@ -15,44 +15,6 @@ import SettingsBackgroundColorsFeature from "../feature/SettingsBackgroundColors
 import SettingsBackgroundImagesFeature from "../feature/SettingsBackgroundImagesFeature.vue";
 import SettingsColorFeature from "../feature/SettingsColorFeature.vue";
 import SettingsRangeFeature from "../feature/SettingsRangeFeature.vue";
-
-let template = {
-    "meta": {
-        "name": "Template",
-        "special": true,
-        "version": "2"
-    },
-    "background": {
-        "speed": 0,
-        "type": "linear",
-        "colors": [
-            "32, 30, 28"
-        ]
-    },
-    "colors": {
-        "text": "255, 145, 0",
-        "accentColor": "61, 47, 35",
-        "secondaryAccentColor": "102, 86, 75"
-    },
-    "useBackgroundImage": false,
-    "backgroundImages": [
-        {
-            "path": "/background/template.png",
-            "position": [0, 0],
-            "scale": 1.0
-        }
-    ],
-    "useParticles": false,
-    "particles": [
-        {
-            "type": "leaf",
-            "speed": 1.0,
-            "frequency": 1
-        }
-    ],
-    "radialTransparency": "1",
-    "imageOnBgBrightness": "1"
-}
 </script>
 
 <template>

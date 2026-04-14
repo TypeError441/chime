@@ -17,13 +17,15 @@ const currentDialog = useCurrentDialog();
 const feedbackText = ref("");
 
 function submit() {
-    if(feedbackText.length > 0) {
+    if(feedbackText.value.length > 0) {
         fetch('/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
                 'form-name': 'feedback',
-                'feedback-modal': `v:${version},i:${id},f:${feedbackText}`
+                'version': `${version.value}`,
+                'id': `${id.value}`,
+                'content': `${feedbackText}`
             })
         });
     }
@@ -34,11 +36,13 @@ function submit() {
 
 <template>
 <dialog id="overlay--dialog__feedback" class="overlay--dialog glass" :open="currentDialog == 'feedback'">
-    <form name="feedback" id="feedback-modal" @submit.prevent="submit" netlify>
+    <form name="feedback" id="feedback-modal" @submit.prevent="submit" data-netlify="true">
         <CloseDialog />
         <div id="feedback--title">Feedback</div>
         <div id="feedback--subtitle">If you have questions, tell me your name or ask irl (I can't answer through the website)</div>
-        <textarea name="feedback-modal" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
+        <input type="text" name="version" hidden>
+        <input type="text" name="id" hidden>
+        <textarea name="content" id="feedback--textarea" class="glass glass__child" maxlength="200" v-model.trim="feedbackText"></textarea>
         <button type="submit" class="button glass glass__child">Submit</button>
     </form>
 </dialog>

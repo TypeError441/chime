@@ -1,10 +1,14 @@
 <script setup>
 import { useCurrentDialog } from "../../composables/settings";
 
+const props = defineProps({
+    back: { type: String, default: "none" }
+});
+
 const currentDialog = useCurrentDialog();
 
 function exit() {
-    currentDialog.value = "none";
+    currentDialog.value = props.back;
 }
 </script>
 
