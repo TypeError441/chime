@@ -25,7 +25,7 @@ function submit() {
                 'form-name': 'feedback',
                 'version': `${version.value}`,
                 'id': `${id.value}`,
-                'content': `${feedbackText.value}`
+                'feedback-modal': `${feedbackText.value}`
             })
         });
     }

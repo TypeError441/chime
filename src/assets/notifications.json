@@ -60,7 +60,7 @@
         "content": "Feedback is broken currently i am trying to fix it please just tell me in person"
     },
     "notification-feedback-error-06": {
-        "special": false,
+        "special": true,
         "content": "Im gonna fix feedback soon and ima add a lot more features tell me what u want and ill try adding it in the next update"
     },
     "notification-bellx-01": {
