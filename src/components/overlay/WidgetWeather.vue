@@ -15,7 +15,7 @@ const errorMsg = ref("");
 onMounted(async () => {
     try {
         const res = await fetch(
-            `https://api.openweathermap.org/data/3.0/onecall?lat=37.3814&lon=-122.1143&exclude=minutely,hourly,daily&units=imperial&appid=668b2ad8a862a7a1ed60c08264b6620b`
+            `https://api.openweathermap.org/data/3.0/onecall?lat=37.3814&lon=-122.1143&exclude=minutely,hourly,daily&units=imperial&appid=${import.meta.env.VITE_WEATHER_KEY}`
         );
 
         if (!res.ok) throw new Error("Network error");

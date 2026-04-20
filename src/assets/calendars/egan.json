@@ -30,2155 +30,353 @@
 
 
         "4-14": "Advisory",
-        "4-17": "Tutorial"
+        "4-17": "Tutorial",
+
+        "4-21": "Normal",
+        "4-22": "English CAT",
+        "4-23": "English PT",
+
+        "4-29": "Math CAT",
+        "4-30": "Math PT"
     },
     "schedules": {
         "Normal": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        16
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        19
-                    ],
-                    "end": [
-                        10,
-                        5
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        8
-                    ],
-                    "end": [
-                        10,
-                        57
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        57
-                    ],
-                    "end": [
-                        11,
-                        11
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        11,
-                        14
-                    ],
-                    "end": [
-                        12,
-                        0
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        3
-                    ],
-                    "end": [
-                        12,
-                        49
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        49
-                    ],
-                    "end": [
-                        13,
-                        25
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        28
-                    ],
-                    "end": [
-                        14,
-                        14
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        17
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 16], "name": "Period 1" },
+                { "start": [9, 19], "end": [10, 5], "name": "Period 2" },
+                { "start": [10, 8], "end": [10, 57], "name": "Period 3" },
+                { "start": [10, 57], "end": [11, 11], "name": "Brunch" },
+                { "start": [11, 14], "end": [12, 0], "name": "Period 4" },
+                { "start": [12, 3], "end": [12, 49], "name": "Period 5" },
+                { "start": [12, 49], "end": [13, 25], "name": "Lunch" },
+                { "start": [13, 28], "end": [14, 14], "name": "Period 6" },
+                { "start": [14, 17], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Tutorial": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        12
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        15
-                    ],
-                    "end": [
-                        9,
-                        57
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        0
-                    ],
-                    "end": [
-                        10,
-                        42
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        42
-                    ],
-                    "end": [
-                        10,
-                        56
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        59
-                    ],
-                    "end": [
-                        11,
-                        27
-                    ],
-                    "name": "Tutorial"
-                },
-                {
-                    "start": [
-                        11,
-                        30
-                    ],
-                    "end": [
-                        12,
-                        12
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        15
-                    ],
-                    "end": [
-                        12,
-                        57
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        33
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        36
-                    ],
-                    "end": [
-                        14,
-                        18
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        21
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 12], "name": "Period 1" },
+                { "start": [9, 15], "end": [9, 57], "name": "Period 2" },
+                { "start": [10, 0], "end": [10, 42], "name": "Period 3" },
+                { "start": [10, 42], "end": [10, 56], "name": "Brunch" },
+                { "start": [10, 59], "end": [11, 27], "name": "Tutorial" },
+                { "start": [11, 30], "end": [12, 12], "name": "Period 4" },
+                { "start": [12, 15], "end": [12, 57], "name": "Period 5" },
+                { "start": [12, 57], "end": [13, 33], "name": "Lunch" },
+                { "start": [13, 36], "end": [14, 18], "name": "Period 6" },
+                { "start": [14, 21], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Even": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        9,
-                        12
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        9,
-                        17
-                    ],
-                    "end": [
-                        10,
-                        39
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        39
-                    ],
-                    "end": [
-                        10,
-                        53
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        56
-                    ],
-                    "end": [
-                        12,
-                        18
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        18
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        14,
-                        19
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        22
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Tutorial"
-                }
+                { "start": [0, 0], "end": [9, 12], "name": "Free" },
+                { "start": [9, 17], "end": [10, 39], "name": "Period 2" },
+                { "start": [10, 39], "end": [10, 53], "name": "Brunch" },
+                { "start": [10, 56], "end": [12, 18], "name": "Period 4" },
+                { "start": [12, 18], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [14, 19], "name": "Period 6" },
+                { "start": [14, 22], "end": [15, 3], "name": "Tutorial" }
             ]
         },
         "Odd": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        52
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        52
-                    ],
-                    "end": [
-                        9,
-                        58
-                    ],
-                    "name": "Break"
-                },
-                {
-                    "start": [
-                        10,
-                        1
-                    ],
-                    "end": [
-                        11,
-                        23
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        11,
-                        23
-                    ],
-                    "end": [
-                        11,
-                        37
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        11,
-                        40
-                    ],
-                    "end": [
-                        13,
-                        2
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        2
-                    ],
-                    "end": [
-                        13,
-                        38
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        41
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 52], "name": "Period 1" },
+                { "start": [9, 52], "end": [9, 58], "name": "Break" },
+                { "start": [10, 1], "end": [11, 23], "name": "Period 3" },
+                { "start": [11, 23], "end": [11, 37], "name": "Brunch" },
+                { "start": [11, 40], "end": [13, 2], "name": "Period 5" },
+                { "start": [13, 2], "end": [13, 38], "name": "Lunch" },
+                { "start": [13, 41], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Advisory": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        12
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        15
-                    ],
-                    "end": [
-                        9,
-                        57
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        0
-                    ],
-                    "end": [
-                        10,
-                        42
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        42
-                    ],
-                    "end": [
-                        10,
-                        56
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        59
-                    ],
-                    "end": [
-                        11,
-                        27
-                    ],
-                    "name": "Advisory"
-                },
-                {
-                    "start": [
-                        11,
-                        30
-                    ],
-                    "end": [
-                        12,
-                        12
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        15
-                    ],
-                    "end": [
-                        12,
-                        57
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        33
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        36
-                    ],
-                    "end": [
-                        14,
-                        18
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        21
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 12], "name": "Period 1" },
+                { "start": [9, 15], "end": [9, 57], "name": "Period 2" },
+                { "start": [10, 0], "end": [10, 42], "name": "Period 3" },
+                { "start": [10, 42], "end": [10, 56], "name": "Brunch" },
+                { "start": [10, 59], "end": [11, 27], "name": "Advisory" },
+                { "start": [11, 30], "end": [12, 12], "name": "Period 4" },
+                { "start": [12, 15], "end": [12, 57], "name": "Period 5" },
+                { "start": [12, 57], "end": [13, 33], "name": "Lunch" },
+                { "start": [13, 36], "end": [14, 18], "name": "Period 6" },
+                { "start": [14, 21], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Minimum": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        0
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        3
-                    ],
-                    "end": [
-                        9,
-                        33
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        36
-                    ],
-                    "end": [
-                        10,
-                        6
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        9
-                    ],
-                    "end": [
-                        10,
-                        39
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        10,
-                        39
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        24
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        11,
-                        27
-                    ],
-                    "end": [
-                        11,
-                        57
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        12,
-                        0
-                    ],
-                    "end": [
-                        12,
-                        30
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 0], "name": "Period 1" },
+                { "start": [9, 3], "end": [9, 33], "name": "Period 2" },
+                { "start": [9, 36], "end": [10, 6], "name": "Period 3" },
+                { "start": [10, 9], "end": [10, 39], "name": "Period 4" },
+                { "start": [10, 39], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 24], "name": "Period 5" },
+                { "start": [11, 27], "end": [11, 57], "name": "Period 6" },
+                { "start": [12, 0], "end": [12, 30], "name": "Period 7" }
             ]
         },
         "Assembly": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "A"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "B"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "C"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "D"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "E"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "F"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "G"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "H"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "A" },
+                { "start": [9, 13], "end": [9, 53], "name": "B" },
+                { "start": [9, 56], "end": [10, 37], "name": "C" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "D" },
+                { "start": [11, 37], "end": [12, 17], "name": "E" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "F" },
+                { "start": [13, 40], "end": [14, 20], "name": "G" },
+                { "start": [14, 23], "end": [15, 3], "name": "H" }
             ]
         },
         "Wednesday Non-block": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        9,
-                        12
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        9,
-                        17
-                    ],
-                    "end": [
-                        9,
-                        56
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        59
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        40
-                    ],
-                    "end": [
-                        11,
-                        28
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        11,
-                        28
-                    ],
-                    "end": [
-                        11,
-                        42
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        11,
-                        45
-                    ],
-                    "end": [
-                        12,
-                        23
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        26
-                    ],
-                    "end": [
-                        13,
-                        4
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        4
-                    ],
-                    "end": [
-                        13,
-                        41
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        44
-                    ],
-                    "end": [
-                        14,
-                        22
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        25
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [9, 12], "name": "Free" },
+                { "start": [9, 17], "end": [9, 56], "name": "Period 1" },
+                { "start": [9, 59], "end": [10, 37], "name": "Period 2" },
+                { "start": [10, 40], "end": [11, 28], "name": "Period 3" },
+                { "start": [11, 28], "end": [11, 42], "name": "Brunch" },
+                { "start": [11, 45], "end": [12, 23], "name": "Period 4" },
+                { "start": [12, 26], "end": [13, 4], "name": "Period 5" },
+                { "start": [13, 4], "end": [13, 41], "name": "Lunch" },
+                { "start": [13, 44], "end": [14, 22], "name": "Period 6" },
+                { "start": [14, 25], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Holiday": {
             "meta": { "special": false },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        24,
-                        0
-                    ],
-                    "name": "Free"
-                }
+                { "start": [0, 0], "end": [24, 0], "name": "Free" }
             ]
         },
-
+        
         "Weekend": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        24,
-                        0
-                    ],
-                    "name": "Free"
-                }
+                { "start": [0, 0], "end": [24, 0], "name": "Free" }
             ]
         },
         "First Three Days": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        5
-                    ],
-                    "name": "Advisory"
-                },
-                {
-                    "start": [
-                        9,
-                        8
-                    ],
-                    "end": [
-                        9,
-                        43
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        46
-                    ],
-                    "end": [
-                        10,
-                        21
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        24
-                    ],
-                    "end": [
-                        10,
-                        59
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        59
-                    ],
-                    "end": [
-                        11,
-                        13
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        11,
-                        17
-                    ],
-                    "end": [
-                        11,
-                        52
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        11,
-                        55
-                    ],
-                    "end": [
-                        12,
-                        30
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        30
-                    ],
-                    "end": [
-                        13,
-                        6
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        13,
-                        9
-                    ],
-                    "end": [
-                        13,
-                        44
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        13,
-                        47
-                    ],
-                    "end": [
-                        14,
-                        22
-                    ],
-                    "name": "Period 7"
-                },
-                {
-                    "start": [
-                        14,
-                        22
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Assembly"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 5], "name": "Advisory" },
+                { "start": [9, 8], "end": [9, 43], "name": "Period 1" },
+                { "start": [9, 46], "end": [10, 21], "name": "Period 2" },
+                { "start": [10, 24], "end": [10, 59], "name": "Period 3" },
+                { "start": [10, 59], "end": [11, 13], "name": "Brunch" },
+                { "start": [11, 17], "end": [11, 52], "name": "Period 4" },
+                { "start": [11, 55], "end": [12, 30], "name": "Period 5" },
+                { "start": [12, 30], "end": [13, 6], "name": "Lunch" },
+                { "start": [13, 9], "end": [13, 44], "name": "Period 6" },
+                { "start": [13, 47], "end": [14, 22], "name": "Period 7" },
+                { "start": [14, 22], "end": [15, 3], "name": "Assembly" }
             ]
         },
         "Even Advisory": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        9,
-                        12
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        9,
-                        17
-                    ],
-                    "end": [
-                        10,
-                        39
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        39
-                    ],
-                    "end": [
-                        10,
-                        53
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        56
-                    ],
-                    "end": [
-                        12,
-                        18
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        18
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        14,
-                        19
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        22
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Advisory"
-                }
+                { "start": [0, 0], "end": [9, 12], "name": "Free" },
+                { "start": [9, 17], "end": [10, 39], "name": "Period 2" },
+                { "start": [10, 39], "end": [10, 53], "name": "Brunch" },
+                { "start": [10, 56], "end": [12, 18], "name": "Period 4" },
+                { "start": [12, 18], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [14, 19], "name": "Period 6" },
+                { "start": [14, 22], "end": [15, 3], "name": "Advisory" }
             ]
         },
-
         "Assembly A": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "A"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "A" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 1" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 2" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 3" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 4" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 5" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly B": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "B"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "B" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 2" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 3" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 4" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 5" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly C": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "C"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "C" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 3" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 4" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 5" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly D": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "D"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 3" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "D" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 4" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 5" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly E": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "E"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 3" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 4" },
+                { "start": [11, 37], "end": [12, 17], "name": "E" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 5" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly F": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "F"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 3" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 4" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 5" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "F" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 6" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly G": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "G"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "Period 7"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 3" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 4" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 5" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 6" },
+                { "start": [13, 40], "end": [14, 20], "name": "G" },
+                { "start": [14, 23], "end": [15, 3], "name": "Period 7" }
             ]
         },
         "Assembly H": {
             "meta": { "special": true },
             "periods": [
-                {
-                    "start": [
-                        0,
-                        0
-                    ],
-                    "end": [
-                        8,
-                        25
-                    ],
-                    "name": "Free"
-                },
-                {
-                    "start": [
-                        8,
-                        30
-                    ],
-                    "end": [
-                        9,
-                        10
-                    ],
-                    "name": "Period 1"
-                },
-                {
-                    "start": [
-                        9,
-                        13
-                    ],
-                    "end": [
-                        9,
-                        53
-                    ],
-                    "name": "Period 2"
-                },
-                {
-                    "start": [
-                        9,
-                        56
-                    ],
-                    "end": [
-                        10,
-                        37
-                    ],
-                    "name": "Period 3"
-                },
-                {
-                    "start": [
-                        10,
-                        37
-                    ],
-                    "end": [
-                        10,
-                        51
-                    ],
-                    "name": "Brunch"
-                },
-                {
-                    "start": [
-                        10,
-                        54
-                    ],
-                    "end": [
-                        11,
-                        34
-                    ],
-                    "name": "Period 4"
-                },
-                {
-                    "start": [
-                        11,
-                        37
-                    ],
-                    "end": [
-                        12,
-                        17
-                    ],
-                    "name": "Period 5"
-                },
-                {
-                    "start": [
-                        12,
-                        17
-                    ],
-                    "end": [
-                        12,
-                        54
-                    ],
-                    "name": "Lunch"
-                },
-                {
-                    "start": [
-                        12,
-                        57
-                    ],
-                    "end": [
-                        13,
-                        37
-                    ],
-                    "name": "Period 6"
-                },
-                {
-                    "start": [
-                        13,
-                        40
-                    ],
-                    "end": [
-                        14,
-                        20
-                    ],
-                    "name": "Period 7"
-                },
-                {
-                    "start": [
-                        14,
-                        23
-                    ],
-                    "end": [
-                        15,
-                        3
-                    ],
-                    "name": "H"
-                }
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 10], "name": "Period 1" },
+                { "start": [9, 13], "end": [9, 53], "name": "Period 2" },
+                { "start": [9, 56], "end": [10, 37], "name": "Period 3" },
+                { "start": [10, 37], "end": [10, 51], "name": "Brunch" },
+                { "start": [10, 54], "end": [11, 34], "name": "Period 4" },
+                { "start": [11, 37], "end": [12, 17], "name": "Period 5" },
+                { "start": [12, 17], "end": [12, 54], "name": "Lunch" },
+                { "start": [12, 57], "end": [13, 37], "name": "Period 6" },
+                { "start": [13, 40], "end": [14, 20], "name": "Period 7" },
+                { "start": [14, 23], "end": [15, 3], "name": "H" }
+            ]
+        },
+        "English CAT": {
+            "meta": { "special": false },
+            "periods": [
+                { "start": [0, 0], "end": [9, 12], "name": "Free" },
+                { "start": [9, 17], "end": [10, 17], "name": "Period 2" },
+                { "start": [10, 17], "end": [10, 31], "name": "Brunch" },
+                { "start": [10, 34], "end": [11, 34], "name": "English CAT" },
+                { "start": [11, 37], "end": [12, 37], "name": "Period 4" },
+                { "start": [12, 37], "end": [13, 13], "name": "Lunch" },
+                { "start": [13, 16], "end": [14, 16], "name": "Period 6" },
+                { "start": [14, 19], "end": [15, 3], "name": "Extended Tutorial" }
+            ]
+        },
+        "English PT": {
+            "meta": { "special": false },
+            "periods": [
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 20], "name": "Period 1" },
+                { "start": [9, 23], "end": [10, 13], "name": "Period 3" },
+                { "start": [10, 13], "end": [10, 27], "name": "Brunch" },
+                { "start": [10, 30], "end": [12, 40], "name": "English Performance Task" },
+                { "start": [12, 40], "end": [13, 17], "name": "Lunch" },
+                { "start": [13, 20], "end": [14, 10], "name": "Period 5" },
+                { "start": [14, 13], "end": [15, 3], "name": "Period 7" }
+            ]
+        },
+        "Math CAT": {
+            "meta": { "special": false },
+            "periods": [
+                { "start": [0, 0], "end": [9, 12], "name": "Free" },
+                { "start": [9, 17], "end": [10, 7], "name": "Period 2" },
+                { "start": [10, 7], "end": [10, 21], "name": "Brunch" },
+                { "start": [10, 24], "end": [11, 39], "name": "Math CAT" },
+                { "start": [11, 42], "end": [12, 32], "name": "Period 4" },
+                { "start": [12, 32], "end": [13, 8], "name": "Lunch" },
+                { "start": [13, 11], "end": [14, 1], "name": "Period 6" },
+                { "start": [14, 4], "end": [15, 3], "name": "Extended Tutorial" }
+            ]
+        },
+        "Math PT": {
+            "meta": { "special": false },
+            "periods": [
+                { "start": [0, 0], "end": [8, 25], "name": "Free" },
+                { "start": [8, 30], "end": [9, 30], "name": "Period 1" },
+                { "start": [9, 33], "end": [10, 40], "name": "Period 3" },
+                { "start": [10, 40], "end": [10, 54], "name": "Brunch" },
+                { "start": [10, 57], "end": [12, 17], "name": "Math Performance Task" },
+                { "start": [12, 17], "end": [12, 53], "name": "Lunch" },
+                { "start": [12, 59], "end": [13, 59], "name": "Period 5" },
+                { "start": [14, 2], "end": [15, 3], "name": "Period 7" }
             ]
         }
     }

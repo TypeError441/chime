@@ -30,6 +30,7 @@ function submit() {
         });
     }
 
+    feedbackText.value = "";
     currentDialog.value = "none";
 }
 </script>
