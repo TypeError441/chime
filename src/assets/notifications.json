@@ -1,19 +1,11 @@
 {
-    "notification-feedback-error-07": {
+    "notification-features-01": {
         "special": false,
-        "content": "feedback is fixed"
-    },
-    "notification-banned-02": {
-        "special": false,
-        "content": "A lot of people are saying my websites banned if reentering the URL doesn't work tell me irl"
-    },
-    "notification-tune-04": {
-        "special": false,
-        "content": "The bells are off by a few seconds every day. Scroll down to the settings to make the timer accurate."
+        "content": "Give me features and ill add them soon i dont have any features to add rn"
     },
 
 
-
+    
     "notification-tune-01": {
         "special": true,
         "content": "Bells are around 30 seconds early. Go to settings to tune Chime so that the timer is accurate."
@@ -25,6 +17,10 @@
     "notification-tune-03": {
         "special": true,
         "content": "Bells are off by a few seconds every day. Go to settings to make the timer accurate."
+    },
+    "notification-tune-04": {
+        "special": true,
+        "content": "The bells are off by a few seconds every day. Go to the settings to make the timer accurate."
     },
 
     "notification-new-themes-01": {
@@ -63,6 +59,10 @@
         "special": true,
         "content": "Im gonna fix feedback soon and ima add a lot more features tell me what u want and ill try adding it in the next update"
     },
+    "notification-feedback-error-07": {
+        "special": true,
+        "content": "feedback is fixed"
+    },
     "notification-bellx-01": {
         "special": true,
         "content": "Yo don't let me see anyone using bell x. Even bellminus is better. Ill be adding ur features soon dw"
@@ -90,5 +90,9 @@
     "notification-banned-01": {
         "special": true,
         "content": "If my website's banned you might have to re-enter the URL in the browser"
+    },
+    "notification-banned-02": {
+        "special": true,
+        "content": "A lot of people are saying my websites banned if reentering the URL doesn't work tell me irl"
     }
 }

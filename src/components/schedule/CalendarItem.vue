@@ -31,11 +31,12 @@ defineProps({
     width: 83%;
     color: rgb(var(--color));
     right: 0;
+    border-radius: 0.4em;
 
     .item--left {
-        border-radius: 1em 0 0 1em;
+        border-radius: 0.4em 0 0 0.4em;
         height: 100%;
-        width: 1em;
+        width: 0.4em;
         background-color: rgb(var(--background-color));
     }
 
